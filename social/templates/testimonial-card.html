@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Testimonial | Social Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --dark-gray: #111111;
+      --gray: #666666;
+      --white: #FFFFFF;
+      --gold: #ffcc00;
+      --yellow: #fdea01;
+      --font-display: 'Futura PT', 'Futura', 'Century Gothic', 'Avant Garde', sans-serif;
+      --font-body: 'Futura PT', 'Futura', 'Century Gothic', sans-serif;
+      --font-accent: 'Cormorant Garamond', 'Garamond', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .template-container {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .social-post {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #1a1a1a 0%, var(--black) 100%);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .quote-mark {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      font-family: var(--font-accent);
+      font-size: 8rem;
+      color: var(--yellow);
+      opacity: 0.15;
+      line-height: 1;
+    }
+
+    .post-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      width: 80%;
+    }
+
+    .testimonial-quote {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: clamp(1.5rem, 4.5vw, 2.25rem);
+      color: var(--white);
+      line-height: 1.4;
+      margin-bottom: 32px;
+    }
+
+    .client-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .client-name {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--yellow);
+    }
+
+    .client-details {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gray);
+    }
+
+    .stars {
+      color: var(--yellow);
+      font-size: 1rem;
+      letter-spacing: 0.25em;
+      margin-top: 8px;
+    }
+
+    .logo-container {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .logo-container img {
+      height: 32px;
+      opacity: 0.4;
+    }
+
+    .caption-section {
+      background: var(--dark-gray);
+      padding: 32px;
+      margin-top: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .caption-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .caption-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--white);
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .caption-text .hashtags {
+      color: var(--gray);
+      margin-top: 16px;
+      display: block;
+    }
+
+    .caption-note {
+      background: rgba(253, 234, 1, 0.1);
+      border: 1px solid rgba(253, 234, 1, 0.2);
+      padding: 16px;
+      margin-top: 24px;
+      font-size: 0.875rem;
+      color: var(--yellow);
+    }
+  </style>
+</head>
+<body>
+  <div class="template-container">
+    <!-- Social Post Image -->
+    <div class="social-post">
+      <span class="quote-mark">"</span>
+      <div class="post-content">
+        <p class="testimonial-quote">"I've tried gyms before, but Zeb's approach is completely different. He actually listens and adjusts everything to what my body needs."</p>
+        <div class="client-info">
+          <p class="client-name">[Client Name]</p>
+          <p class="client-details">Age [XX] - Training for [X] months</p>
+          <p class="stars">★★★★★</p>
+        </div>
+      </div>
+      <div class="logo-container">
+        <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873636754-7KKE9M4BRNTZEDPFWFHS/Zeb+Logo.png?format=500w" alt="Zeb's Platinum Fitness">
+      </div>
+    </div>
+
+    <!-- Caption -->
+    <div class="caption-section">
+      <p class="caption-label">Suggested Caption</p>
+      <p class="caption-text">This is why I do what I do.
+
+[Client Name] came to me after years of trying different programs that never stuck. The problem wasn't motivation - it was the approach.
+
+Generic programs don't work for everyone. Especially not for those of us with a few more years of experience.
+
+What makes the difference:
+- Personalized programming for YOUR body
+- Adjustments based on how you're feeling each session
+- Focus on sustainable progress, not quick fixes
+
+[Client Name] is proof that the right fit makes all the difference.
+
+Curious if personal training is right for you? Let's talk. Free consultation - link in bio.
+
+<span class="hashtags">#ClientTestimonial #PersonalTraining #FitnessOver50 #RealResults #ZebsPlatinumFitness #5StarReview</span></p>
+
+      <div class="caption-note">
+        <strong>Note:</strong> Always get written permission from clients before sharing their testimonials. Replace bracketed text with actual client details.
+      </div>
+    </div>
+  </div>
+</body>
+</html>

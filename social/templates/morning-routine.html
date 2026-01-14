@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Morning Routine | Social Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --dark-gray: #111111;
+      --gray: #666666;
+      --white: #FFFFFF;
+      --gold: #ffcc00;
+      --yellow: #fdea01;
+      --font-display: 'Futura PT', 'Futura', 'Century Gothic', 'Avant Garde', sans-serif;
+      --font-body: 'Futura PT', 'Futura', 'Century Gothic', sans-serif;
+      --font-accent: 'Cormorant Garamond', 'Garamond', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .template-container {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .social-post {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(180deg, #2a2a2a 0%, var(--black) 100%);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .post-header {
+      position: absolute;
+      top: 32px;
+      left: 32px;
+    }
+
+    .post-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--yellow);
+    }
+
+    .post-content {
+      position: absolute;
+      top: 50%;
+      left: 32px;
+      right: 32px;
+      transform: translateY(-50%);
+    }
+
+    .routine-list {
+      list-style: none;
+    }
+
+    .routine-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .routine-item:last-child {
+      border-bottom: none;
+    }
+
+    .routine-number {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--yellow);
+      width: 24px;
+      text-align: center;
+    }
+
+    .routine-text {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--white);
+    }
+
+    .routine-time {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--gray);
+      margin-left: auto;
+    }
+
+    .post-footer {
+      position: absolute;
+      bottom: 32px;
+      left: 32px;
+      right: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .total-time {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gray);
+    }
+
+    .total-time span {
+      color: var(--yellow);
+    }
+
+    .logo-container img {
+      height: 28px;
+      opacity: 0.4;
+    }
+
+    .caption-section {
+      background: var(--dark-gray);
+      padding: 32px;
+      margin-top: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .caption-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .caption-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--white);
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .caption-text .hashtags {
+      color: var(--gray);
+      margin-top: 16px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="template-container">
+    <!-- Social Post Image -->
+    <div class="social-post">
+      <div class="post-header">
+        <p class="post-label">5-Minute Morning Routine</p>
+      </div>
+      <div class="post-content">
+        <ul class="routine-list">
+          <li class="routine-item">
+            <span class="routine-number">01</span>
+            <span class="routine-text">Deep Breaths</span>
+            <span class="routine-time">30 sec</span>
+          </li>
+          <li class="routine-item">
+            <span class="routine-number">02</span>
+            <span class="routine-text">Neck Circles</span>
+            <span class="routine-time">1 min</span>
+          </li>
+          <li class="routine-item">
+            <span class="routine-number">03</span>
+            <span class="routine-text">Shoulder Rolls</span>
+            <span class="routine-time">1 min</span>
+          </li>
+          <li class="routine-item">
+            <span class="routine-number">04</span>
+            <span class="routine-text">Standing Stretch</span>
+            <span class="routine-time">1.5 min</span>
+          </li>
+          <li class="routine-item">
+            <span class="routine-number">05</span>
+            <span class="routine-text">March in Place</span>
+            <span class="routine-time">1 min</span>
+          </li>
+        </ul>
+      </div>
+      <div class="post-footer">
+        <p class="total-time">Total: <span>5 Minutes</span></p>
+        <div class="logo-container">
+          <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873636754-7KKE9M4BRNTZEDPFWFHS/Zeb+Logo.png?format=500w" alt="Zeb's Platinum Fitness">
+        </div>
+      </div>
+    </div>
+
+    <!-- Caption -->
+    <div class="caption-section">
+      <p class="caption-label">Suggested Caption</p>
+      <p class="caption-text">Your morning doesn't need an hour-long workout.
+
+It needs 5 intentional minutes.
+
+Here's my go-to morning routine that takes less time than making coffee:
+
+1. Deep breaths (30 sec) - Wake up your nervous system
+2. Neck circles (1 min) - Release overnight tension
+3. Shoulder rolls (1 min) - Open up your upper body
+4. Standing stretch (1.5 min) - Lengthen your spine
+5. March in place (1 min) - Get blood flowing
+
+Do this every morning for a week. You'll feel the difference by day 3.
+
+Save this post and try it tomorrow morning.
+
+<span class="hashtags">#MorningRoutine #5MinuteWorkout #FitnessOver50 #HealthyHabits #ZebsPlatinumFitness #StartYourDay #SimpleMovement</span></p>
+    </div>
+  </div>
+</body>
+</html>

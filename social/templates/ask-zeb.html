@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ask Zeb | Social Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --dark-gray: #111111;
+      --gray: #666666;
+      --white: #FFFFFF;
+      --gold: #ffcc00;
+      --yellow: #fdea01;
+      --font-display: 'Futura PT', 'Futura', 'Century Gothic', 'Avant Garde', sans-serif;
+      --font-body: 'Futura PT', 'Futura', 'Century Gothic', sans-serif;
+      --font-accent: 'Cormorant Garamond', 'Garamond', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .template-container {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .social-post {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .question-mark-bg {
+      position: absolute;
+      top: 50%;
+      right: -10%;
+      transform: translateY(-50%);
+      font-family: var(--font-display);
+      font-size: 40rem;
+      font-weight: 800;
+      color: rgba(253, 234, 1, 0.03);
+      line-height: 1;
+    }
+
+    .post-header {
+      position: absolute;
+      top: 32px;
+      left: 32px;
+    }
+
+    .post-label {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+      background: rgba(253, 234, 1, 0.1);
+      padding: 8px 16px;
+      display: inline-block;
+    }
+
+    .post-content {
+      position: absolute;
+      top: 50%;
+      left: 32px;
+      right: 32px;
+      transform: translateY(-50%);
+    }
+
+    .question-text {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: clamp(1.5rem, 5vw, 2.25rem);
+      color: var(--white);
+      line-height: 1.4;
+      margin-bottom: 24px;
+      padding-left: 24px;
+      border-left: 3px solid var(--yellow);
+    }
+
+    .question-source {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+      padding-left: 24px;
+    }
+
+    .post-footer {
+      position: absolute;
+      bottom: 32px;
+      left: 32px;
+      right: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cta-text {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+    }
+
+    .logo-container img {
+      height: 28px;
+      opacity: 0.4;
+    }
+
+    .caption-section {
+      background: var(--dark-gray);
+      padding: 32px;
+      margin-top: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .caption-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .caption-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--white);
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .caption-text .hashtags {
+      color: var(--gray);
+      margin-top: 16px;
+      display: block;
+    }
+
+    .variations {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 24px;
+      margin-top: 24px;
+    }
+
+    .variations-title {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--yellow);
+      margin-bottom: 12px;
+    }
+
+    .variations ul {
+      list-style: none;
+    }
+
+    .variations li {
+      font-size: 0.875rem;
+      color: var(--gray);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .variations li:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="template-container">
+    <!-- Social Post Image -->
+    <div class="social-post">
+      <span class="question-mark-bg">?</span>
+      <div class="post-header">
+        <p class="post-label">Ask Zeb</p>
+      </div>
+      <div class="post-content">
+        <p class="question-text">"Is it too late to start working out at 60? I've never really exercised before."</p>
+        <p class="question-source">- Question from a follower</p>
+      </div>
+      <div class="post-footer">
+        <p class="cta-text">Answer in caption below</p>
+        <div class="logo-container">
+          <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873636754-7KKE9M4BRNTZEDPFWFHS/Zeb+Logo.png?format=500w" alt="Zeb's Platinum Fitness">
+        </div>
+      </div>
+    </div>
+
+    <!-- Caption -->
+    <div class="caption-section">
+      <p class="caption-label">Suggested Caption</p>
+      <p class="caption-text">ASK ZEB: "Is it too late to start at 60?"
+
+I get this question all the time. Here's my honest answer:
+
+No. Absolutely not.
+
+Here's what the science says:
+
+- People in their 60s, 70s, even 80s can build muscle and strength
+- Beginners often see the FASTEST improvements
+- It's never too late to improve bone density, balance, and mobility
+
+I've trained complete beginners in their late 60s who are now stronger than they were in their 40s.
+
+The key is starting with the RIGHT program:
+- Proper progression (start light, build slowly)
+- Focus on form over weight
+- Exercises appropriate for your current fitness level
+- Consistency over intensity
+
+You don't need to have exercised before. You just need to start now.
+
+The only workout you'll regret is the one you never started.
+
+Got a question for me? Drop it in the comments or DM me. I might feature it in a future post!
+
+<span class="hashtags">#AskZeb #FitnessQuestions #NeverTooLate #FitnessOver50 #BeginnerFitness #ZebsPlatinumFitness #FitnessOver60</span></p>
+
+      <div class="variations">
+        <p class="variations-title">Other Q&A Topics</p>
+        <ul>
+          <li>"How often should I work out at my age?"</li>
+          <li>"Should I do cardio or weights first?"</li>
+          <li>"Is soreness normal after a workout?"</li>
+          <li>"Can I exercise with bad knees?"</li>
+          <li>"What should I eat before/after working out?"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

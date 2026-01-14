@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sleep & Recovery | Social Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --dark-gray: #111111;
+      --gray: #666666;
+      --white: #FFFFFF;
+      --gold: #ffcc00;
+      --yellow: #fdea01;
+      --font-display: 'Futura PT', 'Futura', 'Century Gothic', 'Avant Garde', sans-serif;
+      --font-body: 'Futura PT', 'Futura', 'Century Gothic', sans-serif;
+      --font-accent: 'Cormorant Garamond', 'Garamond', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .template-container {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .social-post {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(180deg, #0a0a15 0%, var(--black) 100%);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .moon-accent {
+      position: absolute;
+      top: 40px;
+      right: 40px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(253, 234, 1, 0.1);
+      box-shadow: 0 0 60px rgba(253, 234, 1, 0.2);
+    }
+
+    .post-header {
+      position: absolute;
+      top: 32px;
+      left: 32px;
+    }
+
+    .post-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--yellow);
+    }
+
+    .post-content {
+      position: absolute;
+      top: 50%;
+      left: 32px;
+      right: 32px;
+      transform: translateY(-50%);
+    }
+
+    .sleep-headline {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 5vw, 2.25rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+
+    .sleep-headline span {
+      color: var(--yellow);
+    }
+
+    .recovery-list {
+      list-style: none;
+    }
+
+    .recovery-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .recovery-item:last-child {
+      border-bottom: none;
+    }
+
+    .recovery-number {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--yellow);
+      background: rgba(253, 234, 1, 0.1);
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .recovery-text {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    .logo-container {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .logo-container img {
+      height: 28px;
+      opacity: 0.4;
+    }
+
+    .caption-section {
+      background: var(--dark-gray);
+      padding: 32px;
+      margin-top: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .caption-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .caption-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--white);
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .caption-text .hashtags {
+      color: var(--gray);
+      margin-top: 16px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="template-container">
+    <!-- Social Post Image -->
+    <div class="social-post">
+      <div class="moon-accent"></div>
+      <div class="post-header">
+        <p class="post-label">Recovery Matters</p>
+      </div>
+      <div class="post-content">
+        <h2 class="sleep-headline">Your muscles don't grow <span>in the gym.</span> They grow <span>while you sleep.</span></h2>
+        <ul class="recovery-list">
+          <li class="recovery-item">
+            <span class="recovery-number">1</span>
+            <span class="recovery-text">Aim for 7-9 hours per night</span>
+          </li>
+          <li class="recovery-item">
+            <span class="recovery-number">2</span>
+            <span class="recovery-text">Keep a consistent sleep schedule</span>
+          </li>
+          <li class="recovery-item">
+            <span class="recovery-number">3</span>
+            <span class="recovery-text">Cool, dark room (65-68°F)</span>
+          </li>
+          <li class="recovery-item">
+            <span class="recovery-number">4</span>
+            <span class="recovery-text">No screens 1 hour before bed</span>
+          </li>
+        </ul>
+      </div>
+      <div class="logo-container">
+        <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873636754-7KKE9M4BRNTZEDPFWFHS/Zeb+Logo.png?format=500w" alt="Zeb's Platinum Fitness">
+      </div>
+    </div>
+
+    <!-- Caption -->
+    <div class="caption-section">
+      <p class="caption-label">Suggested Caption</p>
+      <p class="caption-text">Here's something most people don't realize:
+
+Your muscles don't actually grow in the gym.
+
+They grow while you sleep.
+
+Training creates the stimulus. Sleep is when your body does the repair work.
+
+Skip the sleep? Skip the results.
+
+Here's how to optimize your recovery:
+
+1. AIM FOR 7-9 HOURS
+Less than 6 hours = significantly impaired muscle recovery
+
+2. CONSISTENT SCHEDULE
+Go to bed and wake up at the same time. Your body loves routine.
+
+3. COOL, DARK ROOM
+65-68°F is optimal. Complete darkness helps melatonin production.
+
+4. NO SCREENS BEFORE BED
+Blue light disrupts your sleep cycle. Read a book instead.
+
+The best workout in the world won't help if you're running on 5 hours of sleep.
+
+Prioritize recovery. It's not lazy - it's smart training.
+
+What's your biggest sleep challenge? Tell me in the comments.
+
+<span class="hashtags">#SleepMatters #Recovery #FitnessOver50 #MuscleRecovery #ZebsPlatinumFitness #HealthyHabits #RestDay</span></p>
+    </div>
+  </div>
+</body>
+</html>

@@ -413,6 +413,55 @@ section {
   background: rgba(0, 0, 0, 0.3);
 }
 
+/* Gray section — Charcoal background */
+.section--gray {
+  background: var(--mid-gray);
+  color: var(--white);
+}
+
+.section--gray p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.section--gray h1,
+.section--gray h2,
+.section--gray h3,
+.section--gray h4,
+.section--gray .section-title {
+  color: var(--white);
+}
+
+.section--gray .section-label {
+  color: var(--yellow);
+}
+
+.section--gray .section-label::before {
+  background: var(--yellow);
+}
+
+.section--gray .card {
+  background: var(--dark-gray);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Dark Gray section — Deeper charcoal */
+.section--dark-gray {
+  background: var(--dark-gray);
+  color: var(--white);
+}
+
+.section--dark-gray p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.section--dark-gray .section-label {
+  color: var(--yellow);
+}
+
+.section--dark-gray .section-label::before {
+  background: var(--yellow);
+}
+
 /* --------------------------------------------------------------------------
    GRID SYSTEM
    -------------------------------------------------------------------------- */
@@ -432,11 +481,13 @@ section {
 .marquee-bar {
   background: var(--yellow);
   overflow: hidden;
-  padding: var(--space-md) 0;
+  padding: var(--space-sm) 0;
   transform: skewY(var(--zag-angle-subtle));
-  margin: -40px 0;
-  position: relative;
-  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: -20px;
+  right: -20px;
+  z-index: 1001;
 }
 
 .marquee-bar--top {
@@ -505,7 +556,7 @@ section {
 }
 
 .nav--with-marquee {
-  top: 44px;
+  top: 32px;
 }
 
 .nav-container {
@@ -823,8 +874,8 @@ section {
 }
 
 .revenue-card-text {
-  font-size: 0.8125rem;
-  color: var(--gray);
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* Link Card */
@@ -1946,27 +1997,10 @@ section {
 .animated-underline:nth-of-type(2)::after { transition-delay: 0.7s; }
 .animated-underline:nth-of-type(3)::after { transition-delay: 0.9s; }
 
-/* Statement section divider - diagonal ZAG */
-.statement-section-top {
-  position: absolute;
-  top: -60px;
-  left: 0;
-  right: 0;
-  height: 120px;
-  background: var(--yellow);
-  transform: skewY(var(--zag-angle));
-  z-index: 0;
-}
-
+/* Statement section divider - diagonal ZAG (hidden for cleaner look) */
+.statement-section-top,
 .statement-section-bottom {
-  position: absolute;
-  bottom: -60px;
-  left: 0;
-  right: 0;
-  height: 120px;
-  background: var(--yellow);
-  transform: skewY(var(--zag-angle));
-  z-index: 0;
+  display: none;
 }
 
 /* Big number callout inside statement */

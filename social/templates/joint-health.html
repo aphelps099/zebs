@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joint Health | Social Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --dark-gray: #111111;
+      --gray: #666666;
+      --white: #FFFFFF;
+      --gold: #ffcc00;
+      --yellow: #fdea01;
+      --font-display: 'Futura PT', 'Futura', 'Century Gothic', 'Avant Garde', sans-serif;
+      --font-body: 'Futura PT', 'Futura', 'Century Gothic', sans-serif;
+      --font-accent: 'Cormorant Garamond', 'Garamond', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .template-container {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .social-post {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #1a1a1a 0%, var(--black) 100%);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .post-header {
+      position: absolute;
+      top: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+
+    .post-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--yellow);
+      margin-bottom: 12px;
+    }
+
+    .post-headline {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 6vw, 2.5rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      line-height: 1.1;
+    }
+
+    .tips-grid {
+      position: absolute;
+      top: 50%;
+      left: 24px;
+      right: 24px;
+      transform: translateY(-50%);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .tip-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .tip-icon {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .tip-title {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .tip-desc {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      color: var(--gray);
+    }
+
+    .logo-container {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .logo-container img {
+      height: 32px;
+      opacity: 0.4;
+    }
+
+    .caption-section {
+      background: var(--dark-gray);
+      padding: 32px;
+      margin-top: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .caption-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .caption-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--white);
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .caption-text .hashtags {
+      color: var(--gray);
+      margin-top: 16px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="template-container">
+    <!-- Social Post Image -->
+    <div class="social-post">
+      <div class="post-header">
+        <p class="post-label">Joint Health 101</p>
+        <h1 class="post-headline">Protect Your Joints</h1>
+      </div>
+      <div class="tips-grid">
+        <div class="tip-item">
+          <p class="tip-icon">💧</p>
+          <p class="tip-title">Stay Hydrated</p>
+          <p class="tip-desc">Water lubricates joints</p>
+        </div>
+        <div class="tip-item">
+          <p class="tip-icon">🏃</p>
+          <p class="tip-title">Move Daily</p>
+          <p class="tip-desc">Motion is lotion</p>
+        </div>
+        <div class="tip-item">
+          <p class="tip-icon">💪</p>
+          <p class="tip-title">Build Muscle</p>
+          <p class="tip-desc">Supports your joints</p>
+        </div>
+        <div class="tip-item">
+          <p class="tip-icon">⚖️</p>
+          <p class="tip-title">Healthy Weight</p>
+          <p class="tip-desc">Less stress on joints</p>
+        </div>
+      </div>
+      <div class="logo-container">
+        <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873636754-7KKE9M4BRNTZEDPFWFHS/Zeb+Logo.png?format=500w" alt="Zeb's Platinum Fitness">
+      </div>
+    </div>
+
+    <!-- Caption -->
+    <div class="caption-section">
+      <p class="caption-label">Suggested Caption</p>
+      <p class="caption-text">JOINT HEALTH 101
+
+Worried about your knees? Hips? Shoulders?
+
+Here are 4 simple ways to protect your joints:
+
+1. STAY HYDRATED
+Cartilage is 80% water. Dehydration = stiffer joints.
+
+2. MOVE DAILY
+"Motion is lotion." Gentle movement keeps joints lubricated and healthy.
+
+3. BUILD MUSCLE
+Strong muscles around a joint = less stress on the joint itself.
+
+4. MAINTAIN HEALTHY WEIGHT
+Every pound of body weight = 4 pounds of pressure on your knees.
+
+The mistake most people make? Avoiding movement because of joint pain.
+
+Often, the RIGHT movement actually reduces pain over time.
+
+Want to learn joint-friendly exercises? That's my specialty. DM me.
+
+<span class="hashtags">#JointHealth #HealthyJoints #FitnessOver50 #KneePain #ArthritisFriendly #ZebsPlatinumFitness #HealthyAging</span></p>
+    </div>
+  </div>
+</body>
+</html>

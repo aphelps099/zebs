@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motivation Monday | Social Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --dark-gray: #111111;
+      --gray: #666666;
+      --white: #FFFFFF;
+      --gold: #ffcc00;
+      --yellow: #fdea01;
+      --font-display: 'Futura PT', 'Futura', 'Century Gothic', 'Avant Garde', sans-serif;
+      --font-body: 'Futura PT', 'Futura', 'Century Gothic', sans-serif;
+      --font-accent: 'Cormorant Garamond', 'Garamond', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .template-container {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .social-post {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .diagonal-accent {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      background: var(--yellow);
+      transform: skewX(-15deg) translateX(30%);
+    }
+
+    .post-header {
+      position: absolute;
+      top: 32px;
+      left: 32px;
+    }
+
+    .post-label {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+    }
+
+    .post-content {
+      position: absolute;
+      top: 50%;
+      left: 32px;
+      right: 40%;
+      transform: translateY(-50%);
+    }
+
+    .motivation-quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      line-height: 1.15;
+    }
+
+    .motivation-quote span {
+      color: var(--yellow);
+    }
+
+    .post-footer {
+      position: absolute;
+      bottom: 32px;
+      left: 32px;
+    }
+
+    .author-name {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+    }
+
+    .logo-container {
+      position: absolute;
+      bottom: 32px;
+      right: 32px;
+    }
+
+    .logo-container img {
+      height: 28px;
+      opacity: 0.4;
+    }
+
+    .caption-section {
+      background: var(--dark-gray);
+      padding: 32px;
+      margin-top: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .caption-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .caption-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--white);
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .caption-text .hashtags {
+      color: var(--gray);
+      margin-top: 16px;
+      display: block;
+    }
+
+    .variations {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 24px;
+      margin-top: 24px;
+    }
+
+    .variations-title {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--yellow);
+      margin-bottom: 12px;
+    }
+
+    .variations ul {
+      list-style: none;
+    }
+
+    .variations li {
+      font-size: 0.875rem;
+      color: var(--gray);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .variations li:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="template-container">
+    <!-- Social Post Image -->
+    <div class="social-post">
+      <div class="diagonal-accent"></div>
+      <div class="post-header">
+        <p class="post-label">Motivation Monday</p>
+      </div>
+      <div class="post-content">
+        <p class="motivation-quote">The best time to start was <span>yesterday.</span> The second best time is <span>now.</span></p>
+      </div>
+      <div class="post-footer">
+        <p class="author-name">- Chinese Proverb</p>
+      </div>
+      <div class="logo-container">
+        <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873636754-7KKE9M4BRNTZEDPFWFHS/Zeb+Logo.png?format=500w" alt="Zeb's Platinum Fitness">
+      </div>
+    </div>
+
+    <!-- Caption -->
+    <div class="caption-section">
+      <p class="caption-label">Suggested Caption</p>
+      <p class="caption-text">MOTIVATION MONDAY
+
+"The best time to start was yesterday. The second best time is now."
+
+Stop waiting for:
+- Monday
+- The new year
+- When you're "ready"
+- When life slows down
+
+Life doesn't slow down. You just get older.
+
+The clients who succeed aren't the ones who waited for the perfect moment. They're the ones who started before they felt ready.
+
+One small step today beats a perfect plan tomorrow.
+
+What's one small thing you can do for your health today? Comment below.
+
+<span class="hashtags">#MotivationMonday #StartNow #FitnessOver50 #NoMoreExcuses #ZebsPlatinumFitness #MondayMotivation #TakeAction</span></p>
+
+      <div class="variations">
+        <p class="variations-title">Other Monday Quotes</p>
+        <ul>
+          <li>"Discipline is choosing between what you want now and what you want most."</li>
+          <li>"You don't have to be great to start, but you have to start to be great."</li>
+          <li>"The only workout you regret is the one you didn't do."</li>
+          <li>"Progress, not perfection."</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
