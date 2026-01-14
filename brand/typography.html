@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typography | Zeb's Platinum Fitness Brand House</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Libre Franklin', 'Century Gothic', 'Futura', sans-serif; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873335476-YWWL8XLLAG8L911G4JSZ/zeb+logo+2.png?format=750w" alt="Zeb's Platinum Fitness">
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('active')">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links">
+        <a href="../index.html#brand" class="nav-link">Brand</a>
+        <a href="../index.html#products" class="nav-link">Products</a>
+        <a href="../index.html#social" class="nav-link">Social</a>
+        <a href="../index.html#roadmap" class="nav-link">Roadmap</a>
+        <a href="../index.html#assets" class="nav-link">Assets</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <div class="page-header-content">
+        <p class="breadcrumb"><a href="../index.html">Home</a> <span>/</span> Brand</p>
+        <h1 class="page-title">TYPOGRAPHY</h1>
+        <p class="page-subtitle">Font system and hierarchy for consistent brand communication</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Primary Font -->
+  <section class="content-section">
+    <div class="container">
+      <p class="section-label">Primary Typeface</p>
+      <h2 class="section-title">FUTURA PT</h2>
+      <p class="mb-lg">Futura PT is the primary typeface for Zeb's Platinum Fitness. Its geometric construction conveys strength and modernity while remaining highly legible. Use Century Gothic or system sans-serif as fallbacks.</p>
+
+      <div class="card mb-lg">
+        <p class="type-label">Font Stack</p>
+        <div class="code-block">
+          <code>font-family: 'Futura PT', 'Century Gothic', 'Futura', sans-serif;</code>
+        </div>
+      </div>
+
+      <div class="grid grid--4">
+        <div class="card">
+          <p class="type-label">Light</p>
+          <p style="font-weight: 300; font-size: 3rem;">Aa</p>
+          <p class="type-meta">Weight: 300</p>
+        </div>
+        <div class="card">
+          <p class="type-label">Regular</p>
+          <p style="font-weight: 400; font-size: 3rem;">Aa</p>
+          <p class="type-meta">Weight: 400</p>
+        </div>
+        <div class="card">
+          <p class="type-label">Medium</p>
+          <p style="font-weight: 500; font-size: 3rem;">Aa</p>
+          <p class="type-meta">Weight: 500</p>
+        </div>
+        <div class="card">
+          <p class="type-label">Bold</p>
+          <p style="font-weight: 700; font-size: 3rem;">Aa</p>
+          <p class="type-meta">Weight: 700</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Type Scale -->
+  <section class="content-section">
+    <div class="container">
+      <p class="section-label">Type Scale</p>
+      <h2 class="section-title">HIERARCHY</h2>
+
+      <div class="type-specimen">
+        <p class="type-label">H1 — Hero Title</p>
+        <h1 style="font-size: clamp(3rem, 8vw, 6rem); letter-spacing: 8px; margin-bottom: 0;">ZEB'S PLATINUM</h1>
+        <p class="type-meta">Size: clamp(3rem, 8vw, 6rem) | Weight: 700 | Letter-spacing: 8px | Uppercase</p>
+      </div>
+
+      <div class="type-specimen">
+        <p class="type-label">H2 — Section Title</p>
+        <h2 style="font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: 6px; margin-bottom: 0;">THE BRAND</h2>
+        <p class="type-meta">Size: clamp(2rem, 5vw, 3.5rem) | Weight: 700 | Letter-spacing: 6px | Uppercase</p>
+      </div>
+
+      <div class="type-specimen">
+        <p class="type-label">H3 — Card Title</p>
+        <h3 style="font-size: clamp(1.25rem, 3vw, 1.75rem); letter-spacing: 4px; margin-bottom: 0;">DISCIPLINE = SIMPLICITY</h3>
+        <p class="type-meta">Size: clamp(1.25rem, 3vw, 1.75rem) | Weight: 700 | Letter-spacing: 4px | Uppercase</p>
+      </div>
+
+      <div class="type-specimen">
+        <p class="type-label">H4 — Subsection Title</p>
+        <h4 style="font-size: 1.125rem; letter-spacing: 3px; margin-bottom: 0;">FACEBOOK FIRST</h4>
+        <p class="type-meta">Size: 1.125rem | Weight: 700 | Letter-spacing: 3px | Uppercase</p>
+      </div>
+
+      <div class="type-specimen">
+        <p class="type-label">Body Text</p>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 0;">Empower adults 50+ to reclaim their physical independence through simple, sustainable fitness programs delivered with accountability and zero judgment.</p>
+        <p class="type-meta">Size: 1rem | Weight: 300 | Line-height: 1.8 | Color: #888888</p>
+      </div>
+
+      <div class="type-specimen">
+        <p class="type-label">Label / Overline</p>
+        <p style="font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 0;">01 — FOUNDATION</p>
+        <p class="type-meta">Size: 11px | Weight: 500 | Letter-spacing: 3px | Uppercase | Color: Gold</p>
+      </div>
+
+      <div class="type-specimen">
+        <p class="type-label">Quote / Emphasis</p>
+        <p style="font-size: 1.25rem; font-style: italic; color: var(--gold); margin-bottom: 0;">"I'm in my 60s. If you think it's too late — watch me."</p>
+        <p class="type-meta">Size: 1.25rem | Weight: 300 | Style: Italic | Color: Gold</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Usage Guidelines -->
+  <section class="content-section">
+    <div class="container">
+      <p class="section-label">Guidelines</p>
+      <h2 class="section-title">USAGE RULES</h2>
+
+      <div class="grid grid--2">
+        <div class="card">
+          <h3 class="card-title text-gold mb-sm">HEADLINES</h3>
+          <ul class="checklist">
+            <li>Always uppercase</li>
+            <li>Bold weight (700)</li>
+            <li>Letter-spacing: 4-8px depending on size</li>
+            <li>High contrast against background</li>
+            <li>Keep headlines short and impactful</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title text-gold mb-sm">BODY TEXT</h3>
+          <ul class="checklist">
+            <li>Light weight (300) for elegance</li>
+            <li>Line-height: 1.7-1.8 for readability</li>
+            <li>Gray (#888) on dark backgrounds</li>
+            <li>Regular sentence case</li>
+            <li>Maximum 70 characters per line</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title text-gold mb-sm">LABELS & NAVIGATION</h3>
+          <ul class="checklist">
+            <li>Small size (10-11px)</li>
+            <li>Medium weight (500)</li>
+            <li>Uppercase with letter-spacing 2-3px</li>
+            <li>Gold for active/accent states</li>
+            <li>Gray for secondary labels</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title text-gold mb-sm">QUOTES</h3>
+          <ul class="checklist">
+            <li>Italic style for distinction</li>
+            <li>Gold color for brand alignment</li>
+            <li>Slightly larger than body (1.125-1.5rem)</li>
+            <li>Use for testimonials and key phrases</li>
+            <li>Attribution in uppercase, small size</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CSS Implementation -->
+  <section class="content-section">
+    <div class="container">
+      <p class="section-label">Implementation</p>
+      <h2 class="section-title">CSS VARIABLES</h2>
+
+      <div class="code-block">
+        <pre><code>:root {
+  /* Typography */
+  --font-primary: 'Futura PT', 'Century Gothic', 'Futura', sans-serif;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+}
+
+/* Headlines */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  line-height: 1.2;
+}
+
+/* Body */
+body {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-light);
+  line-height: 1.7;
+}
+
+/* Labels */
+.label {
+  font-size: 11px;
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873636754-7KKE9M4BRNTZEDPFWFHS/Zeb+Logo.png?format=500w" alt="Zeb's Platinum Fitness" class="footer-logo">
+    <p class="footer-tagline">Structure &bull; Motivation &bull; Accountability</p>
+  </footer>
+
+</body>
+</html>
