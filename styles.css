@@ -5,6 +5,41 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
+   CUSTOM FONTS — Self-hosted Futura & TROS
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Futura';
+  src: url('fonts/Futura Book font.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura';
+  src: url('fonts/Futura Extra Black font.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura';
+  src: url('fonts/Futura XBlk BT.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TROS';
+  src: url('fonts/TROS-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --------------------------------------------------------------------------
    CSS VARIABLES
    -------------------------------------------------------------------------- */
 :root {
@@ -21,17 +56,20 @@
   --yellow: #fdea01;
   --gold-dark: #e6b800;
 
-  /* Typography — Futura as primary, Cormorant for elegance */
-  --font-display: 'Futura PT', 'Futura', 'Century Gothic', 'Avant Garde', sans-serif;
-  --font-body: 'Futura PT', 'Futura', 'Century Gothic', sans-serif;
+  /* Typography — Self-hosted Futura as primary, Cormorant for elegance */
+  --font-display: 'Futura', 'Futura PT', 'Century Gothic', 'Avant Garde', sans-serif;
+  --font-body: 'Futura', 'Futura PT', 'Century Gothic', sans-serif;
   --font-accent: 'Cormorant Garamond', 'Garamond', 'Times New Roman', serif;
+  --font-thin: 'TROS', 'Futura', sans-serif;
 
   /* Font Weights */
+  --weight-thin: 100;
   --weight-light: 300;
   --weight-book: 400;
   --weight-medium: 500;
   --weight-bold: 700;
   --weight-heavy: 800;
+  --weight-black: 900;
 
   /* Spacing Scale — Generous whitespace */
   --space-xs: 4px;
