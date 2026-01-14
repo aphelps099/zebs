@@ -471,13 +471,13 @@
       </div>
     </div>
 
-    <!-- Marquee Divider - inside yellow section for seamless transition -->
-    <div class="marquee-bar" style="margin-top: var(--space-xl); background: var(--black);">
+    <!-- Marquee Divider - transparent with black text for seamless yellow integration -->
+    <div class="marquee-bar" style="margin-top: var(--space-xl); background: transparent;">
       <div class="marquee-content">
-        <span class="marquee-text" style="color: var(--yellow);">"There is nothing impossible to him who will try." - Alexander The Great</span>
-        <span class="marquee-text" style="color: var(--yellow);">"There is nothing impossible to him who will try." - Alexander The Great</span>
-        <span class="marquee-text" style="color: var(--yellow);">"There is nothing impossible to him who will try." - Alexander The Great</span>
-        <span class="marquee-text" style="color: var(--yellow);">"There is nothing impossible to him who will try." - Alexander The Great</span>
+        <span class="marquee-text" style="color: var(--black);">"There is nothing impossible to him who will try." - Alexander The Great</span>
+        <span class="marquee-text" style="color: var(--black);">"There is nothing impossible to him who will try." - Alexander The Great</span>
+        <span class="marquee-text" style="color: var(--black);">"There is nothing impossible to him who will try." - Alexander The Great</span>
+        <span class="marquee-text" style="color: var(--black);">"There is nothing impossible to him who will try." - Alexander The Great</span>
       </div>
     </div>
   </section>
@@ -645,6 +645,12 @@
     </div>
     <p class="footer-quote">"There is nothing impossible to him who will try."</p>
     <p class="footer-quote-author">- Alexander The Great</p>
+
+    <!-- Aaron Phelps Credit -->
+    <a href="https://aaroncphelps.com" target="_blank" class="footer-credit">
+      <span class="footer-credit-circle">A</span>
+      <span class="footer-credit-tooltip">brand house copyright aaronphelps</span>
+    </a>
   </footer>
 
   <!-- Scroll Animation Script -->
@@ -764,6 +770,23 @@
     if (statementSection) {
       statementObserver.observe(statementSection);
     }
+
+    // Disable right-click to prevent source code viewing
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      return false;
+    });
+
+    // Also disable keyboard shortcuts for view source
+    document.addEventListener('keydown', function(e) {
+      // Ctrl+U (view source), Ctrl+Shift+I (dev tools), F12 (dev tools)
+      if ((e.ctrlKey && e.key === 'u') ||
+          (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+          e.key === 'F12') {
+        e.preventDefault();
+        return false;
+      }
+    });
   </script>
 
 </body>
