@@ -12,34 +12,23 @@
 </head>
 <body>
 
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+  </div>
+
   <!-- Loading Screen -->
-  <div class="loading-screen" id="loadingScreen">
-    <div class="loading-marquee">
-      <div class="loading-marquee-content">
-        <span>STRUCTURE</span>
-        <span class="loading-dot"></span>
-        <span>MOTIVATION</span>
-        <span class="loading-dot"></span>
-        <span>ACCOUNTABILITY</span>
-        <span class="loading-dot"></span>
-        <span>STRUCTURE</span>
-        <span class="loading-dot"></span>
-        <span>MOTIVATION</span>
-        <span class="loading-dot"></span>
-        <span>ACCOUNTABILITY</span>
-        <span class="loading-dot"></span>
-        <span>STRUCTURE</span>
-        <span class="loading-dot"></span>
-        <span>MOTIVATION</span>
-        <span class="loading-dot"></span>
-        <span>ACCOUNTABILITY</span>
-        <span class="loading-dot"></span>
-      </div>
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873636754-7KKE9M4BRNTZEDPFWFHS/Zeb+Logo.png?format=500w" alt="Zeb's Platinum Fitness" class="loader-logo">
+      <p class="loader-text">Loading</p>
     </div>
+    <div class="loader-bar"></div>
   </div>
 
   <!-- Navigation -->
-  <nav class="nav">
+  <nav class="nav" id="nav">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
         <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873335476-YWWL8XLLAG8L911G4JSZ/zeb+logo+2.png?format=750w" alt="Zeb's Platinum Fitness">
@@ -60,29 +49,45 @@
     </div>
   </nav>
 
-  <!-- Section 3: Hero -->
-  <section class="hero">
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" id="heroBg"></div>
     <div class="hero-content">
-      <p class="hero-overline">Brand House<span class="tooltip">The strategic brand hub for Zeb's Platinum Fitness, a personal training studio serving adults 50+ in Redding, CA.</span></p>
-      <h1 class="hero-title">ZEB'S PLATINUM FITNESS</h1>
-      <p class="hero-tagline">Structure &bull; Motivation &bull; Accountability</p>
+      <p class="hero-overline">
+        <span class="hero-overline-dot"></span>
+        Brand House
+        <span class="tooltip">The strategic brand hub for Zeb's Platinum Fitness, a personal training studio serving adults 50+ in Redding, CA.</span>
+      </p>
+      <h1 class="hero-title" id="heroTitle">ZEB'S PLATINUM FITNESS</h1>
+      <p class="hero-tagline">Structure <span>&bull;</span> Motivation <span>&bull;</span> Accountability</p>
       <p class="hero-quote">"I'm in my 60s. If you think it's too late - watch me."</p>
+    </div>
+    <div class="hero-scroll">
+      <span class="hero-scroll-text">Scroll</span>
+      <div class="hero-scroll-line"></div>
     </div>
   </section>
 
-  <!-- Bold Statement Section -->
-  <section class="statement-section">
-    <div class="statement-section-top"></div>
-    <div class="statement-big-number">50+</div>
-    <div class="container">
+  <!-- Statement Section -->
+  <section class="statement" id="statement">
+    <div class="statement-grid"></div>
+    <div class="statement-bg-number">50+</div>
+    <div class="statement-corner statement-corner--tl"></div>
+    <div class="statement-corner statement-corner--br"></div>
+    <div class="statement-container">
       <div class="statement-content">
         <p class="statement-label">The Mission</p>
         <p class="statement-text">
-          For <span class="statement-stat">30+ years</span>, I've helped adults over <span class="statement-stat">50</span> prove that <span class="animated-underline">age is just a number</span>. With <span class="animated-underline">structure</span>, <span class="animated-underline">motivation</span>, and <span class="animated-underline">accountability</span> - transformation happens at <span class="statement-stat">any stage</span> of life.
+          For <span class="statement-stat" data-delay="0">30+ years</span>, I've helped adults over <span class="statement-stat" data-delay="1">50</span> prove that <span class="statement-underline">age is just a number</span>. With <span class="statement-underline">structure</span>, <span class="statement-underline">motivation</span>, and <span class="statement-underline">accountability</span> - transformation happens at <span class="statement-stat" data-delay="2">any stage</span> of life.
         </p>
       </div>
     </div>
-    <div class="statement-section-bottom"></div>
+  </section>
+
+  <!-- Preview of Next Section -->
+  <section class="preview">
+    <p class="preview-label">Next</p>
+    <h2 class="preview-title">The Brand</h2>
   </section>
 
   <!-- Section 4: Brand Foundation -->
@@ -654,16 +659,132 @@
     </a>
   </footer>
 
-  <!-- Scroll Animation Script -->
+  <!-- Premium Interactions Script -->
   <script>
-    // Loading screen
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        document.getElementById('loadingScreen').classList.add('hidden');
-      }, 1200);
+    // ==========================================================================
+    // PREMIUM INTERACTIONS
+    // ==========================================================================
+
+    // --------------------------------------------------------------------------
+    // Custom Cursor
+    // --------------------------------------------------------------------------
+    const cursor = document.getElementById('cursor');
+    let cursorX = 0, cursorY = 0;
+    let currentX = 0, currentY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      cursorX = e.clientX;
+      cursorY = e.clientY;
     });
 
+    // Smooth cursor follow with lerp
+    function animateCursor() {
+      const ease = 0.15;
+      currentX += (cursorX - currentX) * ease;
+      currentY += (cursorY - currentY) * ease;
+      cursor.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Hover states for interactive elements
+    const hoverables = document.querySelectorAll('a, button, .hero-overline');
+    hoverables.forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+    });
+
+    // --------------------------------------------------------------------------
+    // Loading Screen
+    // --------------------------------------------------------------------------
+    const loader = document.getElementById('loader');
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        loader.classList.add('exit');
+        document.body.classList.add('loaded');
+
+        // Trigger title character animation
+        animateTitle();
+
+        setTimeout(() => {
+          loader.style.display = 'none';
+        }, 800);
+      }, 2000);
+    });
+
+    // --------------------------------------------------------------------------
+    // Hero Title Character Animation
+    // --------------------------------------------------------------------------
+    function animateTitle() {
+      const title = document.getElementById('heroTitle');
+      const text = title.textContent.trim();
+      title.innerHTML = '';
+
+      // Split into words and characters
+      const words = text.split(' ');
+      let charIndex = 0;
+
+      words.forEach((word, wordIndex) => {
+        const wordSpan = document.createElement('span');
+        wordSpan.className = 'word';
+
+        word.split('').forEach((char) => {
+          const charSpan = document.createElement('span');
+          charSpan.className = 'char';
+          charSpan.textContent = char;
+          charSpan.style.animationDelay = `${0.4 + charIndex * 0.03}s`;
+          wordSpan.appendChild(charSpan);
+          charIndex++;
+        });
+
+        title.appendChild(wordSpan);
+
+        // Add space between words
+        if (wordIndex < words.length - 1) {
+          const space = document.createElement('span');
+          space.innerHTML = '&nbsp;';
+          title.appendChild(space);
+        }
+      });
+    }
+
+    // --------------------------------------------------------------------------
+    // Parallax Background
+    // --------------------------------------------------------------------------
+    const heroBg = document.getElementById('heroBg');
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrolled = window.pageYOffset;
+          const rate = scrolled * 0.3;
+          if (heroBg) {
+            heroBg.style.transform = `translateY(${rate}px)`;
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // --------------------------------------------------------------------------
+    // Navigation Scroll State
+    // --------------------------------------------------------------------------
+    const nav = document.getElementById('nav');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.classList.add('nav--scrolled');
+      } else {
+        nav.classList.remove('nav--scrolled');
+      }
+    });
+
+    // --------------------------------------------------------------------------
     // Intersection Observer for fade-up animations
+    // --------------------------------------------------------------------------
     const observerOptions = {
       root: null,
       rootMargin: '0px',
@@ -682,16 +803,51 @@
       observer.observe(el);
     });
 
+    // --------------------------------------------------------------------------
+    // Statement Section Intersection Observer
+    // --------------------------------------------------------------------------
+    const statement = document.getElementById('statement');
+    const stats = document.querySelectorAll('.statement .statement-stat');
+    const underlines = document.querySelectorAll('.statement-underline');
+
+    const statementObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+
+          // Animate stats with stagger
+          stats.forEach((stat, index) => {
+            setTimeout(() => {
+              stat.classList.add('visible');
+            }, 500 + (index * 200));
+          });
+
+          // Animate underlines with stagger
+          underlines.forEach((underline, index) => {
+            setTimeout(() => {
+              underline.classList.add('visible');
+            }, 700 + (index * 150));
+          });
+
+          statementObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35 });
+
+    if (statement) {
+      statementObserver.observe(statement);
+    }
+
+    // --------------------------------------------------------------------------
     // Smooth scroll for nav links
+    // --------------------------------------------------------------------------
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
           const navHeight = document.querySelector('.nav').offsetHeight;
-          const marqueeHeight = document.querySelector('.marquee-bar').offsetHeight;
-          const offset = navHeight + marqueeHeight;
-          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 20;
           window.scrollTo({
             top: targetPosition,
             behavior: 'smooth'
@@ -702,7 +858,9 @@
       });
     });
 
+    // --------------------------------------------------------------------------
     // Modal functionality
+    // --------------------------------------------------------------------------
     let currentModalUrl = '';
 
     function openModal(id, title, url) {
@@ -734,49 +892,10 @@
       }
     });
 
-    // Statement section animations - snap-in effect
-    const statementObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // Animate the label
-          const label = entry.target.querySelector('.statement-label');
-          if (label) label.classList.add('visible');
-
-          // Animate the statement text
-          const text = entry.target.querySelector('.statement-text');
-          if (text) text.classList.add('visible');
-
-          // Snap in the stats with staggered timing
-          const stats = entry.target.querySelectorAll('.statement-stat');
-          stats.forEach((stat, index) => {
-            setTimeout(() => {
-              stat.classList.add('snap-in');
-            }, 400 + (index * 200));
-          });
-
-          // Animate underlines
-          const underlines = entry.target.querySelectorAll('.animated-underline');
-          underlines.forEach((underline, index) => {
-            setTimeout(() => {
-              underline.classList.add('visible');
-            }, 500 + (index * 150));
-          });
-
-          statementObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.3 });
-
-    const statementSection = document.querySelector('.statement-section');
-    if (statementSection) {
-      statementObserver.observe(statementSection);
-    }
-
-    // Disable right-click to prevent source code viewing
-    document.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-      return false;
-    });
+    // --------------------------------------------------------------------------
+    // Prevent right-click (for presentation polish)
+    // --------------------------------------------------------------------------
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
 
     // Also disable keyboard shortcuts for view source
     document.addEventListener('keydown', function(e) {
