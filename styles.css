@@ -2489,6 +2489,7 @@ body::before {
   padding: 12px 24px;
   margin-bottom: var(--space-lg);
   position: relative;
+  z-index: 99999;
   cursor: help;
   opacity: 0;
   transform: translateY(30px);
