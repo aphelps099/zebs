@@ -8,15 +8,35 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" rel="stylesheet">
-  <style>
-    /* Fallback for Futura PT */
-    body {
-      font-family: 'Libre Franklin', 'Century Gothic', 'Futura', sans-serif;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-marquee">
+      <div class="loading-marquee-content">
+        <span>STRUCTURE</span>
+        <span class="loading-dot"></span>
+        <span>MOTIVATION</span>
+        <span class="loading-dot"></span>
+        <span>ACCOUNTABILITY</span>
+        <span class="loading-dot"></span>
+        <span>STRUCTURE</span>
+        <span class="loading-dot"></span>
+        <span>MOTIVATION</span>
+        <span class="loading-dot"></span>
+        <span>ACCOUNTABILITY</span>
+        <span class="loading-dot"></span>
+        <span>STRUCTURE</span>
+        <span class="loading-dot"></span>
+        <span>MOTIVATION</span>
+        <span class="loading-dot"></span>
+        <span>ACCOUNTABILITY</span>
+        <span class="loading-dot"></span>
+      </div>
+    </div>
+  </div>
 
   <!-- Section 1: Marquee Bar -->
   <div class="marquee-bar">
@@ -366,6 +386,13 @@
 
   <!-- Scroll Animation Script -->
   <script>
+    // Loading screen
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.getElementById('loadingScreen').classList.add('hidden');
+      }, 1200);
+    });
+
     // Intersection Observer for fade-up animations
     const observerOptions = {
       root: null,
