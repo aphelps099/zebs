@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10-Minute Mobility Series | Project Plan</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    .plan-hero {
+      background: var(--black);
+      padding: var(--space-2xl) var(--space-lg);
+      text-align: center;
+    }
+
+    .plan-hero-label {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--yellow);
+      margin-bottom: var(--space-sm);
+    }
+
+    .plan-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 7vw, 4rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: var(--space-md);
+    }
+
+    .plan-hero-subtitle {
+      font-family: var(--font-body);
+      font-size: 1.125rem;
+      color: var(--gray);
+      max-width: 600px;
+      margin: 0 auto var(--space-lg);
+    }
+
+    .plan-meta {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-xl);
+      flex-wrap: wrap;
+    }
+
+    .plan-meta-item {
+      text-align: center;
+    }
+
+    .plan-meta-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+      margin-bottom: 4px;
+    }
+
+    .plan-meta-value {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--yellow);
+    }
+
+    .plan-section {
+      padding: var(--space-xl) var(--space-lg);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .plan-section--dark {
+      background: var(--black);
+      max-width: 100%;
+    }
+
+    .plan-section--dark .plan-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .plan-section--gray {
+      background: #f5f5f5;
+      max-width: 100%;
+    }
+
+    .plan-section--gray .plan-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .plan-label {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+      margin-bottom: var(--space-sm);
+    }
+
+    .plan-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--black);
+      margin-bottom: var(--space-md);
+    }
+
+    .plan-section--dark .plan-title {
+      color: var(--white);
+    }
+
+    .plan-text {
+      font-family: var(--font-body);
+      font-size: 1.0625rem;
+      line-height: 1.8;
+      color: var(--dark-gray);
+    }
+
+    .plan-text p {
+      margin-bottom: var(--space-md);
+    }
+
+    .plan-section--dark .plan-text {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Deliverables Grid */
+    .deliverables-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+      margin: var(--space-lg) 0;
+    }
+
+    .deliverable-card {
+      background: var(--white);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      padding: var(--space-lg);
+    }
+
+    .deliverable-card h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--black);
+      margin-bottom: var(--space-sm);
+      padding-bottom: var(--space-sm);
+      border-bottom: 2px solid var(--yellow);
+    }
+
+    .deliverable-card p {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      color: var(--dark-gray);
+      line-height: 1.6;
+    }
+
+    /* Landing Page Structure */
+    .lp-section {
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-md);
+    }
+
+    .lp-section-title {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--yellow);
+      margin-bottom: var(--space-sm);
+    }
+
+    .lp-section h4 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--black);
+      margin-bottom: var(--space-sm);
+    }
+
+    .lp-section p {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      color: var(--dark-gray);
+      line-height: 1.6;
+    }
+
+    .lp-section ul {
+      list-style: none;
+      padding: 0;
+      margin: var(--space-sm) 0 0;
+    }
+
+    .lp-section li {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      color: var(--dark-gray);
+      padding: 4px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .lp-section li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--yellow);
+    }
+
+    /* Video Structure */
+    .video-section {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-md);
+    }
+
+    .video-section-time {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--yellow);
+      margin-bottom: 4px;
+    }
+
+    .video-section-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      margin-bottom: var(--space-sm);
+    }
+
+    .video-section-content {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+    }
+
+    .coaching-cue {
+      font-family: var(--font-accent);
+      font-style: italic;
+      color: var(--gray);
+      margin-top: var(--space-sm);
+    }
+
+    /* Future Series */
+    .series-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      margin: var(--space-lg) 0;
+    }
+
+    .series-card {
+      background: var(--white);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      padding: var(--space-lg);
+      text-align: center;
+    }
+
+    .series-card.active {
+      border: 2px solid var(--yellow);
+      background: #FFFDF5;
+    }
+
+    .series-card h4 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: var(--space-sm);
+    }
+
+    .series-card-target {
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--yellow);
+      margin-bottom: var(--space-sm);
+    }
+
+    .series-card p {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--gray);
+    }
+
+    /* Back Link */
+    .back-link {
+      text-align: center;
+      padding: var(--space-lg);
+      background: var(--black);
+    }
+
+    .back-link a {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+      text-decoration: none;
+    }
+
+    .back-link a:hover {
+      color: var(--yellow);
+    }
+
+    @media (max-width: 768px) {
+      .deliverables-grid, .series-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      .plan-hero {
+        padding: 40px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="plan-hero">
+    <p class="plan-hero-label">Project Plan & Launch Blueprint</p>
+    <h1 class="plan-hero-title">10-Minute Mobility Series</h1>
+    <p class="plan-hero-subtitle">A lead generation funnel designed to capture email addresses, demonstrate Zeb's expertise, and convert viewers into paying clients.</p>
+    <div class="plan-meta">
+      <div class="plan-meta-item">
+        <p class="plan-meta-label">Prepared For</p>
+        <p class="plan-meta-value">Zeb Young</p>
+      </div>
+      <div class="plan-meta-item">
+        <p class="plan-meta-label">Prepared By</p>
+        <p class="plan-meta-value">Aaron Phelps</p>
+      </div>
+      <div class="plan-meta-item">
+        <p class="plan-meta-label">Date</p>
+        <p class="plan-meta-value">January 2025</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Executive Summary -->
+  <section class="plan-section">
+    <p class="plan-label">Overview</p>
+    <h2 class="plan-title">Executive Summary</h2>
+    <div class="plan-text">
+      <p>The 10-Minute Mobility Series is a <strong>lead generation funnel</strong> - not a free giveaway. Users provide their email to access the content. This first series serves as a template for future mini-courses (Booty, Abs, etc.).</p>
+    </div>
+    <div class="deliverables-grid">
+      <div class="deliverable-card">
+        <h3>Landing Page</h3>
+        <p>Email-gated page with compelling copy, built in Squarespace. Users must enter their email to access the video content.</p>
+      </div>
+      <div class="deliverable-card">
+        <h3>Core Video</h3>
+        <p>10-minute mobility routine (gated content after email capture). The main product delivered after signup.</p>
+      </div>
+      <div class="deliverable-card">
+        <h3>Promo Video</h3>
+        <p>"Who Should Join" teaser video for social sharing (ungated). Drives traffic to the landing page.</p>
+      </div>
+      <div class="deliverable-card">
+        <h3>Sharing Strategy</h3>
+        <p>Distribution roadmap for launch and ongoing promotion across Facebook, Instagram, and YouTube.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Landing Page -->
+  <section class="plan-section plan-section--gray">
+    <div class="plan-content">
+      <p class="plan-label">Section 1</p>
+      <h2 class="plan-title">Landing Page Structure</h2>
+      <div class="plan-text">
+        <p>The landing page follows a proven lead-capture formula: hook, problem, solution, credibility, and call-to-action. Built for Squarespace with mobile-first design.</p>
+      </div>
+
+      <div class="lp-section">
+        <p class="lp-section-title">Hero Section</p>
+        <h4>10 Minutes to Move Better</h4>
+        <p>A free daily mobility routine from a 70+ year-old trainer who rebuilt his body after back surgery. No gym required.</p>
+        <p style="margin-top: var(--space-sm);"><strong>CTA:</strong> Get Free Access →</p>
+      </div>
+
+      <div class="lp-section">
+        <p class="lp-section-title">Problem Section</p>
+        <h4>"Sound familiar?"</h4>
+        <ul>
+          <li>You wake up stiff and it takes 20 minutes before you feel human</li>
+          <li>Getting up from the floor feels like a project</li>
+          <li>You've tried stretching but nothing sticks</li>
+          <li>You're not injured - you just don't move as well as you used to</li>
+          <li>You worry about what the next 10 years will feel like</li>
+        </ul>
+      </div>
+
+      <div class="lp-section">
+        <p class="lp-section-title">Solution Section</p>
+        <h4>"What if you could feel better in just 10 minutes a day?"</h4>
+        <p>This isn't another stretching video you'll watch once and forget. It's a simple, repeatable routine designed specifically for adults 50+ who want to move without stiffness, pain, or limitation.</p>
+        <ul>
+          <li>10-Minute Follow-Along Video: Do it with me, every movement, every breath</li>
+          <li>No Equipment Needed: Just you, the floor, and 10 minutes</li>
+          <li>Designed for Real Bodies: Modifications shown for every movement</li>
+          <li>Instant Access: Enter your email and start today</li>
+        </ul>
+      </div>
+
+      <div class="lp-section">
+        <p class="lp-section-title">Credibility Section</p>
+        <h4>"Why trust a 70-year-old trainer?"</h4>
+        <p>Because I've lived it. After major back surgery, doctors weren't sure I'd train again. I rebuilt everything - mobility first, then strength, then confidence. Now I'm stronger at 70+ than most people half my age. Not because I'm special, but because I found what works. This routine is part of that system.</p>
+      </div>
+
+      <div class="lp-section">
+        <p class="lp-section-title">Email Capture Form</p>
+        <h4>Ready to move better?</h4>
+        <p><strong>Fields:</strong> First Name, Email Address</p>
+        <p><strong>Button:</strong> Send Me the Video</p>
+        <p><strong>Privacy:</strong> No spam. Unsubscribe anytime. Just good movement advice.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Content -->
+  <section class="plan-section plan-section--dark">
+    <div class="plan-content">
+      <p class="plan-label">Section 2</p>
+      <h2 class="plan-title">Video Content</h2>
+      <div class="plan-text">
+        <p><strong>Length:</strong> 10-12 minutes | <strong>Format:</strong> Follow-along workout with Zeb on camera | <strong>Location:</strong> Zeb's Platinum Fitness studio | <strong>Hosting:</strong> Unlisted YouTube or Vimeo (link sent after email capture)</p>
+      </div>
+
+      <div class="video-section">
+        <p class="video-section-time">0:00 - 0:45</p>
+        <h4 class="video-section-title">Intro</h4>
+        <p class="video-section-content">"Hey, I'm Zeb. Welcome to 10-Minute Mobility." Quick credibility: "I'm 70+ and I rebuilt my mobility after back surgery using routines like this." Set expectations: "We're going to move through 6 positions. Each one targets a common problem area. No equipment, no excuses."</p>
+      </div>
+
+      <div class="video-section">
+        <p class="video-section-time">0:45 - 2:15</p>
+        <h4 class="video-section-title">Movement 1: Neck & Upper Back</h4>
+        <p class="video-section-content">Chin tucks, neck circles, thoracic rotations</p>
+        <p class="coaching-cue">"This is where we store stress. Let it go."</p>
+      </div>
+
+      <div class="video-section">
+        <p class="video-section-time">2:15 - 3:45</p>
+        <h4 class="video-section-title">Movement 2: Shoulders</h4>
+        <p class="video-section-content">Arm circles, wall slides (or standing version), doorway stretches</p>
+        <p class="coaching-cue">"If you can't get your arms overhead without pain, this is for you."</p>
+      </div>
+
+      <div class="video-section">
+        <p class="video-section-time">3:45 - 5:15</p>
+        <h4 class="video-section-title">Movement 3: Spine</h4>
+        <p class="video-section-content">Cat-cow, seated spinal twist, gentle side bends</p>
+        <p class="coaching-cue">"Your spine needs movement to stay healthy. This is lubrication."</p>
+      </div>
+
+      <div class="video-section">
+        <p class="video-section-time">5:15 - 7:00</p>
+        <h4 class="video-section-title">Movement 4: Hips</h4>
+        <p class="video-section-content">Hip circles, 90/90 stretch (with modification), pigeon variation</p>
+        <p class="coaching-cue">"Tight hips cause back pain. Most people sit all day - this undoes that."</p>
+      </div>
+
+      <div class="video-section">
+        <p class="video-section-time">7:00 - 8:30</p>
+        <h4 class="video-section-title">Movement 5: Legs</h4>
+        <p class="video-section-content">Hamstring stretch, quad stretch, calf raises</p>
+        <p class="coaching-cue">"These muscles get short when we don't use them. Let's wake them up."</p>
+      </div>
+
+      <div class="video-section">
+        <p class="video-section-time">8:30 - 9:30</p>
+        <h4 class="video-section-title">Movement 6: Integration</h4>
+        <p class="video-section-content">World's greatest stretch, or a simple flow combining multiple movements</p>
+        <p class="coaching-cue">"This puts it all together. One movement that touches everything."</p>
+      </div>
+
+      <div class="video-section">
+        <p class="video-section-time">9:30 - 10:00</p>
+        <h4 class="video-section-title">Outro</h4>
+        <p class="video-section-content">"That's 10 minutes. Do this every morning - or every other morning - and you'll feel different in a week." Soft CTA: "If you're in Redding and want more structure, I train clients just like you at Zeb's Platinum Fitness. Link in the description." "Now get moving."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Promo Video -->
+  <section class="plan-section">
+    <p class="plan-label">Section 3</p>
+    <h2 class="plan-title">"Who Should Join" Promo Video</h2>
+    <div class="plan-text">
+      <p><strong>Length:</strong> 60-90 seconds | <strong>Purpose:</strong> Social sharing, Facebook/Instagram ads, drive traffic to landing page | <strong>Tone:</strong> Direct, relatable, no hard sell</p>
+    </div>
+
+    <div class="lp-section">
+      <p class="lp-section-title">Script</p>
+      <p><strong>[Opening - 10 sec]</strong><br>
+      "This video is for you if you wake up stiff... if getting off the floor takes planning... or if you just don't move as well as you used to."</p>
+
+      <p><strong>[The Problem - 20 sec]</strong><br>
+      "Here's the thing - most people over 50 don't have a mobility problem. They have a consistency problem. You've tried stretching. It didn't stick. Not because stretching doesn't work, but because you didn't have a simple routine you could do every day."</p>
+
+      <p><strong>[The Solution - 20 sec]</strong><br>
+      "I put together a 10-minute routine you can do first thing in the morning. No equipment. No gym. Just you and the floor. I'm 70+ and I use this exact sequence to stay moving."</p>
+
+      <p><strong>[Credibility - 15 sec]</strong><br>
+      "After my back surgery, I wasn't sure I'd train again. This routine is part of what got me back. If it worked for me, it'll work for you."</p>
+
+      <p><strong>[CTA - 15 sec]</strong><br>
+      "Get the free video at [URL]. Enter your email, and you'll have instant access. Ten minutes. That's all it takes. See you there."</p>
+    </div>
+  </section>
+
+  <!-- Future Series -->
+  <section class="plan-section plan-section--gray">
+    <div class="plan-content">
+      <p class="plan-label">Section 4</p>
+      <h2 class="plan-title">Template for Future Series</h2>
+      <div class="plan-text">
+        <p>This structure can be replicated for "10-Minute Booty" and "10-Minute Abs" or any future mini-course. Each series becomes another lead magnet, growing the email list while demonstrating expertise in different areas.</p>
+      </div>
+      <div class="series-grid">
+        <div class="series-card active">
+          <h4>10-Min Mobility</h4>
+          <p class="series-card-target">Adults 50+ who feel stiff</p>
+          <p>Morning stiffness, loss of flexibility - the gateway product</p>
+        </div>
+        <div class="series-card">
+          <h4>10-Min Booty</h4>
+          <p class="series-card-target">Women 40-60</p>
+          <p>Weak glutes, knee/back pain from sitting</p>
+        </div>
+        <div class="series-card">
+          <h4>10-Min Abs</h4>
+          <p class="series-card-target">Adults 50+ wanting core</p>
+          <p>Weak core, balance issues, back pain</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Next Steps -->
+  <section class="plan-section">
+    <p class="plan-label">Action Items</p>
+    <h2 class="plan-title">Next Steps</h2>
+    <div class="plan-text">
+      <ol style="padding-left: 20px;">
+        <li style="margin-bottom: 12px;">Review and approve this plan</li>
+        <li style="margin-bottom: 12px;">Schedule video filming date at the studio</li>
+        <li style="margin-bottom: 12px;">Build landing page in Squarespace</li>
+        <li style="margin-bottom: 12px;">Film both videos (core routine + promo)</li>
+        <li style="margin-bottom: 12px;">Edit and upload videos</li>
+        <li style="margin-bottom: 12px;">Set up email capture and automation</li>
+        <li style="margin-bottom: 12px;">Launch!</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Back Link -->
+  <div class="back-link">
+    <a href="../index.html">← Back to Brand House</a>
+  </div>
+
+</body>
+</html>

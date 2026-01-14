@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Zeb Young | Zeb's Platinum Fitness</title>
+  <meta name="description" content="Zeb Young - Personal trainer for adults 50+ in Redding, CA. Over 30 years of experience helping people transform their bodies at any age.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    /* Page-specific styles */
+    .about-hero {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 0%, rgba(253, 234, 1, 0.03) 100%);
+    }
+
+    .about-hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--space-xl) var(--space-lg);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      align-items: center;
+    }
+
+    .about-hero-image {
+      position: relative;
+    }
+
+    .about-hero-image img {
+      width: 100%;
+      max-width: 450px;
+      display: block;
+      filter: grayscale(20%);
+    }
+
+    .about-hero-image::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 100%;
+      height: 100%;
+      border: 2px solid var(--yellow);
+      z-index: -1;
+    }
+
+    .about-hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-hero-label {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--yellow);
+      margin-bottom: var(--space-sm);
+    }
+
+    .about-hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: var(--space-md);
+    }
+
+    .about-hero-title {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--gray);
+      margin-bottom: var(--space-md);
+    }
+
+    .about-hero-quote {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: var(--white);
+      padding-left: var(--space-md);
+      border-left: 3px solid var(--yellow);
+      margin-bottom: var(--space-lg);
+    }
+
+    .about-stats {
+      display: flex;
+      gap: var(--space-lg);
+    }
+
+    .about-stat {
+      text-align: center;
+    }
+
+    .about-stat-number {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--yellow);
+      line-height: 1;
+    }
+
+    .about-stat-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+
+    /* Bio Section */
+    .bio-section {
+      background: var(--white);
+      padding: var(--space-2xl) var(--space-lg);
+    }
+
+    .bio-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .bio-label {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--yellow);
+      margin-bottom: var(--space-sm);
+    }
+
+    .bio-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--black);
+      margin-bottom: var(--space-lg);
+    }
+
+    .bio-text {
+      font-family: var(--font-body);
+      font-size: 1.125rem;
+      line-height: 1.8;
+      color: var(--dark-gray);
+    }
+
+    .bio-text p {
+      margin-bottom: var(--space-md);
+    }
+
+    .bio-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Short Bio Box */
+    .short-bio {
+      background: var(--black);
+      padding: var(--space-xl);
+      margin-top: var(--space-xl);
+      position: relative;
+    }
+
+    .short-bio::before {
+      content: 'SHORT BIO';
+      position: absolute;
+      top: -10px;
+      left: var(--space-md);
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--black);
+      background: var(--yellow);
+      padding: 4px 12px;
+    }
+
+    .short-bio p {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--white);
+    }
+
+    .short-bio .copy-note {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      color: var(--gray);
+      margin-top: var(--space-md);
+      padding-top: var(--space-md);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Story Section */
+    .story-section {
+      background: linear-gradient(180deg, #f5f5f5 0%, var(--white) 100%);
+      padding: var(--space-2xl) var(--space-lg);
+    }
+
+    .story-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .story-header {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+
+    .story-label {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--yellow);
+      margin-bottom: var(--space-sm);
+    }
+
+    .story-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--black);
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+    }
+
+    .story-card {
+      background: var(--white);
+      padding: var(--space-lg);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      position: relative;
+    }
+
+    .story-card-number {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 800;
+      color: rgba(253, 234, 1, 0.2);
+      position: absolute;
+      top: var(--space-sm);
+      right: var(--space-md);
+      line-height: 1;
+    }
+
+    .story-card-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--black);
+      margin-bottom: var(--space-sm);
+    }
+
+    .story-card-text {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--dark-gray);
+    }
+
+    /* Expertise Section */
+    .expertise-section {
+      background: var(--black);
+      padding: var(--space-2xl) var(--space-lg);
+    }
+
+    .expertise-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .expertise-header {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+
+    .expertise-label {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--yellow);
+      margin-bottom: var(--space-sm);
+    }
+
+    .expertise-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--white);
+    }
+
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
+    }
+
+    .expertise-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: var(--space-lg);
+      text-align: center;
+    }
+
+    .expertise-icon {
+      font-size: 2rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    .expertise-name {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .expertise-desc {
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      color: var(--gray);
+    }
+
+    /* Media Kit Section */
+    .media-section {
+      background: var(--white);
+      padding: var(--space-2xl) var(--space-lg);
+    }
+
+    .media-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .media-header {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+
+    .media-label {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--yellow);
+      margin-bottom: var(--space-sm);
+    }
+
+    .media-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--black);
+      margin-bottom: var(--space-sm);
+    }
+
+    .media-subtitle {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--dark-gray);
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+    }
+
+    .media-card {
+      background: #f8f8f8;
+      padding: var(--space-lg);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .media-card-title {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--black);
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-sm);
+      border-bottom: 2px solid var(--yellow);
+    }
+
+    .media-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .media-card li {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      color: var(--dark-gray);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .media-card li:last-child {
+      border-bottom: none;
+    }
+
+    .media-card li strong {
+      color: var(--black);
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: var(--yellow);
+      padding: var(--space-xl) var(--space-lg);
+    }
+
+    .contact-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-label {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: rgba(0, 0, 0, 0.4);
+      margin-bottom: var(--space-sm);
+    }
+
+    .contact-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--black);
+      margin-bottom: var(--space-md);
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-xl);
+      flex-wrap: wrap;
+    }
+
+    .contact-item {
+      text-align: center;
+    }
+
+    .contact-item-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(0, 0, 0, 0.5);
+      margin-bottom: 4px;
+    }
+
+    .contact-item-value {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    .contact-item-value a {
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .contact-item-value a:hover {
+      text-decoration: underline;
+    }
+
+    /* Print Styles */
+    @media print {
+      .nav, .marquee-bar, .contact-section {
+        display: none;
+      }
+
+      .about-hero {
+        min-height: auto;
+        padding: 40px 0;
+      }
+
+      .about-hero-container {
+        grid-template-columns: 200px 1fr;
+        gap: 40px;
+      }
+
+      .about-hero-image img {
+        max-width: 200px;
+      }
+
+      .story-grid, .expertise-grid, .media-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      body {
+        font-size: 11pt;
+      }
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .about-hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .about-hero-image {
+        order: -1;
+        max-width: 300px;
+        margin: 0 auto;
+      }
+
+      .about-hero-image::after {
+        display: none;
+      }
+
+      .about-hero-quote {
+        border-left: none;
+        padding-left: 0;
+        border-top: 3px solid var(--yellow);
+        padding-top: var(--space-md);
+      }
+
+      .about-stats {
+        justify-content: center;
+      }
+
+      .story-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .expertise-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .media-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873335476-YWWL8XLLAG8L911G4JSZ/zeb+logo+2.png?format=750w" alt="Zeb's Platinum Fitness">
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('active')">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Brand House</a>
+        <a href="about.html" class="nav-link">About Zeb</a>
+        <a href="https://www.zebsplatinumfitness.com" class="nav-link" target="_blank">Main Site</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="about-hero">
+    <div class="about-hero-container">
+      <div class="about-hero-image">
+        <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527870175783-JMOT8CBQBZJ6NRZ4Y6YH/zeb+training+copy.png?format=1500w" alt="Zeb Young - Personal Trainer">
+      </div>
+      <div class="about-hero-content">
+        <p class="about-hero-label">Personal Trainer & Fitness Expert</p>
+        <h1 class="about-hero-name">Zeb Young</h1>
+        <p class="about-hero-title">Founder, Zeb's Platinum Fitness</p>
+        <p class="about-hero-quote">"I'm in my 60s. If you think it's too late - watch me."</p>
+        <div class="about-stats">
+          <div class="about-stat">
+            <p class="about-stat-number">30+</p>
+            <p class="about-stat-label">Years Experience</p>
+          </div>
+          <div class="about-stat">
+            <p class="about-stat-number">50+</p>
+            <p class="about-stat-label">Target Age Group</p>
+          </div>
+          <div class="about-stat">
+            <p class="about-stat-number">1000s</p>
+            <p class="about-stat-label">Clients Trained</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bio Section -->
+  <section class="bio-section">
+    <div class="bio-container">
+      <p class="bio-label">Biography</p>
+      <h2 class="bio-title">The Full Story</h2>
+      <div class="bio-text">
+        <p>Zeb began working out with weights and educating himself on health and fitness when he was just 12 years old. Those early seeds blossomed into a passion for fitness, and the fire to stay fit and healthy has continued with Zeb for more than three decades since.</p>
+
+        <p>Zeb's education, personal experience, and research as a personal trainer has fueled his desire to make a difference for as many people as possible. Over the years, Zeb has created a variety of programs to help people maintain a healthy and fit lifestyle - with a special focus on adults over 50 who are often told their best years are behind them.</p>
+
+        <p>Zeb has experienced the personal challenges of recovering from major back surgery and having to create a new 100% for himself to maintain the active and fit lifestyle he has always desired. Throughout it all, Zeb has continued to read and research the latest literature on health, fitness, and nutrition, to ensure the most effective training and diet for the changing needs of his clients.</p>
+
+        <p>What sets Zeb apart is his focus on the most difficult challenge for people: the mental game. When you talk with Zeb about your own personal training and fitness goals, you will immediately see the passion, experience, and knowledge that makes him so effective as a trainer. He doesn't just teach exercises - he transforms mindsets.</p>
+      </div>
+
+      <div class="short-bio">
+        <p><strong>Zeb Young</strong> is a personal trainer and fitness expert based in Redding, California, specializing in training adults 50 and older. With over 30 years of experience and his own journey rebuilding his body after major back surgery, Zeb brings both expertise and lived experience to every client. His philosophy centers on three pillars: structure, motivation, and accountability. Zeb is the founder of Zeb's Platinum Fitness and creator of the 10-Minute Fitness Series.</p>
+        <p class="copy-note">* Use this bio for radio, podcast, and media appearances (150 words)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story Section -->
+  <section class="story-section">
+    <div class="story-container">
+      <div class="story-header">
+        <p class="story-label">The Journey</p>
+        <h2 class="story-title">From Surgery to Strength</h2>
+      </div>
+      <div class="story-grid">
+        <div class="story-card">
+          <span class="story-card-number">01</span>
+          <h3 class="story-card-title">The Beginning</h3>
+          <p class="story-card-text">At just 12 years old, Zeb discovered his passion for fitness. What started as curiosity became a lifelong commitment to health, wellness, and helping others achieve their potential.</p>
+        </div>
+        <div class="story-card">
+          <span class="story-card-number">02</span>
+          <h3 class="story-card-title">The Challenge</h3>
+          <p class="story-card-text">Major back surgery threatened everything. Doctors weren't sure Zeb would train again. But giving up was never an option - it was time to rebuild from zero and create a new 100%.</p>
+        </div>
+        <div class="story-card">
+          <span class="story-card-number">03</span>
+          <h3 class="story-card-title">The Transformation</h3>
+          <p class="story-card-text">Today, Zeb is stronger than most people half his age. His recovery isn't just a story - it's living proof that with the right approach, transformation is possible at any age.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Expertise Section -->
+  <section class="expertise-section">
+    <div class="expertise-container">
+      <div class="expertise-header">
+        <p class="expertise-label">Specializations</p>
+        <h2 class="expertise-title">Areas of Expertise</h2>
+      </div>
+      <div class="expertise-grid">
+        <div class="expertise-item">
+          <div class="expertise-icon">🏋️</div>
+          <p class="expertise-name">Strength Training</p>
+          <p class="expertise-desc">Building functional strength for daily life</p>
+        </div>
+        <div class="expertise-item">
+          <div class="expertise-icon">🧘</div>
+          <p class="expertise-name">Mobility</p>
+          <p class="expertise-desc">Restoring movement and flexibility</p>
+        </div>
+        <div class="expertise-item">
+          <div class="expertise-icon">⚖️</div>
+          <p class="expertise-name">Balance</p>
+          <p class="expertise-desc">Fall prevention and stability</p>
+        </div>
+        <div class="expertise-item">
+          <div class="expertise-icon">🧠</div>
+          <p class="expertise-name">Mental Fitness</p>
+          <p class="expertise-desc">Mindset and motivation coaching</p>
+        </div>
+        <div class="expertise-item">
+          <div class="expertise-icon">🔄</div>
+          <p class="expertise-name">Recovery</p>
+          <p class="expertise-desc">Post-surgery rehabilitation</p>
+        </div>
+        <div class="expertise-item">
+          <div class="expertise-icon">🥗</div>
+          <p class="expertise-name">Nutrition</p>
+          <p class="expertise-desc">Simple, sustainable eating guidance</p>
+        </div>
+        <div class="expertise-item">
+          <div class="expertise-icon">👴</div>
+          <p class="expertise-name">Senior Fitness</p>
+          <p class="expertise-desc">Specialized training for 50+</p>
+        </div>
+        <div class="expertise-item">
+          <div class="expertise-icon">📉</div>
+          <p class="expertise-name">Weight Management</p>
+          <p class="expertise-desc">Sustainable fat loss strategies</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Media Kit Section -->
+  <section class="media-section">
+    <div class="media-container">
+      <div class="media-header">
+        <p class="media-label">For Media</p>
+        <h2 class="media-title">Press Kit</h2>
+        <p class="media-subtitle">Information for interviews, podcasts, and media appearances</p>
+      </div>
+      <div class="media-grid">
+        <div class="media-card">
+          <h3 class="media-card-title">Interview Topics</h3>
+          <ul>
+            <li>Fitness after 50: Why it's never too late to start</li>
+            <li>Rebuilding your body after injury or surgery</li>
+            <li>The mental game: How mindset determines success</li>
+            <li>Simple fitness: Why 10 minutes beats complicated programs</li>
+            <li>Fall prevention and balance for seniors</li>
+            <li>Strength training myths for older adults</li>
+            <li>Creating sustainable fitness habits at any age</li>
+          </ul>
+        </div>
+        <div class="media-card">
+          <h3 class="media-card-title">Quick Facts</h3>
+          <ul>
+            <li><strong>Based in:</strong> Redding, California</li>
+            <li><strong>Experience:</strong> 30+ years as a personal trainer</li>
+            <li><strong>Specialty:</strong> Adults 50+ and seniors</li>
+            <li><strong>Studio:</strong> Zeb's Platinum Fitness</li>
+            <li><strong>Philosophy:</strong> Structure, Motivation, Accountability</li>
+            <li><strong>Signature Program:</strong> 10-Minute Fitness Series</li>
+            <li><strong>Personal:</strong> Rebuilt his body after major back surgery</li>
+          </ul>
+        </div>
+        <div class="media-card">
+          <h3 class="media-card-title">Talking Points</h3>
+          <ul>
+            <li>"I'm in my 60s. If you think it's too late - watch me."</li>
+            <li>"You don't need motivation. You need simplicity."</li>
+            <li>"Consistency beats intensity every single time."</li>
+            <li>"Your body doesn't have an expiration date."</li>
+            <li>"10 minutes a day beats 2 hours once a week."</li>
+            <li>"The only workout you regret is the one you didn't do."</li>
+          </ul>
+        </div>
+        <div class="media-card">
+          <h3 class="media-card-title">Social Handles</h3>
+          <ul>
+            <li><strong>Website:</strong> zebsplatinumfitness.com</li>
+            <li><strong>Facebook:</strong> @ZebsPlatinumFitness</li>
+            <li><strong>Instagram:</strong> @ZebsPlatinumFitness</li>
+            <li><strong>YouTube:</strong> Zeb's Platinum Fitness</li>
+            <li><strong>Location:</strong> 1320 Yuba St, Ste 101, Redding CA</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="contact-container">
+      <p class="contact-label">Get In Touch</p>
+      <h2 class="contact-title">Book Zeb for Your Show</h2>
+      <div class="contact-info">
+        <div class="contact-item">
+          <p class="contact-item-label">Email</p>
+          <p class="contact-item-value"><a href="mailto:zeb@zebsplatinumfitness.com">zeb@zebsplatinumfitness.com</a></p>
+        </div>
+        <div class="contact-item">
+          <p class="contact-item-label">Phone</p>
+          <p class="contact-item-value"><a href="tel:+15302428588">(530) 242-8588</a></p>
+        </div>
+        <div class="contact-item">
+          <p class="contact-item-label">Website</p>
+          <p class="contact-item-value"><a href="https://www.zebsplatinumfitness.com" target="_blank">zebsplatinumfitness.com</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back to Brand House Link -->
+  <section style="background: var(--black); padding: var(--space-lg); text-align: center;">
+    <a href="index.html" style="font-family: var(--font-display); font-size: 0.875rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gray); text-decoration: none;">← Back to Brand House</a>
+  </section>
+
+</body>
+</html>
