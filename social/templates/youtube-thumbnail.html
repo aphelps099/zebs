@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Thumbnail | Design Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --dark-gray: #111111;
+      --gray: #666666;
+      --white: #FFFFFF;
+      --gold: #ffcc00;
+      --yellow: #fdea01;
+      --font-display: 'Futura PT', 'Futura', 'Century Gothic', 'Avant Garde', sans-serif;
+      --font-body: 'Futura PT', 'Futura', 'Century Gothic', sans-serif;
+      --font-accent: 'Cormorant Garamond', 'Garamond', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .template-container {
+      max-width: 800px;
+      width: 100%;
+    }
+
+    /* YouTube Thumbnail - 1280x720 aspect ratio */
+    .youtube-thumbnail {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 100%);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .thumb-photo-area {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 45%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 1px dashed rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .thumb-photo-placeholder {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+
+    .thumb-accent {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      background: var(--yellow);
+      clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+    }
+
+    .thumb-content {
+      position: absolute;
+      top: 50%;
+      left: 5%;
+      transform: translateY(-50%);
+      width: 50%;
+    }
+
+    .thumb-series {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+      margin-bottom: 8px;
+    }
+
+    .thumb-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .thumb-episode {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .thumb-duration {
+      position: absolute;
+      bottom: 5%;
+      right: 3%;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 4px 8px;
+    }
+
+    .thumb-duration span {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .thumb-logo {
+      position: absolute;
+      bottom: 5%;
+      left: 5%;
+    }
+
+    .thumb-logo img {
+      height: 28px;
+      opacity: 0.5;
+    }
+
+    /* Spec Section */
+    .spec-section {
+      background: var(--dark-gray);
+      padding: 32px;
+      margin-top: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .spec-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .spec-item {
+      text-align: center;
+    }
+
+    .spec-value {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .spec-name {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gray);
+    }
+
+    /* Variations */
+    .variations {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 24px;
+      margin-top: 24px;
+    }
+
+    .variations-title {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .variation-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .variation-thumb {
+      aspect-ratio: 16/9;
+      background: var(--black);
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+    }
+
+    .variation-thumb.mobility {
+      background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 100%);
+    }
+
+    .variation-thumb.mobility::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 35%;
+      height: 100%;
+      background: var(--yellow);
+    }
+
+    .variation-thumb.abs {
+      background: linear-gradient(135deg, #1a0a1a 0%, var(--black) 100%);
+    }
+
+    .variation-thumb.abs::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 30%;
+      background: var(--yellow);
+    }
+
+    .variation-thumb.booty {
+      background: var(--yellow);
+    }
+
+    .variation-label {
+      font-family: var(--font-display);
+      font-size: 0.5rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gray);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* Tips */
+    .tips-section {
+      background: rgba(253, 234, 1, 0.05);
+      border: 1px solid rgba(253, 234, 1, 0.2);
+      padding: 24px;
+      margin-top: 24px;
+    }
+
+    .tips-title {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .tips-list {
+      list-style: none;
+    }
+
+    .tips-list li {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      color: rgba(255, 255, 255, 0.8);
+      padding: 8px 0;
+      padding-left: 20px;
+      position: relative;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .tips-list li:last-child {
+      border-bottom: none;
+    }
+
+    .tips-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--yellow);
+    }
+
+    @media (max-width: 600px) {
+      .spec-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .variation-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="template-container">
+    <!-- YouTube Thumbnail -->
+    <div class="youtube-thumbnail">
+      <div class="thumb-accent"></div>
+      <div class="thumb-content">
+        <p class="thumb-series">10-Minute Series</p>
+        <h1 class="thumb-title">Mobility</h1>
+        <p class="thumb-episode">Day 1 - Full Routine</p>
+      </div>
+      <div class="thumb-photo-area">
+        <span class="thumb-photo-placeholder">Zeb Photo<br>or Action Shot</span>
+      </div>
+      <div class="thumb-duration">
+        <span>10:24</span>
+      </div>
+      <div class="thumb-logo">
+        <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873636754-7KKE9M4BRNTZEDPFWFHS/Zeb+Logo.png?format=500w" alt="Zeb's Platinum Fitness">
+      </div>
+    </div>
+
+    <!-- Specifications -->
+    <div class="spec-section">
+      <p class="spec-label">Thumbnail Specifications</p>
+      <div class="spec-grid">
+        <div class="spec-item">
+          <p class="spec-value">1280 x 720</p>
+          <p class="spec-name">Dimensions (px)</p>
+        </div>
+        <div class="spec-item">
+          <p class="spec-value">16:9</p>
+          <p class="spec-name">Aspect Ratio</p>
+        </div>
+        <div class="spec-item">
+          <p class="spec-value">&lt; 2MB</p>
+          <p class="spec-name">File Size</p>
+        </div>
+      </div>
+
+      <div class="variations">
+        <p class="variations-title">Series Variations</p>
+        <div class="variation-grid">
+          <div>
+            <div class="variation-thumb mobility"></div>
+            <p class="variation-label">10-Min Mobility</p>
+          </div>
+          <div>
+            <div class="variation-thumb abs"></div>
+            <p class="variation-label">10-Min Abs</p>
+          </div>
+          <div>
+            <div class="variation-thumb booty"></div>
+            <p class="variation-label">10-Min Booty</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Design Tips -->
+    <div class="tips-section">
+      <p class="tips-title">YouTube Thumbnail Best Practices</p>
+      <ul class="tips-list">
+        <li>Use large, bold text - must be readable at small sizes</li>
+        <li>Include a face or person - thumbnails with faces get 38% more clicks</li>
+        <li>Use contrasting colors - yellow on black stands out in feeds</li>
+        <li>Keep it simple - 3 elements max (title, face, brand element)</li>
+        <li>Be consistent - use the same layout across a series</li>
+        <li>Show the benefit - "10-Minute" communicates quick value</li>
+        <li>Avoid text in the bottom-right corner (duration badge covers it)</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

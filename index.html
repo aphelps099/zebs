@@ -38,18 +38,8 @@
     </div>
   </div>
 
-  <!-- Section 1: Marquee Bar -->
-  <div class="marquee-bar">
-    <div class="marquee-content">
-      <span class="marquee-text">"There is nothing impossible to him who will try." - Alexander The Great</span>
-      <span class="marquee-text">"There is nothing impossible to him who will try." - Alexander The Great</span>
-      <span class="marquee-text">"There is nothing impossible to him who will try." - Alexander The Great</span>
-      <span class="marquee-text">"There is nothing impossible to him who will try." - Alexander The Great</span>
-    </div>
-  </div>
-
-  <!-- Section 2: Navigation -->
-  <nav class="nav nav--with-marquee">
+  <!-- Navigation -->
+  <nav class="nav">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
         <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873335476-YWWL8XLLAG8L911G4JSZ/zeb+logo+2.png?format=750w" alt="Zeb's Platinum Fitness">
@@ -133,10 +123,10 @@
       </div>
 
       <!-- Positioning Statement -->
-      <div class="card fade-up" style="border-left: 3px solid var(--gold);">
-        <p class="label label--gold mb-sm">Positioning Statement</p>
-        <p class="card-text text-white" style="font-size: 1.125rem; line-height: 1.8;">
-          For adults 50+ who feel like fitness has passed them by, <strong>Zeb's Platinum Fitness</strong> is the personal training studio that delivers simple, effective programs with unwavering accountability. Unlike generic gyms that ignore older adults or high-intensity programs designed for 25-year-olds, Zeb provides personalized coaching built on decades of experience and proof that it's never too late to transform.
+      <div class="fade-up" style="text-align: center; padding: var(--space-2xl) var(--space-xl); background: linear-gradient(180deg, rgba(253, 234, 1, 0.03) 0%, transparent 100%); border-top: 1px solid rgba(253, 234, 1, 0.2); border-bottom: 1px solid rgba(253, 234, 1, 0.1); margin-top: var(--space-xl);">
+        <p style="font-family: var(--font-display); font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.3em; color: var(--yellow); margin-bottom: var(--space-md);">Positioning Statement</p>
+        <p style="font-family: var(--font-body); font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 400; line-height: 1.8; color: var(--white); max-width: 900px; margin: 0 auto;">
+          For adults 50+ who feel like fitness has passed them by, <strong style="color: var(--yellow);">Zeb's Platinum Fitness</strong> is the personal training studio that delivers simple, effective programs with unwavering accountability. Unlike generic gyms that ignore older adults or high-intensity programs designed for 25-year-olds, Zeb provides personalized coaching built on decades of experience and proof that it's never too late to transform.
         </p>
       </div>
     </div>
@@ -259,7 +249,21 @@
         <div class="card fade-up stagger-2">
           <h3 class="card-title text-gold mb-sm">YOUTUBE LIBRARY</h3>
           <p class="card-text">Long-form content hub. Free workout series, educational content, and testimonials. Evergreen traffic source.</p>
-          <a href="social/youtube.html" class="label label--gold mt-md" style="display: inline-block;">View Playbook →</a>
+
+          <!-- YouTube Thumbnail Preview -->
+          <div style="margin-top: var(--space-md); margin-bottom: var(--space-md); aspect-ratio: 16/9; background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 100%); border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden; cursor: pointer;" onclick="openModal('youtube-thumb', 'YouTube Thumbnail', 'social/templates/youtube-thumbnail.html')">
+            <div style="position: absolute; top: 0; right: 0; width: 35%; height: 100%; background: var(--yellow);"></div>
+            <div style="position: absolute; top: 50%; left: 5%; transform: translateY(-50%); width: 60%;">
+              <span style="font-family: var(--font-display); font-size: clamp(0.625rem, 1.5vw, 0.875rem); font-weight: 800; text-transform: uppercase; color: var(--white); line-height: 1.15; display: block;">10-Minute<br>Mobility</span>
+              <span style="font-family: var(--font-display); font-size: clamp(0.4rem, 0.8vw, 0.5rem); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--yellow); margin-top: 4px; display: block;">Day 1 - Full Routine</span>
+            </div>
+            <div style="position: absolute; bottom: 8%; right: 5%; background: rgba(0,0,0,0.8); padding: 2px 6px;">
+              <span style="font-family: var(--font-display); font-size: 0.5rem; font-weight: 700; color: var(--white);">10:24</span>
+            </div>
+          </div>
+          <p style="font-size: 0.75rem; color: var(--gray); margin-bottom: var(--space-sm);">Sample thumbnail design</p>
+
+          <a href="social/youtube.html" class="label label--gold" style="display: inline-block;">View Playbook →</a>
         </div>
         <div class="card fade-up stagger-3">
           <h3 class="card-title text-gold mb-sm">EMAIL LIST</h3>
@@ -437,6 +441,16 @@
     </div>
     <div class="modal-body">
       <iframe class="modal-iframe" id="modalIframe" src=""></iframe>
+    </div>
+  </div>
+
+  <!-- Marquee Divider -->
+  <div class="marquee-bar marquee-bar--divider">
+    <div class="marquee-content">
+      <span class="marquee-text">"There is nothing impossible to him who will try." - Alexander The Great</span>
+      <span class="marquee-text">"There is nothing impossible to him who will try." - Alexander The Great</span>
+      <span class="marquee-text">"There is nothing impossible to him who will try." - Alexander The Great</span>
+      <span class="marquee-text">"There is nothing impossible to him who will try." - Alexander The Great</span>
     </div>
   </div>
 
