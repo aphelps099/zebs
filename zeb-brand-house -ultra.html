@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zeb's Platinum Fitness | Brand House</title>
+  <style>
+    @import url('https://fonts.cdnfonts.com/css/futura-pt');
+    
+    :root {
+      --black: #000000;
+      --white: #FFFFFF;
+      --gray: #888888;
+      --light: #F5F5F5;
+      --accent: #C9A227; /* Gold from his site */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Futura PT', 'Futura', 'Century Gothic', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: rgba(0,0,0,0.9);
+      backdrop-filter: blur(10px);
+    }
+
+    nav .logo {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    nav .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    nav .nav-links a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    nav .nav-links a:hover {
+      color: var(--white);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at center, rgba(201,162,39,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero .overline {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(48px, 8vw, 100px);
+      font-weight: 700;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .hero .tagline {
+      font-size: 14px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 60px;
+    }
+
+    .hero .quote {
+      font-size: 24px;
+      font-weight: 300;
+      font-style: italic;
+      max-width: 600px;
+      color: var(--accent);
+    }
+
+    /* SECTION */
+    section {
+      padding: 100px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    section.light {
+      background: var(--white);
+      color: var(--black);
+      max-width: none;
+    }
+
+    section.light .section-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 60px;
+    }
+
+    .section-header .label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 12px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    /* GRID */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* CARDS */
+    .card {
+      background: #111;
+      border: 1px solid #222;
+      padding: 40px;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    section.light .card {
+      background: var(--light);
+      border-color: #ddd;
+    }
+
+    .card .icon {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray);
+      line-height: 1.8;
+    }
+
+    section.light .card p {
+      color: #666;
+    }
+
+    .card .tag {
+      display: inline-block;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      background: var(--accent);
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+
+    /* PRODUCT CARDS */
+    .product-card {
+      background: #111;
+      border: 1px solid #222;
+      padding: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .product-card:hover {
+      border-color: var(--accent);
+    }
+
+    .product-card .product-header {
+      background: var(--accent);
+      color: var(--black);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .product-card .product-header .audience {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 4px;
+    }
+
+    .product-card .product-header h3 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .product-card .product-body {
+      padding: 30px;
+    }
+
+    .product-card .product-body p {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray);
+      margin-bottom: 20px;
+    }
+
+    .product-card .product-body ul {
+      list-style: none;
+      font-size: 12px;
+      color: var(--gray);
+    }
+
+    .product-card .product-body ul li {
+      padding: 8px 0;
+      border-bottom: 1px solid #222;
+    }
+
+    .product-card .product-body ul li:last-child {
+      border-bottom: none;
+    }
+
+    /* VALUES */
+    .value-block {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .value-block .number {
+      font-size: 64px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .value-block h3 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .value-block p {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--gray);
+    }
+
+    /* STATS */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid #222;
+    }
+
+    .stat {
+      padding: 40px;
+      text-align: center;
+      border-right: 1px solid #222;
+    }
+
+    .stat:last-child {
+      border-right: none;
+    }
+
+    .stat .number {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat .label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* ROADMAP */
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .roadmap-item {
+      padding: 30px;
+      border: 1px solid #222;
+      border-right: none;
+      position: relative;
+    }
+
+    .roadmap-item:last-child {
+      border-right: 1px solid #222;
+    }
+
+    .roadmap-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--accent);
+    }
+
+    .roadmap-item .phase {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .roadmap-item h4 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .roadmap-item ul {
+      list-style: none;
+      font-size: 11px;
+      color: var(--gray);
+    }
+
+    .roadmap-item ul li {
+      padding: 4px 0;
+    }
+
+    /* LINK GRID */
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: #222;
+    }
+
+    .link-item {
+      background: #111;
+      padding: 30px;
+      text-decoration: none;
+      color: var(--white);
+      transition: all 0.2s ease;
+    }
+
+    .link-item:hover {
+      background: #1a1a1a;
+    }
+
+    .link-item .category {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .link-item h4 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .link-item p {
+      font-size: 11px;
+      color: var(--gray);
+      font-weight: 300;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 60px 40px;
+      text-align: center;
+      border-top: 1px solid #222;
+    }
+
+    footer .logo {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    footer p {
+      font-size: 11px;
+      color: var(--gray);
+      letter-spacing: 2px;
+    }
+
+    footer .contact {
+      margin-top: 30px;
+      font-size: 12px;
+      color: var(--gray);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">ZPF Brand House</div>
+    <div class="nav-links">
+      <a href="#brand">Brand</a>
+      <a href="#products">Products</a>
+      <a href="#social">Social</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#assets">Assets</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="overline">Brand House</div>
+    <h1>Zeb's Platinum Fitness</h1>
+    <div class="tagline">Structure • Motivation • Accountability</div>
+    <div class="quote">"I'm in my 60s. If you think it's too late — watch me."</div>
+  </section>
+
+  <!-- BRAND FOUNDATION -->
+  <section id="brand">
+    <div class="section-header">
+      <div class="label">01 — Foundation</div>
+      <h2>The Brand</h2>
+    </div>
+
+    <div class="grid-2" style="margin-bottom: 60px;">
+      <div class="card">
+        <h3>Vision</h3>
+        <p>Prove that fitness after 50 isn't just possible — it's the foundation of independence, confidence, and a life fully lived.</p>
+      </div>
+      <div class="card">
+        <h3>Mission</h3>
+        <p>Help adults 50+ move without pain, build real strength, and believe it's never too late — through simple methods and real accountability.</p>
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-bottom: 60px;">
+      <div class="value-block">
+        <div class="number">01</div>
+        <h3>Discipline = Simplicity</h3>
+        <p>Pick one thing. Do it consistently. That's the whole secret.</p>
+      </div>
+      <div class="value-block">
+        <div class="number">02</div>
+        <h3>Consistency Over Intensity</h3>
+        <p>30 minutes 3x/week for a year beats 2 hours daily for 3 weeks.</p>
+      </div>
+      <div class="value-block">
+        <div class="number">03</div>
+        <h3>No Excuses, No Shame</h3>
+        <p>Need accountability? Ask for it. That's strength, not weakness.</p>
+      </div>
+    </div>
+
+    <div class="card" style="text-align: center;">
+      <h3>Positioning</h3>
+      <p style="font-size: 18px; max-width: 600px; margin: 0 auto;">The trainer in his 60s who rebuilt himself after back surgery. Not teaching theory. Living proof.</p>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products" class="light">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="label">02 — Products</div>
+        <h2>The 10-Minute Series</h2>
+      </div>
+
+      <div class="grid-3" style="margin-bottom: 60px;">
+        <div class="product-card">
+          <div class="product-header">
+            <div class="audience">For Seniors 50+</div>
+            <h3>10-Min Mobility</h3>
+          </div>
+          <div class="product-body">
+            <p>Wake up without stiffness. Move without pain. The foundation of everything.</p>
+            <ul>
+              <li>Free: 10-minute video (gated)</li>
+              <li>Premium: 4-week mobility program ($47)</li>
+              <li>Upsell: Local training or online coaching</li>
+            </ul>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-header">
+            <div class="audience">For Women 40+</div>
+            <h3>10-Min Abs</h3>
+          </div>
+          <div class="product-body">
+            <p>Core strength that protects your back and builds confidence. No crunches.</p>
+            <ul>
+              <li>Free: 10-minute video (gated)</li>
+              <li>Premium: Core strength course ($47)</li>
+              <li>Bundle: Add supplements (+$30)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-header">
+            <div class="audience">For Women 40+</div>
+            <h3>10-Min Booty</h3>
+          </div>
+          <div class="product-body">
+            <p>Strong glutes prevent knee and back pain. Look good. Feel better.</p>
+            <ul>
+              <li>Free: 10-minute video (gated)</li>
+              <li>Premium: Glute program ($47)</li>
+              <li>Bundle: Add supplements (+$30)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <div class="label">Revenue Streams</div>
+        <h2 style="font-size: 32px;">Beyond The Series</h2>
+      </div>
+
+      <div class="grid-4">
+        <div class="card">
+          <span class="tag">Current</span>
+          <h3>Local Training</h3>
+          <p>In-person sessions at ZPF. The core business. Digital amplifies this.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Current</span>
+          <h3>Supplements</h3>
+          <p>Currently undersold. Bundle with courses, recommend in emails.</p>
+        </div>
+        <div class="card">
+          <span class="tag">New</span>
+          <h3>Online Coaching</h3>
+          <p>$500-2,000. Group cohorts or 1:1 remote. Serve beyond Redding.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Future</span>
+          <h3>The Book</h3>
+          <p>Your story. Your method. Your proof. Positions you as THE expert.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL -->
+  <section id="social">
+    <div class="section-header">
+      <div class="label">03 — Social</div>
+      <h2>Going Online</h2>
+    </div>
+
+    <p style="font-size: 16px; max-width: 700px; margin-bottom: 60px; font-weight: 300;">You're starting from zero. No social media. No YouTube. That's fine. We build it step by step. The goal isn't to become an influencer — it's to build a machine that generates leads while you train clients.</p>
+
+    <div class="stat-grid" style="margin-bottom: 60px;">
+      <div class="stat">
+        <div class="number">3x</div>
+        <div class="label">Posts per week</div>
+      </div>
+      <div class="stat">
+        <div class="number">60%</div>
+        <div class="label">Education content</div>
+      </div>
+      <div class="stat">
+        <div class="number">20%</div>
+        <div class="label">Proof & testimonials</div>
+      </div>
+      <div class="stat">
+        <div class="number">20%</div>
+        <div class="label">Personal & promo</div>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="icon">📘</div>
+        <h3>Facebook First</h3>
+        <p>Your audience is here. Post clips, tips, client wins. No dancing required. Just show up and be real.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📺</div>
+        <h3>YouTube Library</h3>
+        <p>Long-form content that works forever. Your story, the 10-min series, common mistakes. Searchable. Scalable.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📧</div>
+        <h3>Email List</h3>
+        <p>The asset you own. Not algorithm-dependent. Nurture leads, sell courses, announce launches. Your direct line.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="roadmap" class="light">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="label">04 — Timeline</div>
+        <h2>The Roadmap</h2>
+      </div>
+
+      <div class="roadmap">
+        <div class="roadmap-item">
+          <div class="phase">Month 1</div>
+          <h4>Foundation</h4>
+          <ul>
+            <li>Launch 10-Min Mobility</li>
+            <li>Landing page live</li>
+            <li>Email capture active</li>
+            <li>Share with clients</li>
+            <li>Goal: 50 emails</li>
+          </ul>
+        </div>
+        <div class="roadmap-item">
+          <div class="phase">Month 2-3</div>
+          <h4>Social Launch</h4>
+          <ul>
+            <li>Facebook: 3x/week</li>
+            <li>YouTube channel live</li>
+            <li>10-Min Abs filmed</li>
+            <li>10-Min Booty filmed</li>
+            <li>Goal: 150 emails</li>
+          </ul>
+        </div>
+        <div class="roadmap-item">
+          <div class="phase">Month 4-6</div>
+          <h4>Monetize</h4>
+          <ul>
+            <li>Premium courses ($47)</li>
+            <li>Supplement bundles</li>
+            <li>Email sales sequence</li>
+            <li>First online coaching</li>
+            <li>Goal: $3-5K digital</li>
+          </ul>
+        </div>
+        <div class="roadmap-item">
+          <div class="phase">Month 6+</div>
+          <h4>Scale</h4>
+          <ul>
+            <li>Book development</li>
+            <li>Group coaching cohorts</li>
+            <li>Speaking opportunities</li>
+            <li>Content flywheel</li>
+            <li>Goal: $15K+/yr digital</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ASSETS -->
+  <section id="assets">
+    <div class="section-header">
+      <div class="label">05 — Assets</div>
+      <h2>Brand Assets</h2>
+    </div>
+
+    <div class="link-grid">
+      <a href="#" class="link-item">
+        <div class="category">Products</div>
+        <h4>Mobility Landing Page</h4>
+        <p>Ready-to-deploy template for email capture</p>
+      </a>
+      <a href="#" class="link-item">
+        <div class="category">Products</div>
+        <h4>Abs Landing Page</h4>
+        <p>Template for 10-Min Abs series</p>
+      </a>
+      <a href="#" class="link-item">
+        <div class="category">Products</div>
+        <h4>Booty Landing Page</h4>
+        <p>Template for 10-Min Booty series</p>
+      </a>
+      <a href="#" class="link-item">
+        <div class="category">Social</div>
+        <h4>Post Templates</h4>
+        <p>Facebook and Instagram graphics</p>
+      </a>
+      <a href="#" class="link-item">
+        <div class="category">Social</div>
+        <h4>YouTube Thumbnails</h4>
+        <p>Consistent video branding</p>
+      </a>
+      <a href="#" class="link-item">
+        <div class="category">Social</div>
+        <h4>Content Calendar</h4>
+        <p>12-week posting schedule</p>
+      </a>
+      <a href="#" class="link-item">
+        <div class="category">Email</div>
+        <h4>Welcome Sequence</h4>
+        <p>4-email nurture for new subscribers</p>
+      </a>
+      <a href="#" class="link-item">
+        <div class="category">Email</div>
+        <h4>Sales Sequence</h4>
+        <p>Course launch email series</p>
+      </a>
+      <a href="#" class="link-item">
+        <div class="category">Email</div>
+        <h4>Newsletter Template</h4>
+        <p>Monthly client communication</p>
+      </a>
+      <a href="#" class="link-item">
+        <div class="category">Playbook</div>
+        <h4>YouTube Launch Guide</h4>
+        <p>Month-by-month channel strategy</p>
+      </a>
+      <a href="#" class="link-item">
+        <div class="category">Playbook</div>
+        <h4>Supplement Marketing</h4>
+        <p>How to bundle and sell more</p>
+      </a>
+      <a href="#" class="link-item">
+        <div class="category">Playbook</div>
+        <h4>Facebook Strategy</h4>
+        <p>Content pillars and posting cadence</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="logo">Zeb's Platinum Fitness</div>
+    <p>Structure • Motivation • Accountability</p>
+    <div class="contact">
+      1320 Yuba Street Suite 101, Redding, CA 96001<br>
+      530-736-0831 • zpf.zebyoung@gmail.com
+    </div>
+  </footer>
+
+</body>
+</html>
