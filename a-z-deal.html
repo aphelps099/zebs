@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10-Minute Mobility Series | Project Plan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #ffcc00;
+      --gold-light: #ffe566;
+      --black: #1A1A1A;
+      --gray: #4A4A4A;
+      --light: #F5F5F5;
+      --white: #FFFFFF;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @page {
+      size: letter;
+      margin: 0.5in;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      font-size: 11px;
+      line-height: 1.5;
+      max-width: 8.5in;
+      margin: 0 auto;
+      padding: 0.5in;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+      border-bottom: 3px solid var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    .tagline {
+      font-size: 9px;
+      color: var(--gray);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .project-title {
+      text-align: right;
+    }
+
+    .project-title h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      color: var(--black);
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    .project-title .subtitle {
+      font-size: 10px;
+      color: var(--gold);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Overview */
+    .overview {
+      background: var(--light);
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--gold);
+    }
+
+    .overview p {
+      color: var(--gray);
+      font-size: 11px;
+    }
+
+    .overview strong {
+      color: var(--black);
+    }
+
+    /* Deliverables Grid */
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      color: var(--black);
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: var(--gold-light);
+    }
+
+    .deliverables {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .deliverable {
+      background: var(--white);
+      border: 1px solid #E0E0E0;
+      padding: 14px;
+      position: relative;
+    }
+
+    .deliverable::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--gold);
+    }
+
+    .deliverable h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      color: var(--black);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .deliverable p {
+      font-size: 10px;
+      color: var(--gray);
+      margin-bottom: 8px;
+    }
+
+    .deliverable ul {
+      font-size: 9px;
+      color: var(--gray);
+      padding-left: 14px;
+    }
+
+    .deliverable li {
+      margin-bottom: 2px;
+    }
+
+    /* Deal Box */
+    .deal-box {
+      background: var(--black);
+      color: var(--white);
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .deal-box h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      letter-spacing: 1px;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    .deal-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      margin-bottom: 14px;
+    }
+
+    .deal-item {
+      text-align: center;
+    }
+
+    .deal-item .label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gold-light);
+      margin-bottom: 4px;
+    }
+
+    .deal-item .value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 1px;
+    }
+
+    .deal-arrow {
+      font-size: 20px;
+      color: var(--gold);
+    }
+
+    .deal-note {
+      font-size: 9px;
+      color: #999;
+      border-top: 1px solid #333;
+      padding-top: 12px;
+      margin-top: 4px;
+    }
+
+    /* Metrics */
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .metric {
+      background: var(--light);
+      padding: 14px 10px;
+      text-align: center;
+    }
+
+    .metric .number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .metric .label {
+      font-size: 8px;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 2px solid var(--gold);
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9px;
+      color: var(--gray);
+    }
+
+    .footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-contact {
+      display: flex;
+      gap: 20px;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 20px;
+      }
+
+      .header {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .logo-section {
+        flex-direction: column;
+      }
+
+      .project-title {
+        text-align: center;
+      }
+
+      .deliverables {
+        grid-template-columns: 1fr;
+      }
+
+      .deal-row {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .deal-arrow {
+        transform: rotate(90deg);
+      }
+
+      .metrics {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+
+      .footer-contact {
+        flex-direction: column;
+        gap: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo-section">
+      <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873335476-YWWL8XLLAG8L911G4JSZ/zeb+logo+2.png" alt="Zeb's Platinum Fitness" class="logo">
+      <span class="tagline">Structure • Motivation • Accountability</span>
+    </div>
+    <div class="project-title">
+      <div class="subtitle">Project Plan</div>
+      <h1>10-Minute Mobility Series</h1>
+    </div>
+  </header>
+
+  <!-- Overview -->
+  <div class="overview">
+    <p><strong>Objective:</strong> Build a lead generation funnel using gated video content to capture emails, demonstrate Zeb's expertise, and convert viewers into training clients. This series serves as a <strong>reusable template</strong> for future 10-Minute courses (Booty, Abs, etc.).</p>
+  </div>
+
+  <!-- Deliverables -->
+  <div class="section-title">Deliverables</div>
+  <div class="deliverables">
+    <div class="deliverable">
+      <h3>1. Landing Page</h3>
+      <p>Email-capture page built in Squarespace</p>
+      <ul>
+        <li>Headline: "10 Minutes to Move Better"</li>
+        <li>Problem/solution copy targeting 50+ adults</li>
+        <li>Credibility section (Zeb's surgery recovery story)</li>
+        <li>Email form with first name + email</li>
+      </ul>
+    </div>
+    <div class="deliverable">
+      <h3>2. Core Video (Gated)</h3>
+      <p>10-minute follow-along mobility routine</p>
+      <ul>
+        <li>6 movement blocks with coaching cues</li>
+        <li>Modifications shown for all levels</li>
+        <li>Filmed at Zeb's Platinum Fitness</li>
+        <li>Hosted on unlisted YouTube/Vimeo</li>
+      </ul>
+    </div>
+    <div class="deliverable">
+      <h3>3. Promo Video (Ungated)</h3>
+      <p>60-90 second "Who Should Join" teaser</p>
+      <ul>
+        <li>Hook: "This is for you if..."</li>
+        <li>Problem → Solution → Credibility → CTA</li>
+        <li>Optimized for Facebook/Instagram sharing</li>
+        <li>Drives traffic to landing page</li>
+      </ul>
+    </div>
+    <div class="deliverable">
+      <h3>4. Sharing Strategy</h3>
+      <p>Launch roadmap + ongoing promotion plan</p>
+      <ul>
+        <li>Week 1-2: Soft launch, community groups, referral partners</li>
+        <li>Ongoing: 2-3 social posts/week rotation</li>
+        <li>4-email nurture sequence for sign-ups</li>
+        <li>Optional: Facebook ads ($5-10/day)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Deal Box -->
+  <div class="deal-box">
+    <h3>Service Exchange</h3>
+    <div class="deal-row">
+      <div class="deal-item">
+        <div class="label">Aaron Provides</div>
+        <div class="value">Marketing</div>
+      </div>
+      <div class="deal-arrow">⇄</div>
+      <div class="deal-item">
+        <div class="label">Zeb Provides</div>
+        <div class="value">150 Sessions</div>
+      </div>
+    </div>
+    <div class="deal-note">
+      ~$5,000 value exchange<br>
+      30-minute personal training sessions
+    </div>
+  </div>
+
+  <!-- Success Metrics -->
+  <div class="section-title">90-Day Success Metrics</div>
+  <div class="metrics">
+    <div class="metric">
+      <div class="number">100+</div>
+      <div class="label">Email Sign-ups</div>
+    </div>
+    <div class="metric">
+      <div class="number">500+</div>
+      <div class="label">Video Views</div>
+    </div>
+    <div class="metric">
+      <div class="number">5-10</div>
+      <div class="label">Training Inquiries</div>
+    </div>
+    <div class="metric">
+      <div class="number">2-3</div>
+      <div class="label">New Clients</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-contact">
+      <span><strong>Zeb's Platinum Fitness</strong> | 1320 Yuba Street Suite 101, Redding, CA 96001</span>
+      <span>530-736-0831</span>
+      <span>zpf.zebyoung@gmail.com</span>
+    </div>
+    <div>
+      <a href="index.html">← Back to Brand House</a> | Prepared by Aaron Phelps | January 2025
+    </div>
+  </footer>
+
+</body>
+</html>
