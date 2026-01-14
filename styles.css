@@ -980,6 +980,10 @@ section {
   color: var(--black);
 }
 
+.section--light .revenue-card-title {
+  color: rgba(255, 255, 255, 0.7);
+}
+
 /* --------------------------------------------------------------------------
    TIMELINE — WITH ZAG
    -------------------------------------------------------------------------- */
@@ -998,8 +1002,6 @@ section {
   right: 0;
   height: 4px;
   background: var(--yellow);
-  transform: skewY(var(--zag-angle-subtle));
-  transform-origin: top left;
 }
 
 .timeline-phase {
@@ -1619,12 +1621,12 @@ section {
 
 .loading-marquee-content span {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 8vw, 6rem);
+  font-size: clamp(1.25rem, 5vw, 3.5rem);
   font-weight: var(--weight-heavy);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--yellow);
-  padding: 0 var(--space-xl);
+  padding: 0 var(--space-lg);
 }
 
 .loading-dot {
@@ -1970,7 +1972,7 @@ section {
 .statement-stat:nth-of-type(2) { transition-delay: 0.6s; }
 .statement-stat:nth-of-type(3) { transition-delay: 0.8s; }
 
-/* Animated underline effect */
+/* Animated underline effect - subtle */
 .animated-underline {
   position: relative;
   display: inline;
@@ -1979,21 +1981,21 @@ section {
 .animated-underline::after {
   content: '';
   position: absolute;
-  bottom: -4px;
+  bottom: -2px;
   left: 0;
   width: 0;
-  height: 3px;
-  background: var(--black);
-  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  height: 2px;
+  background: rgba(0, 0, 0, 0.4);
+  transition: width 0.8s ease-out;
 }
 
 .animated-underline.visible::after {
   width: 100%;
 }
 
-.animated-underline:nth-of-type(1)::after { transition-delay: 0.5s; }
-.animated-underline:nth-of-type(2)::after { transition-delay: 0.7s; }
-.animated-underline:nth-of-type(3)::after { transition-delay: 0.9s; }
+.animated-underline:nth-of-type(1)::after { transition-delay: 0.6s; }
+.animated-underline:nth-of-type(2)::after { transition-delay: 0.8s; }
+.animated-underline:nth-of-type(3)::after { transition-delay: 1s; }
 
 /* Statement section divider - diagonal ZAG (hidden for cleaner look) */
 .statement-section-top,
