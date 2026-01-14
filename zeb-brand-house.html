@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zeb's Platinum Fitness | Brand House</title>
+  <style>
+    @import url('https://fonts.cdnfonts.com/css/futura-pt');
+    
+    :root {
+      --black: #000000;
+      --white: #FFFFFF;
+      --gray: #666666;
+      --light-gray: #F5F5F5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Futura PT', 'Futura', 'Century Gothic', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      font-size: 14px;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    .page {
+      max-width: 8.5in;
+      min-height: 11in;
+      margin: 0 auto;
+      padding: 60px;
+      page-break-after: always;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    /* Cover */
+    .cover {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .cover h1 {
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .cover .tagline {
+      font-size: 14px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-weight: 300;
+      margin-bottom: 80px;
+    }
+
+    .cover .doc-type {
+      font-size: 18px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      font-weight: 700;
+      border: 2px solid var(--white);
+      padding: 16px 50px;
+    }
+
+    .cover .date {
+      position: absolute;
+      bottom: 60px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* Typography */
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    h3 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h4 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: var(--gray);
+    }
+
+    p {
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .bold {
+      font-weight: 700;
+    }
+
+    /* Divider */
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: var(--black);
+      margin: 40px 0;
+    }
+
+    /* Grid */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 30px;
+    }
+
+    /* Block */
+    .block {
+      margin-bottom: 40px;
+    }
+
+    .block-bordered {
+      border: 1px solid var(--black);
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .block-filled {
+      background: var(--black);
+      color: var(--white);
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .block-gray {
+      background: var(--light-gray);
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    /* Stats */
+    .stat {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .stat .number {
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat .label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* List */
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--light-gray);
+      font-weight: 300;
+    }
+
+    ul li:last-child {
+      border-bottom: none;
+    }
+
+    /* Product Card */
+    .product-card {
+      border: 1px solid var(--black);
+      padding: 24px;
+      text-align: center;
+    }
+
+    .product-card .audience {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 12px;
+    }
+
+    .product-card .title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .product-card .desc {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--gray);
+    }
+
+    /* Timeline */
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .timeline-item:last-child {
+      border-bottom: none;
+    }
+
+    .timeline-item .phase {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .timeline-item .content h4 {
+      color: var(--black);
+      margin-bottom: 6px;
+    }
+
+    .timeline-item .content p {
+      font-size: 12px;
+      margin: 0;
+      color: var(--gray);
+    }
+
+    /* Quote */
+    .quote {
+      font-size: 24px;
+      font-weight: 300;
+      font-style: italic;
+      text-align: center;
+      padding: 40px;
+      border-top: 1px solid var(--black);
+      border-bottom: 1px solid var(--black);
+      margin: 40px 0;
+    }
+
+    /* Current State */
+    .current-state {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .current-state .col {
+      padding: 30px;
+    }
+
+    .current-state .col.problem {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .current-state .col.problem h4 {
+      color: var(--gray);
+    }
+
+    .current-state .col.opportunity {
+      background: var(--light-gray);
+    }
+
+    @media print {
+      .page {
+        padding: 40px;
+        min-height: 10.5in;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1: COVER -->
+  <div class="page cover">
+    <h1>Zeb's Platinum Fitness</h1>
+    <div class="tagline">Structure • Motivation • Accountability</div>
+    <div class="doc-type">Brand House</div>
+    <div class="date">January 2025</div>
+  </div>
+
+  <!-- PAGE 2: WHERE WE ARE -->
+  <div class="page">
+    <h2>Where We Are</h2>
+    
+    <div class="current-state">
+      <div class="col problem">
+        <h4>Today</h4>
+        <h3>The Challenges</h3>
+        <ul style="border-color: #333;">
+          <li>Seasonal income swings — January up, summer down</li>
+          <li>Trading hours for dollars — no sessions, no pay</li>
+          <li>Zero social media presence</li>
+          <li>No YouTube or video content</li>
+          <li>Supplements sell, but not many</li>
+          <li>Local reach only — limited to Redding</li>
+        </ul>
+      </div>
+      <div class="col opportunity">
+        <h4>Tomorrow</h4>
+        <h3>The Opportunity</h3>
+        <ul>
+          <li>Digital revenue doesn't have seasons</li>
+          <li>Content works while you sleep</li>
+          <li>Build an audience that buys</li>
+          <li>Video = trust at scale</li>
+          <li>Supplements can bundle with courses</li>
+          <li>Reach people nationwide</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3>Your Unfair Advantage</h3>
+    <p>You're in your 60s. You rebuilt your body after back surgery. You're not teaching theory — you're living proof. Most fitness content is made by 30-year-olds who have never faced a real setback. You have. That's rare. That's powerful. That's the brand.</p>
+  </div>
+
+  <!-- PAGE 3: THE BRAND -->
+  <div class="page">
+    <h2>The Brand</h2>
+
+    <div class="block-bordered">
+      <h4>Vision</h4>
+      <p class="bold" style="font-size: 18px; margin: 0;">Prove that fitness after 50 isn't just possible — it's the foundation of independence, confidence, and a life fully lived.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="block">
+        <h4>Mission</h4>
+        <p>Help adults 50+ move without pain, build real strength, and believe it's never too late — through simple methods and real accountability.</p>
+      </div>
+      <div class="block">
+        <h4>Positioning</h4>
+        <p>The trainer in his 60s who rebuilt himself after back surgery. Not teaching theory. Living proof.</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="block">
+        <h4>Target Audience</h4>
+        <p>Adults 50+ who feel stiff, scared, or "too old" — but know deep down they're capable of more.</p>
+      </div>
+      <div class="block">
+        <h4>Brand Promise</h4>
+        <p>Mobility. Confidence. Perseverance. In 30 minutes, 3x a week.</p>
+      </div>
+    </div>
+
+    <div class="block-filled">
+      <h4 style="color: #888;">Voice</h4>
+      <p style="margin: 0; font-size: 16px;">Direct. Honest. Warm but no-nonsense. Military discipline meets mentor energy. Never salesy. Always real.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="block" style="text-align: center;">
+        <h4>Value 1</h4>
+        <h3>Discipline = Simplicity</h3>
+        <p style="font-size: 12px;">Pick one thing. Do it consistently. That's it.</p>
+      </div>
+      <div class="block" style="text-align: center;">
+        <h4>Value 2</h4>
+        <h3>Consistency Over Intensity</h3>
+        <p style="font-size: 12px;">30 min 3x/week beats 2 hours daily for 3 weeks.</p>
+      </div>
+      <div class="block" style="text-align: center;">
+        <h4>Value 3</h4>
+        <h3>No Excuses, No Shame</h3>
+        <p style="font-size: 12px;">Need help? Ask for it. That's strength.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 4: THE 10-MINUTE SERIES -->
+  <div class="page">
+    <h2>The 10-Minute Series</h2>
+    <p>Free video content that builds your email list and establishes you as the go-to expert for fitness over 50. Each series targets a specific audience with a specific promise.</p>
+
+    <div class="divider"></div>
+
+    <div class="grid-3">
+      <div class="product-card">
+        <div class="audience">For Seniors 50+</div>
+        <div class="title">10-Minute Mobility</div>
+        <div class="desc">Wake up without stiffness. Move without pain. Get off the floor without help. The foundation of everything.</div>
+      </div>
+      <div class="product-card">
+        <div class="audience">For Women 40+</div>
+        <div class="title">10-Minute Abs</div>
+        <div class="desc">Core strength that protects your back, improves balance, and builds confidence. No crunches. Real results.</div>
+      </div>
+      <div class="product-card">
+        <div class="audience">For Women 40+</div>
+        <div class="title">10-Minute Booty</div>
+        <div class="desc">Strong glutes prevent knee and back pain. Look good. Feel better. Simple movements that work.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3>How It Works</h3>
+    <div class="grid-2">
+      <div class="block">
+        <h4>The Funnel</h4>
+        <ul>
+          <li>Landing page with email capture</li>
+          <li>Free 10-minute video (unlisted)</li>
+          <li>Email sequence nurtures leads</li>
+          <li>Offer premium course ($47-97)</li>
+          <li>Offer local training or online coaching</li>
+        </ul>
+      </div>
+      <div class="block">
+        <h4>Why Free First</h4>
+        <ul>
+          <li>Builds trust before asking for money</li>
+          <li>Proves you know what you're talking about</li>
+          <li>Creates a list you own (not social algorithms)</li>
+          <li>People who watch will buy</li>
+          <li>Shareable — "send this to your mom"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="block-gray">
+      <h4>Production</h4>
+      <p style="margin: 0;">Each video: 10 minutes, filmed at your studio, you on camera walking through the routine. Simple. Authentic. No fancy editing needed — your presence is the value.</p>
+    </div>
+  </div>
+
+  <!-- PAGE 5: GOING ONLINE -->
+  <div class="page">
+    <h2>Going Online</h2>
+    <p>You're starting from zero. No social media. No YouTube. That's fine. We build it step by step. The goal isn't to become an influencer — it's to build a machine that generates leads and revenue while you train clients.</p>
+
+    <div class="divider"></div>
+
+    <h3>The Plan</h3>
+
+    <div class="timeline-item">
+      <div class="phase">Month 1</div>
+      <div class="content">
+        <h4>Foundation</h4>
+        <p>Launch 10-Minute Mobility. Landing page + gated video + email capture. Share with current clients. Ask them to share. Goal: 50 emails.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="phase">Month 2</div>
+      <div class="content">
+        <h4>Facebook</h4>
+        <p>Start posting 3x/week. Short clips from the 10-minute video. Your thoughts on fitness over 50. Client wins (with permission). No dancing. Just real.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="phase">Month 3</div>
+      <div class="content">
+        <h4>YouTube</h4>
+        <p>Upload full 10-Minute Mobility to YouTube (public). Create 2-3 more videos: your story, common mistakes, what to expect. This is your library — it works forever.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="phase">Month 4-6</div>
+      <div class="content">
+        <h4>Expand</h4>
+        <p>Launch 10-Minute Abs and 10-Minute Booty. Cross-promote. Email list grows. Consider first paid course ($47). Bundle supplements with courses.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="phase">Month 6+</div>
+      <div class="content">
+        <h4>Scale</h4>
+        <p>Book launch. Online group coaching. Speaking opportunities. The flywheel is spinning — content builds audience, audience buys products, products fund more content.</p>
+      </div>
+    </div>
+
+    <div class="block-filled" style="margin-top: 30px;">
+      <h3 style="margin-bottom: 10px;">The Commitment</h3>
+      <p style="margin: 0;">2-3 hours per week. Film one video per month. Post 3x/week (can batch). Reply to comments. That's it. Consistency beats intensity.</p>
+    </div>
+  </div>
+
+  <!-- PAGE 6: REVENUE -->
+  <div class="page">
+    <h2>Revenue Streams</h2>
+
+    <div class="grid-2">
+      <div class="block-bordered">
+        <h4>Today</h4>
+        <h3>Local Training</h3>
+        <p>In-person sessions at Zeb's Platinum Fitness. This continues. This is your core. Digital doesn't replace it — digital amplifies it.</p>
+      </div>
+      <div class="block-bordered">
+        <h4>Today</h4>
+        <h3>Supplements</h3>
+        <p>Currently selling, but not many. Opportunity: bundle with courses, recommend in email sequences, feature in content.</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="block-bordered">
+        <h4>New</h4>
+        <h3>Digital Courses</h3>
+        <p>$47-97 each. Premium versions of the 10-minute series with progressions, coaching cues, printable guides. Sell to your email list.</p>
+      </div>
+      <div class="block-bordered">
+        <h4>New</h4>
+        <h3>Online Coaching</h3>
+        <p>$500-2,000. Group cohorts or 1:1 remote training. Serve people who can't come to Redding. Zoom check-ins + custom programming.</p>
+      </div>
+    </div>
+
+    <div class="block-gray">
+      <h4>Future</h4>
+      <h3>The Book</h3>
+      <p>Your story. Your method. Your proof. Ghost-written in your voice. Positions you as THE expert. Generates royalties. Creates speaking opportunities.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3>Year 1 Targets</h3>
+    <div class="grid-3">
+      <div class="stat">
+        <div class="number">500</div>
+        <div class="label">Email subscribers</div>
+      </div>
+      <div class="stat">
+        <div class="number">$5K</div>
+        <div class="label">Digital revenue</div>
+      </div>
+      <div class="stat">
+        <div class="number">12</div>
+        <div class="label">YouTube videos</div>
+      </div>
+    </div>
+
+    <p style="text-align: center; font-size: 12px; color: var(--gray); margin-top: 20px;">Conservative. Achievable. And it compounds every year after.</p>
+  </div>
+
+  <!-- PAGE 7: NEXT STEPS -->
+  <div class="page">
+    <h2>Let's Build This</h2>
+
+    <div class="quote">
+      "I'm in my 60s. If you think it's too late — watch me."
+    </div>
+
+    <h3>The Partnership</h3>
+    <div class="grid-2">
+      <div class="block-bordered">
+        <h4>Aaron Provides</h4>
+        <ul>
+          <li>Landing pages</li>
+          <li>Video strategy</li>
+          <li>Email automation</li>
+          <li>Content templates</li>
+          <li>Launch playbook</li>
+          <li>Ongoing guidance</li>
+        </ul>
+      </div>
+      <div class="block-bordered">
+        <h4>Zeb Provides</h4>
+        <ul>
+          <li>150 training sessions</li>
+          <li>30 minutes each</li>
+          <li>Your expertise</li>
+          <li>Your time on camera</li>
+          <li>~$5,000 value</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3>This Week</h3>
+    <div class="grid-3">
+      <div class="block" style="text-align: center;">
+        <h4>Step 1</h4>
+        <p class="bold">Approve this plan</p>
+        <p style="font-size: 11px;">Confirm direction. Get aligned.</p>
+      </div>
+      <div class="block" style="text-align: center;">
+        <h4>Step 2</h4>
+        <p class="bold">Schedule the shoot</p>
+        <p style="font-size: 11px;">Pick a day to film 10-Min Mobility.</p>
+      </div>
+      <div class="block" style="text-align: center;">
+        <h4>Step 3</h4>
+        <p class="bold">Launch</p>
+        <p style="font-size: 11px;">Get it live. See what happens.</p>
+      </div>
+    </div>
+
+    <div class="block-filled" style="text-align: center; margin-top: 40px;">
+      <p style="font-size: 18px; margin: 0;">You're not trading sessions for a landing page.<br><span class="bold">You're investing in a business that runs without you.</span></p>
+    </div>
+  </div>
+
+</body>
+</html>
