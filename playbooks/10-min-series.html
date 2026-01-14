@@ -76,6 +76,12 @@
       padding: var(--space-xl) var(--space-lg);
       max-width: 900px;
       margin: 0 auto;
+      background: var(--white);
+    }
+
+    .plan-section .plan-content {
+      max-width: 900px;
+      margin: 0 auto;
     }
 
     .plan-section--dark {
@@ -369,10 +375,10 @@
 
   <!-- Executive Summary -->
   <section class="plan-section">
-    <p class="plan-label">Overview</p>
+    <p class="plan-label" style="color: var(--yellow);">Overview</p>
     <h2 class="plan-title">Executive Summary</h2>
     <div class="plan-text">
-      <p>The 10-Minute Mobility Series is a <strong>lead generation funnel</strong> - not a free giveaway. Users provide their email to access the content. This first series serves as a template for future mini-courses (Booty, Abs, etc.).</p>
+      <p style="color: var(--dark-gray);">The 10-Minute Mobility Series is a <strong style="color: var(--black);">lead generation funnel</strong> - not a free giveaway. Users provide their email to access the content. This first series serves as a template for future mini-courses (Booty, Abs, etc.).</p>
     </div>
     <div class="deliverables-grid">
       <div class="deliverable-card">
@@ -517,27 +523,27 @@
 
   <!-- Promo Video -->
   <section class="plan-section">
-    <p class="plan-label">Section 3</p>
-    <h2 class="plan-title">"Who Should Join" Promo Video</h2>
+    <p class="plan-label" style="color: var(--yellow);">Section 3</p>
+    <h2 class="plan-title">Promo Video Script</h2>
     <div class="plan-text">
-      <p><strong>Length:</strong> 60-90 seconds | <strong>Purpose:</strong> Social sharing, Facebook/Instagram ads, drive traffic to landing page | <strong>Tone:</strong> Direct, relatable, no hard sell</p>
+      <p style="color: var(--dark-gray);"><strong style="color: var(--black);">"Who Should Join"</strong> | <strong style="color: var(--black);">Length:</strong> 60-90 seconds | <strong style="color: var(--black);">Purpose:</strong> Social sharing, Facebook/Instagram ads, drive traffic to landing page | <strong style="color: var(--black);">Tone:</strong> Direct, relatable, no hard sell</p>
     </div>
 
-    <div class="lp-section">
-      <p class="lp-section-title">Script</p>
-      <p><strong>[Opening - 10 sec]</strong><br>
+    <div class="lp-section" style="background: #f8f8f8; border: 1px solid #e0e0e0;">
+      <p class="lp-section-title" style="color: #b8860b;">Script</p>
+      <p style="color: var(--dark-gray);"><strong style="color: var(--black);">[Opening - 10 sec]</strong><br>
       "This video is for you if you wake up stiff... if getting off the floor takes planning... or if you just don't move as well as you used to."</p>
 
-      <p><strong>[The Problem - 20 sec]</strong><br>
+      <p style="color: var(--dark-gray);"><strong style="color: var(--black);">[The Problem - 20 sec]</strong><br>
       "Here's the thing - most people over 50 don't have a mobility problem. They have a consistency problem. You've tried stretching. It didn't stick. Not because stretching doesn't work, but because you didn't have a simple routine you could do every day."</p>
 
-      <p><strong>[The Solution - 20 sec]</strong><br>
+      <p style="color: var(--dark-gray);"><strong style="color: var(--black);">[The Solution - 20 sec]</strong><br>
       "I put together a 10-minute routine you can do first thing in the morning. No equipment. No gym. Just you and the floor. I'm 70+ and I use this exact sequence to stay moving."</p>
 
-      <p><strong>[Credibility - 15 sec]</strong><br>
+      <p style="color: var(--dark-gray);"><strong style="color: var(--black);">[Credibility - 15 sec]</strong><br>
       "After my back surgery, I wasn't sure I'd train again. This routine is part of what got me back. If it worked for me, it'll work for you."</p>
 
-      <p><strong>[CTA - 15 sec]</strong><br>
+      <p style="color: var(--dark-gray);"><strong style="color: var(--black);">[CTA - 15 sec]</strong><br>
       "Get the free video at [URL]. Enter your email, and you'll have instant access. Ten minutes. That's all it takes. See you there."</p>
     </div>
   </section>
@@ -570,19 +576,110 @@
     </div>
   </section>
 
+  <!-- Pricing Strategy -->
+  <section class="plan-section plan-section--dark">
+    <div class="plan-content">
+      <p class="plan-label">Section 5</p>
+      <h2 class="plan-title">Pricing Strategy</h2>
+      <div class="plan-text">
+        <p>The 10-Minute Series follows a <strong>freemium-to-premium</strong> model. Free content captures leads, premium programs generate revenue.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); margin: var(--space-lg) 0;">
+        <!-- Free Tier -->
+        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: var(--space-lg); text-align: center;">
+          <p style="font-family: var(--font-display); font-size: 0.625rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gray); margin-bottom: var(--space-sm);">Lead Magnet</p>
+          <p style="font-family: var(--font-display); font-size: 2.5rem; font-weight: 800; color: var(--yellow); line-height: 1;">FREE</p>
+          <p style="font-family: var(--font-display); font-size: 0.875rem; font-weight: 600; color: var(--white); margin: var(--space-md) 0;">10-Min Mobility Intro</p>
+          <ul style="list-style: none; text-align: left; font-size: 0.875rem; color: rgba(255,255,255,0.7);">
+            <li style="padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">✓ Single 10-minute video</li>
+            <li style="padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">✓ Email required</li>
+            <li style="padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">✓ Enters welcome sequence</li>
+            <li style="padding: 6px 0;">✓ Soft sell to premium</li>
+          </ul>
+        </div>
+
+        <!-- Premium Tier -->
+        <div style="background: var(--yellow); padding: var(--space-lg); text-align: center; position: relative;">
+          <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--black); padding: 4px 12px;">
+            <span style="font-family: var(--font-display); font-size: 0.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--yellow);">Recommended</span>
+          </div>
+          <p style="font-family: var(--font-display); font-size: 0.625rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(0,0,0,0.5); margin-bottom: var(--space-sm);">Full Program</p>
+          <p style="font-family: var(--font-display); font-size: 2.5rem; font-weight: 800; color: var(--black); line-height: 1;">$47</p>
+          <p style="font-family: var(--font-display); font-size: 0.875rem; font-weight: 600; color: var(--black); margin: var(--space-md) 0;">30-Day Mobility Program</p>
+          <ul style="list-style: none; text-align: left; font-size: 0.875rem; color: rgba(0,0,0,0.7);">
+            <li style="padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.1);">✓ 30 daily follow-along videos</li>
+            <li style="padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.1);">✓ Progressive difficulty</li>
+            <li style="padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.1);">✓ Printable checklist</li>
+            <li style="padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.1);">✓ Lifetime access</li>
+            <li style="padding: 6px 0;">✓ Email support</li>
+          </ul>
+        </div>
+
+        <!-- Bundle Tier -->
+        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: var(--space-lg); text-align: center;">
+          <p style="font-family: var(--font-display); font-size: 0.625rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gray); margin-bottom: var(--space-sm);">Complete Bundle</p>
+          <p style="font-family: var(--font-display); font-size: 2.5rem; font-weight: 800; color: var(--yellow); line-height: 1;">$97</p>
+          <p style="font-family: var(--font-display); font-size: 0.75rem; color: var(--gray); text-decoration: line-through;">$141 value</p>
+          <p style="font-family: var(--font-display); font-size: 0.875rem; font-weight: 600; color: var(--white); margin: var(--space-md) 0;">All 3 Programs</p>
+          <ul style="list-style: none; text-align: left; font-size: 0.875rem; color: rgba(255,255,255,0.7);">
+            <li style="padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">✓ 10-Min Mobility (30 days)</li>
+            <li style="padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">✓ 10-Min Abs (30 days)</li>
+            <li style="padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">✓ 10-Min Booty (30 days)</li>
+            <li style="padding: 6px 0;">✓ 31% savings</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: var(--space-lg); margin-top: var(--space-lg);">
+        <p style="font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--yellow); margin-bottom: var(--space-md);">Pricing Rationale</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);">
+          <div>
+            <p style="font-size: 0.9375rem; color: rgba(255,255,255,0.8); line-height: 1.7;"><strong style="color: var(--white);">$47 Sweet Spot:</strong> Low enough to be an impulse buy for 50+ audience, high enough to signal quality. Comparable to: 1 personal training session, 2 months of gym membership, dinner for two.</p>
+          </div>
+          <div>
+            <p style="font-size: 0.9375rem; color: rgba(255,255,255,0.8); line-height: 1.7;"><strong style="color: var(--white);">Bundle Incentive:</strong> $97 bundle creates clear value ($44 savings). Encourages buying all three vs. just one. Can promote bundle during launches of subsequent series.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: var(--space-lg);">
+        <p style="font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--yellow); margin-bottom: var(--space-md);">Future Upsell Opportunities</p>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-sm);">
+          <div style="background: rgba(255,255,255,0.03); padding: var(--space-md); text-align: center;">
+            <p style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; color: var(--yellow);">$19</p>
+            <p style="font-size: 0.75rem; color: var(--gray);">Nutrition Guide</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); padding: var(--space-md); text-align: center;">
+            <p style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; color: var(--yellow);">$97/mo</p>
+            <p style="font-size: 0.75rem; color: var(--gray);">Online Coaching</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); padding: var(--space-md); text-align: center;">
+            <p style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; color: var(--yellow);">$150</p>
+            <p style="font-size: 0.75rem; color: var(--gray);">1-on-1 Session</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); padding: var(--space-md); text-align: center;">
+            <p style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; color: var(--yellow);">$497</p>
+            <p style="font-size: 0.75rem; color: var(--gray);">8-Week Package</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Next Steps -->
   <section class="plan-section">
-    <p class="plan-label">Action Items</p>
+    <p class="plan-label" style="color: var(--yellow);">Action Items</p>
     <h2 class="plan-title">Next Steps</h2>
     <div class="plan-text">
-      <ol style="padding-left: 20px;">
-        <li style="margin-bottom: 12px;">Review and approve this plan</li>
-        <li style="margin-bottom: 12px;">Schedule video filming date at the studio</li>
-        <li style="margin-bottom: 12px;">Build landing page in Squarespace</li>
-        <li style="margin-bottom: 12px;">Film both videos (core routine + promo)</li>
-        <li style="margin-bottom: 12px;">Edit and upload videos</li>
-        <li style="margin-bottom: 12px;">Set up email capture and automation</li>
-        <li style="margin-bottom: 12px;">Launch!</li>
+      <ol style="padding-left: 20px; color: var(--dark-gray);">
+        <li style="margin-bottom: 12px; color: var(--dark-gray);">Review and approve this plan</li>
+        <li style="margin-bottom: 12px; color: var(--dark-gray);">Schedule video filming date at the studio</li>
+        <li style="margin-bottom: 12px; color: var(--dark-gray);">Build landing page in Squarespace</li>
+        <li style="margin-bottom: 12px; color: var(--dark-gray);">Film both videos (core routine + promo)</li>
+        <li style="margin-bottom: 12px; color: var(--dark-gray);">Edit and upload videos</li>
+        <li style="margin-bottom: 12px; color: var(--dark-gray);">Set up email capture and automation</li>
+        <li style="margin-bottom: 12px; color: var(--dark-gray);">Launch!</li>
       </ol>
     </div>
   </section>
