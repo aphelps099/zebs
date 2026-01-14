@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Dan Go Model | Zeb's Content Strategy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #C9A227;
+      --gold-light: #E8D59A;
+      --black: #1A1A1A;
+      --gray: #4A4A4A;
+      --light: #F5F5F5;
+      --white: #FFFFFF;
+      --green: #2D8A4E;
+      --blue: #1DA1F2;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      font-size: 12px;
+      line-height: 1.6;
+      max-width: 8.5in;
+      margin: 0 auto;
+      padding: 0.5in;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+      border-bottom: 3px solid var(--gold);
+    }
+
+    .header .eyebrow {
+      font-size: 10px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+
+    .header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      color: var(--black);
+      letter-spacing: 2px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .header .subtitle {
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    /* Dan Go Stats */
+    .dan-stats {
+      background: var(--black);
+      color: var(--white);
+      padding: 16px 24px;
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .dan-stats h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    .dan-stats p {
+      font-size: 11px;
+      margin-top: 6px;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 24px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat .number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      color: var(--gold);
+    }
+
+    .stat .label {
+      font-size: 9px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Comparison */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .compare-box {
+      padding: 16px;
+      border: 1px solid #E0E0E0;
+    }
+
+    .compare-box.zeb {
+      border: 2px solid var(--gold);
+      background: #FFFDF5;
+    }
+
+    .compare-box h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      color: var(--gray);
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .compare-box.zeb h3 {
+      color: var(--gold);
+    }
+
+    .compare-box ul {
+      font-size: 10px;
+      padding-left: 16px;
+      color: var(--gray);
+    }
+
+    .compare-box li {
+      margin-bottom: 4px;
+    }
+
+    .compare-box .edge {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid #E0E0E0;
+      font-size: 10px;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    /* Content Examples */
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      color: var(--black);
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: var(--gold-light);
+    }
+
+    .tweet-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .tweet {
+      background: var(--white);
+      border: 1px solid #E0E0E0;
+      border-radius: 12px;
+      padding: 14px;
+      position: relative;
+    }
+
+    .tweet::before {
+      content: '𝕏';
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-size: 14px;
+      color: var(--black);
+    }
+
+    .tweet .handle {
+      font-size: 10px;
+      color: var(--gray);
+      margin-bottom: 8px;
+    }
+
+    .tweet .handle strong {
+      color: var(--black);
+    }
+
+    .tweet .content {
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .tweet .hook {
+      font-weight: 700;
+      color: var(--black);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .tweet .thread-indicator {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed #E0E0E0;
+      font-size: 9px;
+      color: var(--blue);
+    }
+
+    /* Flywheel */
+    .flywheel {
+      background: var(--light);
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .flywheel h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      color: var(--black);
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .flywheel-steps {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .flywheel-step {
+      text-align: center;
+      flex: 1;
+    }
+
+    .flywheel-step .icon {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    .flywheel-step .title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 12px;
+      color: var(--black);
+      letter-spacing: 0.5px;
+    }
+
+    .flywheel-step .desc {
+      font-size: 9px;
+      color: var(--gray);
+      margin-top: 2px;
+    }
+
+    .flywheel-arrow {
+      font-size: 20px;
+      color: var(--gold);
+    }
+
+    /* Revenue Path */
+    .revenue-path {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .revenue-item {
+      background: var(--white);
+      border: 1px solid #E0E0E0;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .revenue-item .phase {
+      font-size: 8px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .revenue-item .product {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      color: var(--black);
+      margin-bottom: 4px;
+    }
+
+    .revenue-item .price {
+      font-size: 11px;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .revenue-item .note {
+      font-size: 8px;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+
+    /* Bottom Line */
+    .bottom-line {
+      background: var(--black);
+      color: var(--white);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .bottom-line h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .bottom-line p {
+      font-size: 12px;
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    .bottom-line .zeb-quote {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid #333;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--gold-light);
+    }
+
+    @media print {
+      body { padding: 0.4in; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="eyebrow">Content Strategy Vision</div>
+    <h1>Zeb, Meet the Dan Go Model</h1>
+    <div class="subtitle">How a fitness coach built a 7-figure business with simple social media content — and why you're positioned even better</div>
+  </header>
+
+  <!-- Dan Go Stats -->
+  <div class="dan-stats">
+    <div>
+      <h2>Who is Dan Go?</h2>
+      <p>A 44-year-old fitness coach who built an empire posting simple, no-BS fitness advice for busy professionals. He started with Twitter threads. Now he has a coaching business, courses, and a massive email list — all from content.</p>
+    </div>
+    <div class="stats-row">
+      <div class="stat">
+        <div class="number">756K</div>
+        <div class="label">Twitter Followers</div>
+      </div>
+      <div class="stat">
+        <div class="number">480K+</div>
+        <div class="label">Email Subscribers</div>
+      </div>
+      <div class="stat">
+        <div class="number">$2-8K</div>
+        <div class="label">Coaching Packages</div>
+      </div>
+      <div class="stat">
+        <div class="number">94%</div>
+        <div class="label">Client Success Rate</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison -->
+  <div class="comparison">
+    <div class="compare-box">
+      <h3>Dan Go's Positioning</h3>
+      <ul>
+        <li>44 years old — "still young" to many</li>
+        <li>Targets busy entrepreneurs & executives</li>
+        <li>Focus: fat loss, energy, optimization</li>
+        <li>Proof: client transformations</li>
+        <li>Tone: hustle culture meets health</li>
+        <li>Signature: "I'm 44. If you're in your 20s, read this..."</li>
+      </ul>
+    </div>
+    <div class="compare-box zeb">
+      <h3>Zeb's Positioning</h3>
+      <ul>
+        <li><strong>60s — living proof it's never too late</strong></li>
+        <li>Targets 50+ adults who feel "too old"</li>
+        <li>Focus: mobility, independence, confidence</li>
+        <li><strong>Proof: HIMSELF after back surgery</strong></li>
+        <li>Tone: wisdom, discipline, no excuses</li>
+        <li>Signature: <strong>"I'm in my 60s. If you think it's too late, read this..."</strong></li>
+      </ul>
+      <div class="edge">✓ Zeb IS the transformation. That's rare and powerful.</div>
+    </div>
+  </div>
+
+  <!-- Content Examples -->
+  <div class="section-title">Content in Zeb's Voice (Dan Go Style)</div>
+  <div class="tweet-grid">
+    <div class="tweet">
+      <div class="handle"><strong>Zeb Young</strong> @ZebPlatinum</div>
+      <div class="content">
+        <span class="hook">I'm in my 60s. If you're in your 50s, read this:</span>
+        After back surgery, doctors weren't sure I'd train again.<br><br>
+        Today I'm stronger than most people half my age.<br><br>
+        Here's what I learned rebuilding my body from zero:
+      </div>
+      <div class="thread-indicator">🧵 Thread (1/8)</div>
+    </div>
+    <div class="tweet">
+      <div class="handle"><strong>Zeb Young</strong> @ZebPlatinum</div>
+      <div class="content">
+        <span class="hook">Unpopular opinion: You don't need motivation.</span>
+        You need simplicity.<br><br>
+        Most people over 50 fail at fitness because they overcomplicate it.<br><br>
+        Too many programs. Too many diets. Too many gadgets.<br><br>
+        Pick ONE thing. Do it consistently. That's it.
+      </div>
+    </div>
+    <div class="tweet">
+      <div class="handle"><strong>Zeb Young</strong> @ZebPlatinum</div>
+      <div class="content">
+        <span class="hook">The 6 movements that rebuilt my body after surgery:</span>
+        1. Squat (or sit-to-stand)<br>
+        2. Hip hinge<br>
+        3. Push<br>
+        4. Pull<br>
+        5. Carry<br>
+        6. Core<br><br>
+        30 minutes. 3x a week. Same movements every time.<br><br>
+        Simple beats complex. Every time.
+      </div>
+    </div>
+    <div class="tweet">
+      <div class="handle"><strong>Zeb Young</strong> @ZebPlatinum</div>
+      <div class="content">
+        <span class="hook">You can't fake having a fit body in your 60s.</span>
+        You can fake wealth.<br>
+        You can fake wisdom.<br>
+        You can fake being busy.<br><br>
+        But when you're 60+ and you can get off the floor without help, play with your grandkids, and move without pain?<br><br>
+        That's earned. Every single day.
+      </div>
+    </div>
+  </div>
+
+  <!-- Flywheel -->
+  <div class="flywheel">
+    <h3>The Content → Revenue Flywheel</h3>
+    <div class="flywheel-steps">
+      <div class="flywheel-step">
+        <div class="icon">📱</div>
+        <div class="title">Post Content</div>
+        <div class="desc">Twitter, Facebook, Instagram</div>
+      </div>
+      <div class="flywheel-arrow">→</div>
+      <div class="flywheel-step">
+        <div class="icon">👀</div>
+        <div class="title">Get Attention</div>
+        <div class="desc">People share, engage</div>
+      </div>
+      <div class="flywheel-arrow">→</div>
+      <div class="flywheel-step">
+        <div class="icon">📧</div>
+        <div class="title">Capture Emails</div>
+        <div class="desc">Free content = sign-ups</div>
+      </div>
+      <div class="flywheel-arrow">→</div>
+      <div class="flywheel-step">
+        <div class="icon">💰</div>
+        <div class="title">Sell Products</div>
+        <div class="desc">Courses, coaching, book</div>
+      </div>
+      <div class="flywheel-arrow">→</div>
+      <div class="flywheel-step">
+        <div class="icon">🔄</div>
+        <div class="title">Repeat</div>
+        <div class="desc">Compounds forever</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Revenue Path -->
+  <div class="section-title">Your Revenue Path</div>
+  <div class="revenue-path">
+    <div class="revenue-item">
+      <div class="phase">Now</div>
+      <div class="product">10-Min Mobility</div>
+      <div class="price">FREE</div>
+      <div class="note">Builds email list</div>
+    </div>
+    <div class="revenue-item">
+      <div class="phase">Month 2-3</div>
+      <div class="product">Premium Course</div>
+      <div class="price">$47-97</div>
+      <div class="note">Sell to email list</div>
+    </div>
+    <div class="revenue-item">
+      <div class="phase">Month 4-6</div>
+      <div class="product">The Book</div>
+      <div class="price">$15-20</div>
+      <div class="note">Credibility + royalties</div>
+    </div>
+    <div class="revenue-item">
+      <div class="phase">Ongoing</div>
+      <div class="product">Online Coaching</div>
+      <div class="price">$500-2K</div>
+      <div class="note">Group or 1:1 remote</div>
+    </div>
+  </div>
+
+  <!-- Bottom Line -->
+  <div class="bottom-line">
+    <h3>The Opportunity No One Else Has</h3>
+    <p>Dan Go is 44 talking to 30-year-olds about optimization. You're <strong>in your 60s talking to 50-year-olds about what's actually possible</strong>. You're not teaching theory — you're living proof. That's a category of one.</p>
+    <div class="zeb-quote">"I'm in my 60s. If you think it's too late — watch me."</div>
+  </div>
+
+</body>
+</html>
