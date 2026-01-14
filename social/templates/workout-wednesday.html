@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workout Wednesday | Social Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --dark-gray: #111111;
+      --gray: #666666;
+      --white: #FFFFFF;
+      --gold: #ffcc00;
+      --yellow: #fdea01;
+      --font-display: 'Futura PT', 'Futura', 'Century Gothic', 'Avant Garde', sans-serif;
+      --font-body: 'Futura PT', 'Futura', 'Century Gothic', sans-serif;
+      --font-accent: 'Cormorant Garamond', 'Garamond', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .template-container {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .social-post {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #1a1a1a 0%, var(--black) 100%);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .post-header {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      right: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .post-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--yellow);
+    }
+
+    .workout-duration {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--black);
+      background: var(--yellow);
+      padding: 6px 12px;
+    }
+
+    .post-content {
+      position: absolute;
+      top: 50%;
+      left: 24px;
+      right: 24px;
+      transform: translateY(-50%);
+    }
+
+    .workout-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.25rem, 4vw, 1.75rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .workout-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .workout-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 16px;
+    }
+
+    .exercise-name {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .exercise-reps {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--yellow);
+    }
+
+    .post-footer {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      right: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .workout-note {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: 0.875rem;
+      color: var(--gray);
+    }
+
+    .logo-container img {
+      height: 28px;
+      opacity: 0.4;
+    }
+
+    .caption-section {
+      background: var(--dark-gray);
+      padding: 32px;
+      margin-top: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .caption-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .caption-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--white);
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .caption-text .hashtags {
+      color: var(--gray);
+      margin-top: 16px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="template-container">
+    <!-- Social Post Image -->
+    <div class="social-post">
+      <div class="post-header">
+        <p class="post-label">Workout Wednesday</p>
+        <p class="workout-duration">15 Minutes</p>
+      </div>
+      <div class="post-content">
+        <h2 class="workout-title">Full Body Strength - No Equipment</h2>
+        <ul class="workout-list">
+          <li class="workout-item">
+            <p class="exercise-name">Wall Push-ups</p>
+            <p class="exercise-reps">12 reps</p>
+          </li>
+          <li class="workout-item">
+            <p class="exercise-name">Chair Squats</p>
+            <p class="exercise-reps">10 reps</p>
+          </li>
+          <li class="workout-item">
+            <p class="exercise-name">Standing Rows</p>
+            <p class="exercise-reps">12 each arm</p>
+          </li>
+          <li class="workout-item">
+            <p class="exercise-name">Marching</p>
+            <p class="exercise-reps">1 minute</p>
+          </li>
+          <li class="workout-item">
+            <p class="exercise-name">Bird Dogs</p>
+            <p class="exercise-reps">8 each side</p>
+          </li>
+          <li class="workout-item">
+            <p class="exercise-name">Calf Raises</p>
+            <p class="exercise-reps">15 reps</p>
+          </li>
+        </ul>
+      </div>
+      <div class="post-footer">
+        <p class="workout-note">Repeat 2-3 rounds</p>
+        <div class="logo-container">
+          <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873636754-7KKE9M4BRNTZEDPFWFHS/Zeb+Logo.png?format=500w" alt="Zeb's Platinum Fitness">
+        </div>
+      </div>
+    </div>
+
+    <!-- Caption -->
+    <div class="caption-section">
+      <p class="caption-label">Suggested Caption</p>
+      <p class="caption-text">WORKOUT WEDNESDAY: Full Body Strength
+
+No gym. No equipment. Just 15 minutes.
+
+Here's a complete strength workout you can do at home:
+
+CIRCUIT (repeat 2-3 rounds):
+- Wall Push-ups: 12 reps
+- Chair Squats: 10 reps
+- Standing Rows (with band or towel): 12 each arm
+- Marching in Place: 1 minute
+- Bird Dogs: 8 each side
+- Calf Raises: 15 reps
+
+Rest 30-60 seconds between rounds.
+
+The key: Move slowly and controlled. Quality over speed.
+
+Try this today and let me know how it goes!
+
+Save this post so you have it ready when you need it.
+
+<span class="hashtags">#WorkoutWednesday #HomeWorkout #NoEquipmentNeeded #FitnessOver50 #ZebsPlatinumFitness #FullBodyWorkout #15MinuteWorkout</span></p>
+    </div>
+  </div>
+</body>
+</html>

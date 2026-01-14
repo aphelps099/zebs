@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strength Story | Social Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --dark-gray: #111111;
+      --gray: #666666;
+      --white: #FFFFFF;
+      --gold: #ffcc00;
+      --yellow: #fdea01;
+      --font-display: 'Futura PT', 'Futura', 'Century Gothic', 'Avant Garde', sans-serif;
+      --font-body: 'Futura PT', 'Futura', 'Century Gothic', sans-serif;
+      --font-accent: 'Cormorant Garamond', 'Garamond', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .template-container {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .social-post {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .post-header {
+      position: absolute;
+      top: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+
+    .post-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--gray);
+    }
+
+    .post-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      width: 85%;
+    }
+
+    .strength-headline {
+      font-family: var(--font-display);
+      font-size: clamp(1.25rem, 4vw, 1.75rem);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+
+    .strength-stat {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 15vw, 8rem);
+      font-weight: 800;
+      color: var(--yellow);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .strength-context {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: clamp(1.25rem, 4vw, 1.75rem);
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    .logo-container {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .logo-container img {
+      height: 32px;
+      opacity: 0.4;
+    }
+
+    .caption-section {
+      background: var(--dark-gray);
+      padding: 32px;
+      margin-top: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .caption-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .caption-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--white);
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .caption-text .hashtags {
+      color: var(--gray);
+      margin-top: 16px;
+      display: block;
+    }
+
+    .variations {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 24px;
+      margin-top: 24px;
+    }
+
+    .variations-title {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--yellow);
+      margin-bottom: 12px;
+    }
+
+    .variations ul {
+      list-style: none;
+    }
+
+    .variations li {
+      font-size: 0.875rem;
+      color: var(--gray);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .variations li:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="template-container">
+    <!-- Social Post Image -->
+    <div class="social-post">
+      <div class="post-header">
+        <p class="post-label">Why Strength Training Matters</p>
+      </div>
+      <div class="post-content">
+        <p class="strength-headline">After 50 you lose</p>
+        <p class="strength-stat">1-2%</p>
+        <p class="strength-context">of muscle mass per year without strength training</p>
+      </div>
+      <div class="logo-container">
+        <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873636754-7KKE9M4BRNTZEDPFWFHS/Zeb+Logo.png?format=500w" alt="Zeb's Platinum Fitness">
+      </div>
+    </div>
+
+    <!-- Caption -->
+    <div class="caption-section">
+      <p class="caption-label">Suggested Caption</p>
+      <p class="caption-text">Here's a number that should change how you think about exercise:
+
+After 50, you lose 1-2% of muscle mass every year.
+
+That might not sound like much. But compound it:
+
+- By 60: You've lost 10-20% of your muscle
+- By 70: You've lost 20-40%
+- By 80: You've lost 30-60%
+
+This is called sarcopenia. And it's responsible for:
+- Falls and fractures
+- Loss of independence
+- Decreased metabolism
+- Lower quality of life
+
+The good news? Strength training REVERSES this.
+
+You can build muscle at any age. I've seen clients in their 70s gain significant strength in just months.
+
+It's never too late to start. But the sooner you do, the more you keep.
+
+Questions about starting a strength program? DM me.
+
+<span class="hashtags">#StrengthTraining #MuscleMatters #FitnessOver50 #Sarcopenia #ZebsPlatinumFitness #BuildStrength #HealthyAging</span></p>
+
+      <div class="variations">
+        <p class="variations-title">Other Strength Stats to Share</p>
+        <ul>
+          <li>30 min 2x/week is enough to maintain muscle</li>
+          <li>Strength training increases bone density by 1-3%</li>
+          <li>People who strength train live longer</li>
+          <li>Muscle burns 3x more calories than fat at rest</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

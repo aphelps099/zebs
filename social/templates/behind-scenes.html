@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Behind the Scenes | Social Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --dark-gray: #111111;
+      --gray: #666666;
+      --white: #FFFFFF;
+      --gold: #ffcc00;
+      --yellow: #fdea01;
+      --font-display: 'Futura PT', 'Futura', 'Century Gothic', 'Avant Garde', sans-serif;
+      --font-body: 'Futura PT', 'Futura', 'Century Gothic', sans-serif;
+      --font-accent: 'Cormorant Garamond', 'Garamond', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .template-container {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .social-post {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .photo-placeholder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .placeholder-text {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .post-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.9));
+      padding: 80px 24px 24px;
+    }
+
+    .post-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--yellow);
+      margin-bottom: 8px;
+    }
+
+    .post-text {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    .caption-section {
+      background: var(--dark-gray);
+      padding: 32px;
+      margin-top: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .caption-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .caption-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--white);
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .caption-text .hashtags {
+      color: var(--gray);
+      margin-top: 16px;
+      display: block;
+    }
+
+    .variations {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 24px;
+      margin-top: 24px;
+    }
+
+    .variations-title {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--yellow);
+      margin-bottom: 12px;
+    }
+
+    .variations ul {
+      list-style: none;
+    }
+
+    .variations li {
+      font-size: 0.875rem;
+      color: var(--gray);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .variations li:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="template-container">
+    <!-- Social Post Image -->
+    <div class="social-post">
+      <div class="photo-placeholder">
+        <span class="placeholder-text">Your Photo Here</span>
+      </div>
+      <div class="post-overlay">
+        <p class="post-label">Behind the Scenes</p>
+        <p class="post-text">Early morning at the studio. Coffee in hand. Getting ready for another great session.</p>
+      </div>
+    </div>
+
+    <!-- Caption -->
+    <div class="caption-section">
+      <p class="caption-label">Suggested Caption</p>
+      <p class="caption-text">5:30 AM at the studio.
+
+Most people are still in bed. But there's something special about these early mornings.
+
+The quiet before clients arrive. The ritual of preparation. The anticipation of helping someone get stronger today.
+
+After 30+ years of doing this, I still love it.
+
+Why? Because I get to watch people surprise themselves. Every day, someone does something they didn't think they could.
+
+That's why I wake up early. That's why I show up.
+
+What gets you up in the morning? I'd love to hear.
+
+<span class="hashtags">#BehindTheScenes #TrainerLife #MorningMotivation #FitnessOver50 #ZebsPlatinumFitness #WhyIDOWhatIDo #ReddingCA</span></p>
+
+      <div class="variations">
+        <p class="variations-title">Other Behind the Scenes Ideas</p>
+        <ul>
+          <li>Setting up equipment for a session</li>
+          <li>Morning workout (practice what you preach)</li>
+          <li>Studio tour highlights</li>
+          <li>Prepping for a new program</li>
+          <li>End of day reflection</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

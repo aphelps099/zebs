@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balance Focus | Social Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --dark-gray: #111111;
+      --gray: #666666;
+      --white: #FFFFFF;
+      --gold: #ffcc00;
+      --yellow: #fdea01;
+      --font-display: 'Futura PT', 'Futura', 'Century Gothic', 'Avant Garde', sans-serif;
+      --font-body: 'Futura PT', 'Futura', 'Century Gothic', sans-serif;
+      --font-accent: 'Cormorant Garamond', 'Garamond', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .template-container {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .social-post {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(180deg, var(--black) 0%, #0a0a0a 100%);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .balance-line {
+      position: absolute;
+      top: 50%;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--yellow), transparent);
+      transform: translateY(-50%);
+    }
+
+    .balance-dot {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 16px;
+      height: 16px;
+      background: var(--yellow);
+      border-radius: 50%;
+    }
+
+    .post-header {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+
+    .post-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .post-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 6vw, 2.75rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      line-height: 1.1;
+    }
+
+    .stat-row {
+      position: absolute;
+      bottom: 100px;
+      left: 32px;
+      right: 32px;
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--yellow);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+      margin-top: 8px;
+    }
+
+    .logo-container {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .logo-container img {
+      height: 32px;
+      opacity: 0.4;
+    }
+
+    .caption-section {
+      background: var(--dark-gray);
+      padding: 32px;
+      margin-top: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .caption-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .caption-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--white);
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .caption-text .hashtags {
+      color: var(--gray);
+      margin-top: 16px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="template-container">
+    <!-- Social Post Image -->
+    <div class="social-post">
+      <div class="post-header">
+        <p class="post-label">Did You Know?</p>
+        <h1 class="post-headline">Balance Declines<br>3% Per Year<br>After 50</h1>
+      </div>
+      <div class="balance-line"></div>
+      <div class="balance-dot"></div>
+      <div class="stat-row">
+        <div class="stat-item">
+          <p class="stat-number">1 in 4</p>
+          <p class="stat-label">Adults 65+ fall each year</p>
+        </div>
+        <div class="stat-item">
+          <p class="stat-number">95%</p>
+          <p class="stat-label">Of hip fractures from falls</p>
+        </div>
+      </div>
+      <div class="logo-container">
+        <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873636754-7KKE9M4BRNTZEDPFWFHS/Zeb+Logo.png?format=500w" alt="Zeb's Platinum Fitness">
+      </div>
+    </div>
+
+    <!-- Caption -->
+    <div class="caption-section">
+      <p class="caption-label">Suggested Caption</p>
+      <p class="caption-text">Here's a stat that should get your attention:
+
+Balance declines about 3% per year after age 50.
+
+That might not sound like much - until you realize that 1 in 4 adults over 65 will fall this year. And 95% of hip fractures come from falls.
+
+The good news? Balance is trainable at any age.
+
+Simple exercises you can start today:
+- Stand on one foot while brushing teeth
+- Walk heel-to-toe in a straight line
+- Practice sitting and standing without using hands
+
+These small habits compound. Start now, and in 6 months you'll have noticeably better balance.
+
+Want a complete balance program designed for your level? Let's talk. Link in bio.
+
+<span class="hashtags">#BalanceTraining #FallPrevention #FitnessOver50 #SeniorHealth #ZebsPlatinumFitness #HealthyAging #FunctionalFitness</span></p>
+    </div>
+  </div>
+</body>
+</html>

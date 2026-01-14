@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Nutrition Tip | Social Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --dark-gray: #111111;
+      --gray: #666666;
+      --white: #FFFFFF;
+      --gold: #ffcc00;
+      --yellow: #fdea01;
+      --font-display: 'Futura PT', 'Futura', 'Century Gothic', 'Avant Garde', sans-serif;
+      --font-body: 'Futura PT', 'Futura', 'Century Gothic', sans-serif;
+      --font-accent: 'Cormorant Garamond', 'Garamond', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .template-container {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .social-post {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--yellow);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .post-header {
+      position: absolute;
+      top: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .post-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: rgba(0, 0, 0, 0.4);
+    }
+
+    .post-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      width: 85%;
+    }
+
+    .tip-number {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(0, 0, 0, 0.3);
+      margin-bottom: 16px;
+    }
+
+    .tip-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 7vw, 3.5rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+
+    .tip-subline {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: clamp(1.25rem, 4vw, 1.75rem);
+      color: rgba(0, 0, 0, 0.6);
+      line-height: 1.4;
+    }
+
+    .logo-container {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .logo-container img {
+      height: 36px;
+      opacity: 0.25;
+    }
+
+    .caption-section {
+      background: var(--dark-gray);
+      padding: 32px;
+      margin-top: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .caption-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .caption-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--white);
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .caption-text .hashtags {
+      color: var(--gray);
+      margin-top: 16px;
+      display: block;
+    }
+
+    .variations {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 24px;
+      margin-top: 24px;
+    }
+
+    .variations-title {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--yellow);
+      margin-bottom: 12px;
+    }
+
+    .variations ul {
+      list-style: none;
+    }
+
+    .variations li {
+      font-size: 0.875rem;
+      color: var(--gray);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .variations li:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="template-container">
+    <!-- Social Post Image -->
+    <div class="social-post">
+      <div class="post-header">
+        <p class="post-label">Simple Nutrition</p>
+      </div>
+      <div class="post-content">
+        <p class="tip-number">Tip #1</p>
+        <h1 class="tip-headline">Protein at Every Meal</h1>
+        <p class="tip-subline">The single most important nutrition habit for building strength after 50.</p>
+      </div>
+      <div class="logo-container">
+        <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873636754-7KKE9M4BRNTZEDPFWFHS/Zeb+Logo.png?format=500w" alt="Zeb's Platinum Fitness">
+      </div>
+    </div>
+
+    <!-- Caption -->
+    <div class="caption-section">
+      <p class="caption-label">Suggested Caption</p>
+      <p class="caption-text">SIMPLE NUTRITION TIP #1: Protein at Every Meal
+
+If there's ONE nutrition change that matters most after 50, it's this.
+
+Here's why:
+
+After 50, your body becomes less efficient at using protein. You need MORE of it to maintain muscle - not less.
+
+The fix is simple:
+- Include protein at breakfast (eggs, Greek yogurt)
+- Include protein at lunch (chicken, fish, legumes)
+- Include protein at dinner (lean meat, tofu, beans)
+
+Aim for about 25-30g per meal.
+
+That's it. No fancy diet required.
+
+This single habit will do more for your strength than any supplement ever could.
+
+What's your go-to protein source? Drop it in the comments.
+
+<span class="hashtags">#NutritionTips #ProteinForStrength #FitnessOver50 #SimpleNutrition #ZebsPlatinumFitness #HealthyEating #MuscleBuilding</span></p>
+
+      <div class="variations">
+        <p class="variations-title">Other Simple Nutrition Tips</p>
+        <ul>
+          <li>Tip #2: Hydrate before you caffeinate</li>
+          <li>Tip #3: Eat the rainbow (colorful vegetables)</li>
+          <li>Tip #4: Don't drink your calories</li>
+          <li>Tip #5: Prep on Sunday, succeed all week</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
