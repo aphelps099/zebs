@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10-Min Mobility Launch | Social Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --dark-gray: #111111;
+      --gray: #666666;
+      --white: #FFFFFF;
+      --gold: #ffcc00;
+      --yellow: #fdea01;
+      --font-display: 'Futura PT', 'Futura', 'Century Gothic', 'Avant Garde', sans-serif;
+      --font-body: 'Futura PT', 'Futura', 'Century Gothic', sans-serif;
+      --font-accent: 'Cormorant Garamond', 'Garamond', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .template-container {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .social-post {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 50%, var(--black) 100%);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .social-post::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: var(--yellow);
+    }
+
+    .post-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      width: 85%;
+    }
+
+    .post-label {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--gray);
+      margin-bottom: 24px;
+    }
+
+    .post-headline {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--yellow);
+      line-height: 0.95;
+      margin-bottom: 8px;
+    }
+
+    .post-subheadline {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--white);
+      margin-bottom: 32px;
+    }
+
+    .post-body {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--gray);
+      line-height: 1.5;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    .logo-container {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .logo-container img {
+      height: 40px;
+      opacity: 0.6;
+    }
+
+    .caption-section {
+      background: var(--dark-gray);
+      padding: 32px;
+      margin-top: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .caption-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .caption-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--white);
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .caption-text .hashtags {
+      color: var(--gray);
+      margin-top: 16px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="template-container">
+    <!-- Social Post Image -->
+    <div class="social-post">
+      <div class="post-content">
+        <p class="post-label">New Free Series</p>
+        <h1 class="post-headline">10-MIN</h1>
+        <h2 class="post-subheadline">Mobility</h2>
+        <p class="post-body">Daily routines to move better, feel better, and stay independent - at any age.</p>
+      </div>
+      <div class="logo-container">
+        <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873636754-7KKE9M4BRNTZEDPFWFHS/Zeb+Logo.png?format=500w" alt="Zeb's Platinum Fitness">
+      </div>
+    </div>
+
+    <!-- Caption -->
+    <div class="caption-section">
+      <p class="caption-label">Suggested Caption</p>
+      <p class="caption-text">NEW FREE SERIES: 10-Minute Mobility
+
+If you're over 50 and feel like your body doesn't move the way it used to... this is for you.
+
+I created this series because I know what it's like to feel limited by your own body. After my surgery at 60, I had to rebuild from scratch.
+
+These 10-minute routines are designed to:
+- Improve flexibility without pain
+- Build functional strength
+- Help you move freely again
+
+No equipment needed. No gym required. Just 10 minutes a day.
+
+Link in bio to start your first session - it's completely free.
+
+<span class="hashtags">#10MinMobility #FitnessOver50 #SeniorFitness #MobilityTraining #ZebsPlatinumFitness #ReddingCA #NeverTooLate</span></p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class Promotion | Social Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --dark-gray: #111111;
+      --gray: #666666;
+      --white: #FFFFFF;
+      --gold: #ffcc00;
+      --yellow: #fdea01;
+      --font-display: 'Futura PT', 'Futura', 'Century Gothic', 'Avant Garde', sans-serif;
+      --font-body: 'Futura PT', 'Futura', 'Century Gothic', sans-serif;
+      --font-accent: 'Cormorant Garamond', 'Garamond', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .template-container {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .social-post {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #1a1a1a 0%, var(--black) 100%);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .post-accent {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .post-accent::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -30%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, transparent 0%, rgba(253, 234, 1, 0.03) 100%);
+      transform: rotate(-15deg);
+    }
+
+    .post-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      width: 85%;
+    }
+
+    .post-label {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+
+    .post-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--yellow);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .post-subline {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--white);
+      margin-bottom: 32px;
+    }
+
+    .post-details {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .detail-item {
+      text-align: center;
+    }
+
+    .detail-label {
+      font-family: var(--font-display);
+      font-size: 0.5rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--gray);
+      margin-bottom: 4px;
+    }
+
+    .detail-value {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--white);
+    }
+
+    .post-cta {
+      margin-top: 40px;
+      padding: 12px 32px;
+      background: var(--yellow);
+      display: inline-block;
+    }
+
+    .post-cta span {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--black);
+    }
+
+    .logo-container {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .logo-container img {
+      height: 32px;
+      opacity: 0.4;
+    }
+
+    .caption-section {
+      background: var(--dark-gray);
+      padding: 32px;
+      margin-top: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .caption-label {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .caption-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--white);
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .caption-text .hashtags {
+      color: var(--gray);
+      margin-top: 16px;
+      display: block;
+    }
+
+    .variations {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 24px;
+      margin-top: 24px;
+    }
+
+    .variations-title {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--yellow);
+      margin-bottom: 12px;
+    }
+
+    .variations ul {
+      list-style: none;
+    }
+
+    .variations li {
+      font-size: 0.875rem;
+      color: var(--gray);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .variations li:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="template-container">
+    <!-- Social Post Image -->
+    <div class="social-post">
+      <div class="post-accent"></div>
+      <div class="post-content">
+        <p class="post-label">This Week Only</p>
+        <h1 class="post-headline">Free Class</h1>
+        <p class="post-subline">10-Minute Mobility</p>
+
+        <div class="post-details">
+          <div class="detail-item">
+            <p class="detail-label">Date</p>
+            <p class="detail-value">Saturday</p>
+          </div>
+          <div class="detail-item">
+            <p class="detail-label">Time</p>
+            <p class="detail-value">9:00 AM</p>
+          </div>
+          <div class="detail-item">
+            <p class="detail-label">Location</p>
+            <p class="detail-value">Studio</p>
+          </div>
+        </div>
+
+        <div class="post-cta">
+          <span>Reserve Your Spot</span>
+        </div>
+      </div>
+      <div class="logo-container">
+        <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873636754-7KKE9M4BRNTZEDPFWFHS/Zeb+Logo.png?format=500w" alt="Zeb's Platinum Fitness">
+      </div>
+    </div>
+
+    <!-- Caption -->
+    <div class="caption-section">
+      <p class="caption-label">Suggested Caption</p>
+      <p class="caption-text">FREE CLASS THIS SATURDAY
+
+Curious about what training with me looks like? Here's your chance to find out - no commitment, no cost.
+
+This Saturday at 9am, I'm hosting a free 10-Minute Mobility class at the studio.
+
+Perfect for you if:
+- You've been thinking about getting more active
+- You're not sure where to start
+- You want to see if personal training is right for you
+
+Space is limited to 8 people so everyone gets personal attention.
+
+Drop a comment or DM me to reserve your spot.
+
+Address: 1320 Yuba Street, Suite 101, Redding CA
+
+See you Saturday!
+
+<span class="hashtags">#FreeClass #ReddingFitness #FitnessOver50 #MobilityClass #ZebsPlatinumFitness #TryItFree #SaturdayWorkout</span></p>
+
+      <div class="variations">
+        <p class="variations-title">Template Variations</p>
+        <ul>
+          <li><strong>Workshop:</strong> Change "Free Class" to workshop topic (e.g., "Balance Workshop")</li>
+          <li><strong>Special Event:</strong> Change label to "Special Event" for seasonal promos</li>
+          <li><strong>Limited Time:</strong> Add urgency with "3 Spots Left" or "This Week Only"</li>
+          <li><strong>Paid Class:</strong> Add price in CTA area (e.g., "$20/person")</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
