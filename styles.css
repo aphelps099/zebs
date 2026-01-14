@@ -1828,6 +1828,179 @@ section {
 }
 
 /* --------------------------------------------------------------------------
+   BOLD STATEMENT SECTION - Yellow with Black Text
+   -------------------------------------------------------------------------- */
+.statement-section {
+  background: var(--yellow);
+  padding: clamp(80px, 15vh, 160px) 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+}
+
+/* Grid pattern overlay */
+.statement-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.statement-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+.statement-content {
+  text-align: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.statement-label {
+  font-family: var(--font-display);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.5);
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.statement-label.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.statement-text {
+  font-family: var(--font-accent);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 5vw, 3.25rem);
+  line-height: 1.35;
+  color: var(--black);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--ease-out) 0.2s, transform 0.8s var(--ease-out) 0.2s;
+}
+
+.statement-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Highlighted stats with snap-in animation */
+.statement-stat {
+  font-family: var(--font-display);
+  font-weight: var(--weight-heavy);
+  color: var(--black);
+  display: inline;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.statement-stat.snap-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.statement-stat:nth-of-type(1) { transition-delay: 0.4s; }
+.statement-stat:nth-of-type(2) { transition-delay: 0.6s; }
+.statement-stat:nth-of-type(3) { transition-delay: 0.8s; }
+
+/* Animated underline effect */
+.animated-underline {
+  position: relative;
+  display: inline;
+}
+
+.animated-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: var(--black);
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animated-underline.visible::after {
+  width: 100%;
+}
+
+.animated-underline:nth-of-type(1)::after { transition-delay: 0.5s; }
+.animated-underline:nth-of-type(2)::after { transition-delay: 0.7s; }
+.animated-underline:nth-of-type(3)::after { transition-delay: 0.9s; }
+
+/* Statement section divider - diagonal ZAG */
+.statement-section-top {
+  position: absolute;
+  top: -60px;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: var(--yellow);
+  transform: skewY(var(--zag-angle));
+  z-index: 0;
+}
+
+.statement-section-bottom {
+  position: absolute;
+  bottom: -60px;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: var(--yellow);
+  transform: skewY(var(--zag-angle));
+  z-index: 0;
+}
+
+/* Big number callout inside statement */
+.statement-big-number {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 15vw, 12rem);
+  font-weight: var(--weight-heavy);
+  color: rgba(0, 0, 0, 0.08);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  pointer-events: none;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px) {
+  .statement-section {
+    min-height: 50vh;
+    padding: 60px 0;
+  }
+
+  .statement-section-top,
+  .statement-section-bottom {
+    display: none;
+  }
+
+  .statement-big-number {
+    font-size: 6rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
    FEATURED CALLOUT BOX
    -------------------------------------------------------------------------- */
 .featured-callout {

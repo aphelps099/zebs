@@ -79,6 +79,21 @@
     </div>
   </section>
 
+  <!-- Bold Statement Section -->
+  <section class="statement-section">
+    <div class="statement-section-top"></div>
+    <div class="statement-big-number">50+</div>
+    <div class="container">
+      <div class="statement-content">
+        <p class="statement-label">The Mission</p>
+        <p class="statement-text">
+          For <span class="statement-stat">30+ years</span>, I've helped adults over <span class="statement-stat">50</span> prove that <span class="animated-underline">age is just a number</span>. With <span class="animated-underline">structure</span>, <span class="animated-underline">motivation</span>, and <span class="animated-underline">accountability</span> - transformation happens at <span class="statement-stat">any stage</span> of life.
+        </p>
+      </div>
+    </div>
+    <div class="statement-section-bottom"></div>
+  </section>
+
   <!-- Section 4: Brand Foundation -->
   <section id="brand" class="section">
     <div class="container">
@@ -558,6 +573,44 @@
         closeModal();
       }
     });
+
+    // Statement section animations - snap-in effect
+    const statementObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Animate the label
+          const label = entry.target.querySelector('.statement-label');
+          if (label) label.classList.add('visible');
+
+          // Animate the statement text
+          const text = entry.target.querySelector('.statement-text');
+          if (text) text.classList.add('visible');
+
+          // Snap in the stats with staggered timing
+          const stats = entry.target.querySelectorAll('.statement-stat');
+          stats.forEach((stat, index) => {
+            setTimeout(() => {
+              stat.classList.add('snap-in');
+            }, 400 + (index * 200));
+          });
+
+          // Animate underlines
+          const underlines = entry.target.querySelectorAll('.animated-underline');
+          underlines.forEach((underline, index) => {
+            setTimeout(() => {
+              underline.classList.add('visible');
+            }, 500 + (index * 150));
+          });
+
+          statementObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const statementSection = document.querySelector('.statement-section');
+    if (statementSection) {
+      statementObserver.observe(statementSection);
+    }
   </script>
 
 </body>
