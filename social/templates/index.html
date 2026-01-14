@@ -9,414 +9,363 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
   <style>
-    /* Templates Gallery Styles */
-    .templates-hero {
-      min-height: 50vh;
-      display: flex;
-      align-items: center;
-      background: linear-gradient(135deg, #0a0a0a 0%, #111 50%, #0a0a0a 100%);
-      position: relative;
-      overflow: hidden;
-      padding: 160px 0 var(--space-2xl);
+    body {
+      background: var(--black);
     }
 
-    .templates-hero::before {
-      content: '';
+    /* Header */
+    .templates-header {
+      padding: 140px var(--space-lg) var(--space-xl);
+      text-align: center;
+      background: linear-gradient(180deg, var(--black) 0%, var(--near-black) 100%);
+    }
+
+    .templates-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(253, 234, 1, 0.1);
+      border: 1px solid rgba(253, 234, 1, 0.3);
+      padding: 8px 16px;
+      margin-bottom: var(--space-md);
+    }
+
+    .templates-badge-count {
+      width: 24px;
+      height: 24px;
+      background: var(--yellow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--black);
+    }
+
+    .templates-badge span {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--yellow);
+    }
+
+    .templates-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      margin-bottom: var(--space-sm);
+    }
+
+    .templates-subtitle {
+      font-family: var(--font-accent);
+      font-size: 1.125rem;
+      font-style: italic;
+      color: var(--gray);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Grid */
+    .templates-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2px;
+    }
+
+    .template-tile {
+      aspect-ratio: 1;
+      background: var(--near-black);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .template-tile:hover {
+      z-index: 2;
+      transform: scale(1.02);
+    }
+
+    .template-tile:hover .template-tile-overlay {
+      opacity: 1;
+    }
+
+    .template-tile-preview {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .template-tile-overlay {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background:
-        radial-gradient(ellipse at 20% 80%, rgba(253, 234, 1, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(253, 234, 1, 0.04) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    .templates-hero-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .templates-hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(253, 234, 1, 0.1);
-      border: 1px solid rgba(253, 234, 1, 0.3);
-      padding: 8px 16px;
-      margin-bottom: var(--space-lg);
-    }
-
-    .templates-hero-badge span {
-      font-family: var(--font-display);
-      font-size: 0.625rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--yellow);
-    }
-
-    .templates-hero-count {
-      width: 28px;
-      height: 28px;
-      background: var(--yellow);
+      background: rgba(0, 0, 0, 0.8);
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-family: var(--font-display);
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: var(--black);
-    }
-
-    .templates-hero-title {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      line-height: 1;
-      margin-bottom: var(--space-lg);
-      letter-spacing: 0.04em;
-    }
-
-    .templates-hero-subtitle {
-      font-family: var(--font-accent);
-      font-size: 1.25rem;
-      font-style: italic;
-      color: var(--gray);
-      line-height: 1.5;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* Stats Bar */
-    .templates-stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .templates-stat {
-      background: var(--near-black);
-      padding: var(--space-lg);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      padding: 20px;
       text-align: center;
     }
 
-    .templates-stat-number {
+    .template-tile-category {
       font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--yellow);
-      line-height: 1;
-      margin-bottom: var(--space-xs);
-    }
-
-    .templates-stat-label {
-      font-family: var(--font-display);
-      font-size: 0.625rem;
+      font-size: 0.5rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--gray);
-    }
-
-    /* Category Navigation */
-    .category-nav {
-      background: var(--dark-gray);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      padding: var(--space-md) 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .category-nav-inner {
-      display: flex;
-      gap: var(--space-md);
-      overflow-x: auto;
-      padding: 0 var(--space-lg);
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .category-nav-inner::-webkit-scrollbar {
-      display: none;
-    }
-
-    .category-link {
-      font-family: var(--font-display);
-      font-size: 0.6875rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--gray);
-      white-space: nowrap;
-      padding: 8px 16px;
-      border: 1px solid transparent;
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
-
-    .category-link:hover,
-    .category-link.active {
+      letter-spacing: 0.2em;
       color: var(--yellow);
-      border-color: rgba(253, 234, 1, 0.3);
-      background: rgba(253, 234, 1, 0.05);
+      margin-bottom: 8px;
     }
 
-    /* Template Sections */
-    .template-section {
-      padding: var(--space-2xl) 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .template-section:nth-child(odd) {
-      background: var(--near-black);
-    }
-
-    .template-section-header {
-      display: flex;
-      align-items: center;
-      gap: var(--space-lg);
-      margin-bottom: var(--space-xl);
-    }
-
-    .template-section-number {
-      width: 50px;
-      height: 50px;
-      background: rgba(253, 234, 1, 0.1);
-      border: 1px solid rgba(253, 234, 1, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .template-tile-name {
       font-family: var(--font-display);
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--yellow);
-    }
-
-    .template-section-info h2 {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
+      font-size: 0.875rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--white);
-      margin-bottom: 4px;
+      margin-bottom: 12px;
     }
 
-    .template-section-info p {
-      font-size: 0.9375rem;
-      color: var(--gray);
-    }
-
-    .template-category-badge {
-      display: inline-block;
+    .template-tile-btn {
       font-family: var(--font-display);
       font-size: 0.5rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      padding: 4px 10px;
-      margin-left: auto;
-    }
-
-    .template-category-badge--education { background: #3b82f6; color: white; }
-    .template-category-badge--weekly { background: #22c55e; color: white; }
-    .template-category-badge--proof { background: #f59e0b; color: black; }
-    .template-category-badge--promotion { background: var(--yellow); color: black; }
-    .template-category-badge--launch { background: #ef4444; color: white; }
-    .template-category-badge--lifestyle { background: #8b5cf6; color: white; }
-
-    /* Template Embed */
-    .template-embed-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-xl);
-      align-items: start;
-    }
-
-    .template-preview-frame {
-      background: #1a1a1a;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .template-preview-toolbar {
-      background: #252525;
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .template-preview-dots {
-      display: flex;
-      gap: 6px;
-    }
-
-    .template-preview-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-
-    .template-preview-dot--red { background: #ff5f57; }
-    .template-preview-dot--yellow { background: #febc2e; }
-    .template-preview-dot--green { background: #28c840; }
-
-    .template-preview-title {
-      flex: 1;
-      text-align: center;
-      font-family: var(--font-display);
-      font-size: 0.6875rem;
-      color: rgba(255, 255, 255, 0.4);
-    }
-
-    .template-preview-open {
-      font-family: var(--font-display);
-      font-size: 0.625rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--yellow);
-      text-decoration: none;
-      padding: 4px 10px;
-      border: 1px solid rgba(253, 234, 1, 0.3);
-      transition: all 0.3s ease;
-    }
-
-    .template-preview-open:hover {
-      background: var(--yellow);
       color: var(--black);
-    }
-
-    .template-iframe {
-      width: 100%;
-      height: 600px;
-      border: none;
-      display: block;
-    }
-
-    .template-details {
-      padding: var(--space-lg);
-      background: var(--dark-gray);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .template-details-title {
-      font-family: var(--font-display);
-      font-size: 0.625rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--yellow);
-      margin-bottom: var(--space-md);
-    }
-
-    .template-details-text {
-      font-size: 0.9375rem;
-      color: var(--gray);
-      line-height: 1.7;
-      margin-bottom: var(--space-lg);
-    }
-
-    .template-uses {
-      list-style: none;
-    }
-
-    .template-uses li {
-      font-size: 0.875rem;
-      color: rgba(255, 255, 255, 0.6);
-      padding: var(--space-sm) 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-    }
-
-    .template-uses li:last-child {
-      border-bottom: none;
-    }
-
-    .template-uses li::before {
-      content: '\2713';
-      color: #22c55e;
-      font-size: 0.75rem;
-    }
-
-    /* Back to top */
-    .back-to-top {
-      position: fixed;
-      bottom: var(--space-xl);
-      right: var(--space-xl);
-      width: 50px;
-      height: 50px;
       background: var(--yellow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
+      padding: 8px 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s ease;
-      z-index: 100;
     }
 
-    .back-to-top.visible {
+    .modal-backdrop.active {
       opacity: 1;
       visibility: visible;
     }
 
-    .back-to-top::after {
-      content: '';
-      width: 12px;
-      height: 12px;
-      border-left: 2px solid var(--black);
-      border-top: 2px solid var(--black);
-      transform: rotate(45deg) translateY(3px);
+    .modal-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      width: 90%;
+      max-width: 700px;
+      max-height: 90vh;
+      z-index: 1001;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
     }
 
-    .back-to-top:hover {
-      transform: translateY(-4px);
+    .modal-container.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .modal-header {
+      background: var(--dark-gray);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .modal-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .modal-category {
+      font-family: var(--font-display);
+      font-size: 0.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--black);
+      background: var(--yellow);
+      padding: 4px 10px;
+    }
+
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .modal-counter {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      color: var(--gray);
+    }
+
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--gray);
+      font-size: 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .modal-close:hover {
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+
+    .modal-body {
+      background: var(--near-black);
+      overflow: hidden;
+    }
+
+    .modal-iframe {
+      width: 100%;
+      height: 70vh;
+      max-height: 600px;
+      border: none;
+      display: block;
+    }
+
+    .modal-footer {
+      background: var(--dark-gray);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .modal-nav {
+      display: flex;
+      gap: 8px;
+    }
+
+    .modal-nav-btn {
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--gray);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .modal-nav-btn:hover {
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+
+    .modal-nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .modal-open-btn {
+      font-family: var(--font-display);
+      font-size: 0.625rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--black);
+      background: var(--yellow);
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .modal-open-btn:hover {
+      background: var(--white);
+    }
+
+    /* Footer */
+    .templates-footer {
+      padding: var(--space-xl);
+      text-align: center;
+      background: var(--near-black);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .templates-footer a {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .templates-footer a:hover {
+      color: var(--yellow);
     }
 
     /* Responsive */
     @media (max-width: 1024px) {
-      .template-embed-container {
-        grid-template-columns: 1fr;
-      }
-
-      .template-iframe {
-        height: 500px;
+      .templates-grid {
+        grid-template-columns: repeat(3, 1fr);
       }
     }
 
     @media (max-width: 768px) {
-      .templates-stats {
+      .templates-grid {
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .template-section-header {
-        flex-wrap: wrap;
-      }
-
-      .template-category-badge {
-        margin-left: 0;
-        margin-top: var(--space-sm);
+      .modal-iframe {
+        height: 50vh;
       }
     }
 
-    @media (max-width: 600px) {
-      .templates-stats {
+    @media (max-width: 480px) {
+      .templates-grid {
         grid-template-columns: 1fr;
-      }
-
-      .template-iframe {
-        height: 400px;
       }
     }
   </style>
@@ -444,955 +393,185 @@
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="templates-hero">
-    <div class="container">
-      <div class="templates-hero-content">
-        <div class="templates-hero-badge">
-          <div class="templates-hero-count">22</div>
-          <span>Ready-to-Use Templates</span>
-        </div>
-        <h1 class="templates-hero-title">SOCIAL MEDIA TEMPLATES</h1>
-        <p class="templates-hero-subtitle">Pre-designed graphics with captions for Facebook, Instagram, and more. Scroll through all 22 templates below.</p>
+  <!-- Header -->
+  <header class="templates-header">
+    <div class="templates-badge">
+      <div class="templates-badge-count">22</div>
+      <span>Ready-to-Use Templates</span>
+    </div>
+    <h1 class="templates-title">Social Media Templates</h1>
+    <p class="templates-subtitle">Click any template to preview. Use arrows to navigate between templates.</p>
+  </header>
+
+  <!-- Grid -->
+  <div class="templates-grid" id="templatesGrid">
+    <!-- Templates will be injected by JS -->
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+  <div class="modal-container" id="modalContainer">
+    <div class="modal-header">
+      <div class="modal-info">
+        <span class="modal-category" id="modalCategory">Category</span>
+        <span class="modal-title" id="modalTitle">Template Name</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span class="modal-counter" id="modalCounter">1 / 22</span>
+        <button class="modal-close" id="modalClose">&times;</button>
       </div>
     </div>
-  </section>
-
-  <!-- Stats -->
-  <div class="templates-stats">
-    <div class="templates-stat">
-      <div class="templates-stat-number">6</div>
-      <div class="templates-stat-label">Educational</div>
+    <div class="modal-body">
+      <iframe class="modal-iframe" id="modalIframe" src=""></iframe>
     </div>
-    <div class="templates-stat">
-      <div class="templates-stat-number">4</div>
-      <div class="templates-stat-label">Weekly Series</div>
-    </div>
-    <div class="templates-stat">
-      <div class="templates-stat-number">5</div>
-      <div class="templates-stat-label">Promotional</div>
-    </div>
-    <div class="templates-stat">
-      <div class="templates-stat-number">7</div>
-      <div class="templates-stat-label">Lifestyle/Proof</div>
+    <div class="modal-footer">
+      <div class="modal-nav">
+        <button class="modal-nav-btn" id="prevBtn">&#8592;</button>
+        <button class="modal-nav-btn" id="nextBtn">&#8594;</button>
+      </div>
+      <button class="modal-open-btn" id="openNewBtn">Open in New Window</button>
     </div>
   </div>
 
-  <!-- Category Navigation -->
-  <nav class="category-nav">
-    <div class="category-nav-inner">
-      <a href="#launch" class="category-link">Launch</a>
-      <a href="#weekly" class="category-link">Weekly Series</a>
-      <a href="#educational" class="category-link">Educational</a>
-      <a href="#promotional" class="category-link">Promotional</a>
-      <a href="#proof" class="category-link">Proof & Stories</a>
-      <a href="#lifestyle" class="category-link">Lifestyle</a>
-    </div>
-  </nav>
-
-  <!-- Template 1: Mobility Launch -->
-  <section id="launch" class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">01</div>
-        <div class="template-section-info">
-          <h2>Mobility Series Launch</h2>
-          <p>Announcement post for the 10-Min Mobility series</p>
-        </div>
-        <span class="template-category-badge template-category-badge--launch">Launch</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">mobility-launch.html</span>
-            <a href="mobility-launch.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="mobility-launch.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Use this template when launching the 10-Minute Mobility series. Post on launch day and schedule 2-3 reminder posts throughout the first week.</p>
-          <ul class="template-uses">
-            <li>Series launch announcement</li>
-            <li>Program promotion</li>
-            <li>Paid ad creative</li>
-            <li>Email header graphic</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 2: Weekly Tip -->
-  <section id="weekly" class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">02</div>
-        <div class="template-section-info">
-          <h2>Weekly Fitness Tip</h2>
-          <p>Shareable quote cards for engagement</p>
-        </div>
-        <span class="template-category-badge template-category-badge--education">Educational</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">weekly-tip.html</span>
-            <a href="weekly-tip.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="weekly-tip.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Post weekly (ideally Thursday or Friday). High engagement format that gets saves and shares. Swap out the quote to create fresh content.</p>
-          <ul class="template-uses">
-            <li>Weekly recurring content</li>
-            <li>Quote cards</li>
-            <li>Shareable wisdom</li>
-            <li>Story posts</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 3: Motivation Monday -->
-  <section class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">03</div>
-        <div class="template-section-info">
-          <h2>Motivation Monday</h2>
-          <p>Inspiring quotes to kick off the week</p>
-        </div>
-        <span class="template-category-badge template-category-badge--weekly">Weekly Series</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">motivation-monday.html</span>
-            <a href="motivation-monday.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="motivation-monday.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Post every Monday morning (7-9 AM). Consistent weekly series builds audience expectation and engagement habit.</p>
-          <ul class="template-uses">
-            <li>Monday morning posts</li>
-            <li>Story content</li>
-            <li>Engagement builders</li>
-            <li>Community connection</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 4: Workout Wednesday -->
-  <section class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">04</div>
-        <div class="template-section-info">
-          <h2>Workout Wednesday</h2>
-          <p>Quick home workouts with exercises</p>
-        </div>
-        <span class="template-category-badge template-category-badge--weekly">Weekly Series</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">workout-wednesday.html</span>
-            <a href="workout-wednesday.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="workout-wednesday.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Post every Wednesday. Pair with a video demo or carousel of exercise images. Gets high saves from people wanting to try later.</p>
-          <ul class="template-uses">
-            <li>Mid-week workout posts</li>
-            <li>Exercise demonstrations</li>
-            <li>Video thumbnails</li>
-            <li>Carousel cover slides</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 5: Flexibility Friday -->
-  <section class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">05</div>
-        <div class="template-section-info">
-          <h2>Flexibility Friday</h2>
-          <p>End-of-week stretch and mobility tips</p>
-        </div>
-        <span class="template-category-badge template-category-badge--weekly">Weekly Series</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">flexibility-friday.html</span>
-            <a href="flexibility-friday.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="flexibility-friday.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Post every Friday. Focus on stretching, recovery, and mobility. Perfect lead-in to weekend self-care content.</p>
-          <ul class="template-uses">
-            <li>Friday stretch routines</li>
-            <li>Mobility tips</li>
-            <li>Recovery content</li>
-            <li>Weekend prep</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 6: Exercise Spotlight -->
-  <section id="educational" class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">06</div>
-        <div class="template-section-info">
-          <h2>Exercise Spotlight</h2>
-          <p>Deep dive on a single exercise</p>
-        </div>
-        <span class="template-category-badge template-category-badge--education">Educational</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">exercise-spotlight.html</span>
-            <a href="exercise-spotlight.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="exercise-spotlight.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Use when teaching proper form for a specific exercise. Great for establishing expertise and building trust.</p>
-          <ul class="template-uses">
-            <li>Form tutorials</li>
-            <li>Exercise breakdowns</li>
-            <li>Common mistakes</li>
-            <li>Technique tips</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 7: Myth Buster -->
-  <section class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">07</div>
-        <div class="template-section-info">
-          <h2>Myth Buster</h2>
-          <p>Debunk common fitness misconceptions</p>
-        </div>
-        <span class="template-category-badge template-category-badge--education">Educational</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">myth-buster.html</span>
-            <a href="myth-buster.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="myth-buster.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">High engagement format. People love debunking myths. Use for common misconceptions about aging and fitness.</p>
-          <ul class="template-uses">
-            <li>Myth debunking</li>
-            <li>Education posts</li>
-            <li>Conversation starters</li>
-            <li>Authority building</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 8: Balance Focus -->
-  <section class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">08</div>
-        <div class="template-section-info">
-          <h2>Balance Focus</h2>
-          <p>Balance and stability tips for seniors</p>
-        </div>
-        <span class="template-category-badge template-category-badge--education">Educational</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">balance-focus.html</span>
-            <a href="balance-focus.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="balance-focus.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Key topic for 50+ audience. Balance is a major concern. Position as the expert on this critical issue.</p>
-          <ul class="template-uses">
-            <li>Balance tips</li>
-            <li>Fall prevention</li>
-            <li>Stability exercises</li>
-            <li>Safety content</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 9: Joint Health -->
-  <section class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">09</div>
-        <div class="template-section-info">
-          <h2>Joint Health</h2>
-          <p>Tips for healthy joints and pain-free movement</p>
-        </div>
-        <span class="template-category-badge template-category-badge--education">Educational</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">joint-health.html</span>
-            <a href="joint-health.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="joint-health.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Address common pain points (literally). Joint issues are top of mind for your audience. Show you understand their challenges.</p>
-          <ul class="template-uses">
-            <li>Joint care tips</li>
-            <li>Pain management</li>
-            <li>Mobility content</li>
-            <li>Problem-solving posts</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 10: Walking Tips -->
-  <section class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">10</div>
-        <div class="template-section-info">
-          <h2>Walking Tips</h2>
-          <p>Making the most of daily walks</p>
-        </div>
-        <span class="template-category-badge template-category-badge--education">Educational</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">walking-tips.html</span>
-            <a href="walking-tips.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="walking-tips.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Walking is the most accessible exercise. Meet people where they are and elevate what they're already doing.</p>
-          <ul class="template-uses">
-            <li>Walking technique</li>
-            <li>Beginner content</li>
-            <li>Accessible fitness</li>
-            <li>Daily habits</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 11: Class Promo -->
-  <section id="promotional" class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">11</div>
-        <div class="template-section-info">
-          <h2>Class Promotion</h2>
-          <p>Announce classes, workshops, and events</p>
-        </div>
-        <span class="template-category-badge template-category-badge--promotion">Promotion</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">class-promo.html</span>
-            <a href="class-promo.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="class-promo.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Promote upcoming classes, workshops, or special events. Keep the 60/20/20 rule - don't over-promote.</p>
-          <ul class="template-uses">
-            <li>Class announcements</li>
-            <li>Event promotion</li>
-            <li>Workshop signups</li>
-            <li>Schedule posts</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 12: Free Consultation -->
-  <section class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">12</div>
-        <div class="template-section-info">
-          <h2>Free Consultation</h2>
-          <p>Drive leads with consultation offers</p>
-        </div>
-        <span class="template-category-badge template-category-badge--promotion">Promotion</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">free-consultation.html</span>
-            <a href="free-consultation.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="free-consultation.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Lead generation post. Use sparingly but consistently. Great for boosting as a paid ad.</p>
-          <ul class="template-uses">
-            <li>Lead generation</li>
-            <li>Paid ad creative</li>
-            <li>New client offers</li>
-            <li>CTA posts</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 13: Community Class -->
-  <section class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">13</div>
-        <div class="template-section-info">
-          <h2>Community Class</h2>
-          <p>Promote group fitness sessions</p>
-        </div>
-        <span class="template-category-badge template-category-badge--promotion">Promotion</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">community-class.html</span>
-            <a href="community-class.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="community-class.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Promote group sessions and community events. Emphasize the social aspect of fitness.</p>
-          <ul class="template-uses">
-            <li>Group class promotion</li>
-            <li>Community building</li>
-            <li>Social events</li>
-            <li>New member invites</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 14: New Year Goals -->
-  <section class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">14</div>
-        <div class="template-section-info">
-          <h2>New Year Goals</h2>
-          <p>Seasonal goal-setting content</p>
-        </div>
-        <span class="template-category-badge template-category-badge--promotion">Promotion</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">new-year-goals.html</span>
-            <a href="new-year-goals.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="new-year-goals.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">December/January content. Capitalize on resolution season while being anti-hype. Focus on sustainable change.</p>
-          <ul class="template-uses">
-            <li>New Year campaigns</li>
-            <li>Goal-setting content</li>
-            <li>Fresh start messaging</li>
-            <li>January promotion</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 15: Transformation -->
-  <section id="proof" class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">15</div>
-        <div class="template-section-info">
-          <h2>Client Transformation</h2>
-          <p>Showcase client results and testimonials</p>
-        </div>
-        <span class="template-category-badge template-category-badge--proof">Proof</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">transformation.html</span>
-            <a href="transformation.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="transformation.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Powerful social proof. Use real client stories with permission. Before/after or just progress celebration.</p>
-          <ul class="template-uses">
-            <li>Client spotlights</li>
-            <li>Before & after</li>
-            <li>Success stories</li>
-            <li>Social proof</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 16: Testimonial Card -->
-  <section class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">16</div>
-        <div class="template-section-info">
-          <h2>Testimonial Card</h2>
-          <p>Client quote graphics</p>
-        </div>
-        <span class="template-category-badge template-category-badge--proof">Proof</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">testimonial-card.html</span>
-            <a href="testimonial-card.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="testimonial-card.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Turn client feedback into shareable graphics. Collect quotes regularly and batch-create these posts.</p>
-          <ul class="template-uses">
-            <li>Client testimonials</li>
-            <li>Review graphics</li>
-            <li>Quote cards</li>
-            <li>Trust building</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 17: Strength Story -->
-  <section class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">17</div>
-        <div class="template-section-info">
-          <h2>Strength Story</h2>
-          <p>Celebrate client strength milestones</p>
-        </div>
-        <span class="template-category-badge template-category-badge--proof">Proof</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">strength-story.html</span>
-            <a href="strength-story.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="strength-story.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Celebrate non-scale victories. Strength gains, mobility improvements, independence moments.</p>
-          <ul class="template-uses">
-            <li>Milestone celebrations</li>
-            <li>Strength gains</li>
-            <li>Non-scale victories</li>
-            <li>Progress stories</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 18: Ask Zeb -->
-  <section class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">18</div>
-        <div class="template-section-info">
-          <h2>Ask Zeb Q&A</h2>
-          <p>Answer audience questions</p>
-        </div>
-        <span class="template-category-badge template-category-badge--education">Educational</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">ask-zeb.html</span>
-            <a href="ask-zeb.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="ask-zeb.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Interactive content that drives engagement. Collect questions from comments and DMs, then answer publicly.</p>
-          <ul class="template-uses">
-            <li>Q&A sessions</li>
-            <li>Audience engagement</li>
-            <li>Expert positioning</li>
-            <li>Content ideas</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 19: Morning Routine -->
-  <section id="lifestyle" class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">19</div>
-        <div class="template-section-info">
-          <h2>Morning Routine</h2>
-          <p>Share daily habits and routines</p>
-        </div>
-        <span class="template-category-badge template-category-badge--lifestyle">Lifestyle</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">morning-routine.html</span>
-            <a href="morning-routine.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="morning-routine.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Personal content that builds connection. Let the audience into Zeb's daily life and habits.</p>
-          <ul class="template-uses">
-            <li>Behind-the-scenes</li>
-            <li>Daily routines</li>
-            <li>Habit sharing</li>
-            <li>Personal connection</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 20: Behind the Scenes -->
-  <section class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">20</div>
-        <div class="template-section-info">
-          <h2>Behind the Scenes</h2>
-          <p>Studio and training glimpses</p>
-        </div>
-        <span class="template-category-badge template-category-badge--lifestyle">Lifestyle</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">behind-scenes.html</span>
-            <a href="behind-scenes.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="behind-scenes.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Show the real work. Training sessions, studio life, prep work. Authenticity builds trust.</p>
-          <ul class="template-uses">
-            <li>Studio tours</li>
-            <li>Training glimpses</li>
-            <li>Day in the life</li>
-            <li>Authentic moments</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 21: Nutrition Simple -->
-  <section class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">21</div>
-        <div class="template-section-info">
-          <h2>Nutrition Made Simple</h2>
-          <p>Basic nutrition tips without complexity</p>
-        </div>
-        <span class="template-category-badge template-category-badge--lifestyle">Lifestyle</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">nutrition-simple.html</span>
-            <a href="nutrition-simple.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="nutrition-simple.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Keep nutrition simple and judgment-free. No fads, no restrictions - just practical tips.</p>
-          <ul class="template-uses">
-            <li>Nutrition tips</li>
-            <li>Healthy eating</li>
-            <li>Simple swaps</li>
-            <li>Food content</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Template 22: Sleep & Recovery -->
-  <section class="template-section">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number">22</div>
-        <div class="template-section-info">
-          <h2>Sleep & Recovery</h2>
-          <p>Rest and recovery importance</p>
-        </div>
-        <span class="template-category-badge template-category-badge--lifestyle">Lifestyle</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">sleep-recovery.html</span>
-            <a href="sleep-recovery.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="sleep-recovery.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Recovery is half the equation. Address sleep, rest days, and recovery for your 50+ audience.</p>
-          <ul class="template-uses">
-            <li>Sleep tips</li>
-            <li>Recovery content</li>
-            <li>Rest day posts</li>
-            <li>Holistic health</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- YouTube Thumbnail Bonus -->
-  <section class="template-section" style="background: linear-gradient(180deg, rgba(253, 234, 1, 0.05) 0%, transparent 100%);">
-    <div class="container">
-      <div class="template-section-header">
-        <div class="template-section-number" style="background: var(--yellow); color: var(--black); border-color: var(--yellow);">+1</div>
-        <div class="template-section-info">
-          <h2>YouTube Thumbnail</h2>
-          <p>Video thumbnail template for the 10-Minute Series</p>
-        </div>
-        <span class="template-category-badge template-category-badge--launch">Bonus</span>
-      </div>
-      <div class="template-embed-container">
-        <div class="template-preview-frame">
-          <div class="template-preview-toolbar">
-            <div class="template-preview-dots">
-              <div class="template-preview-dot template-preview-dot--red"></div>
-              <div class="template-preview-dot template-preview-dot--yellow"></div>
-              <div class="template-preview-dot template-preview-dot--green"></div>
-            </div>
-            <span class="template-preview-title">youtube-thumbnail.html</span>
-            <a href="youtube-thumbnail.html" target="_blank" class="template-preview-open">Open</a>
-          </div>
-          <iframe class="template-iframe" src="youtube-thumbnail.html"></iframe>
-        </div>
-        <div class="template-details">
-          <h4 class="template-details-title">When to Use</h4>
-          <p class="template-details-text">Consistent thumbnail style for all YouTube videos. Recognizable branding helps with channel growth.</p>
-          <ul class="template-uses">
-            <li>YouTube thumbnails</li>
-            <li>Video covers</li>
-            <li>Playlist graphics</li>
-            <li>Video promotion</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Back to Top -->
-  <a href="#" class="back-to-top" id="backToTop"></a>
-
   <!-- Footer -->
-  <footer class="footer">
-    <img src="https://images.squarespace-cdn.com/content/v1/5b11555ce7494059bae4c5a2/1527873636754-7KKE9M4BRNTZEDPFWFHS/Zeb+Logo.png?format=500w" alt="Zeb's Platinum Fitness" class="footer-logo">
-    <p class="footer-tagline">Structure &bull; Motivation &bull; Accountability</p>
+  <footer class="templates-footer">
+    <a href="../../index.html">← Back to Brand House</a>
   </footer>
 
   <script>
-    // Back to top button visibility
-    const backToTop = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 500) {
-        backToTop.classList.add('visible');
-      } else {
-        backToTop.classList.remove('visible');
-      }
+    // Template Data
+    const templates = [
+      { id: 'mobility-launch', name: 'Mobility Series Launch', category: 'Launch', file: 'mobility-launch.html', bg: 'linear-gradient(135deg, #000 0%, #1a1a1a 100%)', preview: '<span style="font-family: sans-serif; font-size: 1.5rem; font-weight: 800; color: #fdea01; text-transform: uppercase;">10-MIN</span><span style="display: block; font-size: 0.75rem; color: white; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px;">MOBILITY</span>' },
+      { id: 'weekly-tip', name: 'Weekly Fitness Tip', category: 'Educational', file: 'weekly-tip.html', bg: '#fdea01', preview: '<span style="font-family: sans-serif; font-size: 0.5rem; color: rgba(0,0,0,0.4); text-transform: uppercase; letter-spacing: 0.2em;">Weekly Tip</span><span style="display: block; font-family: Georgia, serif; font-size: 0.875rem; font-style: italic; color: #000; margin-top: 8px; line-height: 1.3;">"Consistency beats intensity."</span>' },
+      { id: 'motivation-monday', name: 'Motivation Monday', category: 'Weekly', file: 'motivation-monday.html', bg: '#000', preview: '<div style="position: absolute; top: 0; right: 0; width: 40%; height: 100%; background: #fdea01; transform: skewX(-15deg) translateX(30%);"></div><span style="position: relative; font-family: sans-serif; font-size: 0.5rem; font-weight: 700; color: #fdea01; text-transform: uppercase; letter-spacing: 0.15em;">Motivation Monday</span><span style="position: relative; display: block; font-family: sans-serif; font-size: 0.875rem; font-weight: 800; color: white; text-transform: uppercase; margin-top: 8px;">Start Now.</span>' },
+      { id: 'workout-wednesday', name: 'Workout Wednesday', category: 'Weekly', file: 'workout-wednesday.html', bg: 'linear-gradient(135deg, #1a1a1a 0%, #000 100%)', preview: '<span style="font-family: sans-serif; font-size: 0.5rem; font-weight: 700; color: #fdea01; text-transform: uppercase; letter-spacing: 0.15em;">Workout Wednesday</span><span style="display: block; font-family: sans-serif; font-size: 0.75rem; font-weight: 700; color: white; text-transform: uppercase; margin-top: 8px;">Full Body Strength</span><span style="display: inline-block; font-family: sans-serif; font-size: 0.5rem; color: #000; background: #fdea01; padding: 3px 6px; margin-top: 6px;">15 MIN</span>' },
+      { id: 'flexibility-friday', name: 'Flexibility Friday', category: 'Weekly', file: 'flexibility-friday.html', bg: 'linear-gradient(180deg, #1a1a1a 0%, #000 100%)', preview: '<span style="font-family: sans-serif; font-size: 0.5rem; font-weight: 700; color: #fdea01; text-transform: uppercase; letter-spacing: 0.15em;">Flexibility Friday</span><span style="display: block; font-family: sans-serif; font-size: 0.875rem; font-weight: 700; color: white; text-transform: uppercase; margin-top: 8px;">Stretch & Release</span>' },
+      { id: 'exercise-spotlight', name: 'Exercise Spotlight', category: 'Educational', file: 'exercise-spotlight.html', bg: '#000', preview: '<span style="font-family: sans-serif; font-size: 0.5rem; font-weight: 600; color: #fdea01; text-transform: uppercase; letter-spacing: 0.15em;">Exercise Spotlight</span><span style="display: block; font-family: sans-serif; font-size: 1rem; font-weight: 800; color: white; text-transform: uppercase; margin-top: 8px;">Hip Hinge</span>' },
+      { id: 'myth-buster', name: 'Myth Buster', category: 'Educational', file: 'myth-buster.html', bg: '#000', preview: '<span style="font-family: sans-serif; font-size: 0.5rem; font-weight: 700; color: #ff4444; text-transform: uppercase; letter-spacing: 0.15em; background: rgba(255,68,68,0.1); padding: 3px 6px; border: 1px solid rgba(255,68,68,0.3);">Myth Buster</span><span style="display: block; font-family: sans-serif; font-size: 0.75rem; font-weight: 700; color: white; text-transform: uppercase; margin-top: 10px; text-decoration: line-through; text-decoration-color: #ff4444;">"Too old for muscle"</span>' },
+      { id: 'balance-focus', name: 'Balance Focus', category: 'Educational', file: 'balance-focus.html', bg: 'linear-gradient(135deg, #000 0%, #1a1a1a 100%)', preview: '<span style="font-family: sans-serif; font-size: 0.5rem; font-weight: 600; color: #fdea01; text-transform: uppercase; letter-spacing: 0.15em;">Balance Focus</span><span style="display: block; font-family: sans-serif; font-size: 0.875rem; font-weight: 700; color: white; text-transform: uppercase; margin-top: 8px;">Stability Tips</span>' },
+      { id: 'joint-health', name: 'Joint Health', category: 'Educational', file: 'joint-health.html', bg: '#000', preview: '<span style="font-family: sans-serif; font-size: 0.5rem; font-weight: 600; color: #22c55e; text-transform: uppercase; letter-spacing: 0.15em;">Joint Health</span><span style="display: block; font-family: sans-serif; font-size: 0.875rem; font-weight: 700; color: white; text-transform: uppercase; margin-top: 8px;">Pain-Free Movement</span>' },
+      { id: 'walking-tips', name: 'Walking Tips', category: 'Educational', file: 'walking-tips.html', bg: 'linear-gradient(180deg, #1a1a1a 0%, #000 100%)', preview: '<span style="font-family: sans-serif; font-size: 0.5rem; font-weight: 600; color: #fdea01; text-transform: uppercase; letter-spacing: 0.15em;">Walking Tips</span><span style="display: block; font-family: sans-serif; font-size: 0.875rem; font-weight: 700; color: white; text-transform: uppercase; margin-top: 8px;">Make Every Step Count</span>' },
+      { id: 'class-promo', name: 'Class Promotion', category: 'Promotion', file: 'class-promo.html', bg: 'linear-gradient(135deg, #1a1a1a 0%, #000 100%)', preview: '<span style="font-family: sans-serif; font-size: 0.5rem; font-weight: 500; color: #666; text-transform: uppercase; letter-spacing: 0.15em;">This Week</span><span style="display: block; font-family: sans-serif; font-size: 1rem; font-weight: 700; color: #fdea01; text-transform: uppercase; margin-top: 6px;">Free Class</span><span style="display: block; font-family: sans-serif; font-size: 0.625rem; color: #666; margin-top: 4px;">Saturday 9am</span>' },
+      { id: 'free-consultation', name: 'Free Consultation', category: 'Promotion', file: 'free-consultation.html', bg: '#fdea01', preview: '<span style="font-family: sans-serif; font-size: 1.25rem; font-weight: 800; color: #000; text-transform: uppercase; line-height: 1;">Free Consultation</span><span style="display: inline-block; font-family: sans-serif; font-size: 0.5rem; font-weight: 700; color: #fdea01; background: #000; padding: 4px 10px; margin-top: 10px; text-transform: uppercase; letter-spacing: 0.1em;">Book Now</span>' },
+      { id: 'community-class', name: 'Community Class', category: 'Promotion', file: 'community-class.html', bg: '#000', preview: '<span style="font-family: sans-serif; font-size: 0.5rem; font-weight: 600; color: #fdea01; text-transform: uppercase; letter-spacing: 0.15em;">Community</span><span style="display: block; font-family: sans-serif; font-size: 1rem; font-weight: 700; color: white; text-transform: uppercase; margin-top: 6px;">Group Class</span>' },
+      { id: 'new-year-goals', name: 'New Year Goals', category: 'Promotion', file: 'new-year-goals.html', bg: 'linear-gradient(135deg, #000 0%, #1a1a1a 100%)', preview: '<span style="font-family: sans-serif; font-size: 1.5rem; font-weight: 800; color: #fdea01; line-height: 1;">2025</span><span style="display: block; font-family: sans-serif; font-size: 0.625rem; font-weight: 600; color: white; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px;">New Goals</span>' },
+      { id: 'transformation', name: 'Client Transformation', category: 'Proof', file: 'transformation.html', bg: 'linear-gradient(180deg, #000 0%, #222 100%)', preview: '<span style="font-family: sans-serif; font-size: 0.5rem; font-weight: 500; color: #fdea01; text-transform: uppercase; letter-spacing: 0.15em;">Success Story</span><span style="display: block; font-family: sans-serif; font-size: 1rem; font-weight: 800; color: white; text-transform: uppercase; margin-top: 6px;">Before & After</span>' },
+      { id: 'testimonial-card', name: 'Testimonial Card', category: 'Proof', file: 'testimonial-card.html', bg: '#000', preview: '<span style="font-family: Georgia, serif; font-size: 0.875rem; font-style: italic; color: white; line-height: 1.3;">"Changed my life at 62."</span><span style="display: block; font-family: sans-serif; font-size: 0.5rem; color: #fdea01; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px;">— Margaret T.</span>' },
+      { id: 'strength-story', name: 'Strength Story', category: 'Proof', file: 'strength-story.html', bg: 'linear-gradient(135deg, #1a1a1a 0%, #000 100%)', preview: '<span style="font-family: sans-serif; font-size: 0.5rem; font-weight: 600; color: #fdea01; text-transform: uppercase; letter-spacing: 0.15em;">Strength Story</span><span style="display: block; font-family: sans-serif; font-size: 0.875rem; font-weight: 700; color: white; text-transform: uppercase; margin-top: 6px;">Client Win</span>' },
+      { id: 'ask-zeb', name: 'Ask Zeb Q&A', category: 'Educational', file: 'ask-zeb.html', bg: '#fdea01', preview: '<span style="font-family: sans-serif; font-size: 0.5rem; font-weight: 700; color: rgba(0,0,0,0.5); text-transform: uppercase; letter-spacing: 0.15em;">Q&A</span><span style="display: block; font-family: sans-serif; font-size: 1.25rem; font-weight: 800; color: #000; text-transform: uppercase; margin-top: 6px;">Ask Zeb</span>' },
+      { id: 'morning-routine', name: 'Morning Routine', category: 'Lifestyle', file: 'morning-routine.html', bg: 'linear-gradient(180deg, #1a1a1a 0%, #000 100%)', preview: '<span style="font-family: sans-serif; font-size: 0.5rem; font-weight: 600; color: #fdea01; text-transform: uppercase; letter-spacing: 0.15em;">Daily Habit</span><span style="display: block; font-family: sans-serif; font-size: 0.875rem; font-weight: 700; color: white; text-transform: uppercase; margin-top: 6px;">Morning Routine</span>' },
+      { id: 'behind-scenes', name: 'Behind the Scenes', category: 'Lifestyle', file: 'behind-scenes.html', bg: '#000', preview: '<span style="font-family: sans-serif; font-size: 0.5rem; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.15em;">BTS</span><span style="display: block; font-family: sans-serif; font-size: 0.875rem; font-weight: 700; color: white; text-transform: uppercase; margin-top: 6px;">Studio Life</span>' },
+      { id: 'nutrition-simple', name: 'Nutrition Made Simple', category: 'Lifestyle', file: 'nutrition-simple.html', bg: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)', preview: '<span style="font-family: sans-serif; font-size: 0.5rem; font-weight: 600; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.15em;">Nutrition</span><span style="display: block; font-family: sans-serif; font-size: 0.875rem; font-weight: 700; color: white; text-transform: uppercase; margin-top: 6px;">Keep It Simple</span>' },
+      { id: 'sleep-recovery', name: 'Sleep & Recovery', category: 'Lifestyle', file: 'sleep-recovery.html', bg: 'linear-gradient(180deg, #1e1b4b 0%, #0f0a1e 100%)', preview: '<span style="font-family: sans-serif; font-size: 0.5rem; font-weight: 600; color: #a78bfa; text-transform: uppercase; letter-spacing: 0.15em;">Recovery</span><span style="display: block; font-family: sans-serif; font-size: 0.875rem; font-weight: 700; color: white; text-transform: uppercase; margin-top: 6px;">Sleep Better</span>' }
+    ];
+
+    let currentIndex = 0;
+
+    // Build Grid
+    const grid = document.getElementById('templatesGrid');
+    templates.forEach((template, index) => {
+      const tile = document.createElement('div');
+      tile.className = 'template-tile';
+      tile.onclick = () => openModal(index);
+      tile.innerHTML = `
+        <div class="template-tile-preview" style="background: ${template.bg}; position: relative;">
+          ${template.preview}
+        </div>
+        <div class="template-tile-overlay">
+          <span class="template-tile-category">${template.category}</span>
+          <span class="template-tile-name">${template.name}</span>
+          <button class="template-tile-btn">Preview</button>
+        </div>
+      `;
+      grid.appendChild(tile);
     });
 
-    // Smooth scroll for category links
-    document.querySelectorAll('.category-link').forEach(link => {
-      link.addEventListener('click', (e) => {
+    // Modal Functions
+    const backdrop = document.getElementById('modalBackdrop');
+    const container = document.getElementById('modalContainer');
+    const iframe = document.getElementById('modalIframe');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalCategory = document.getElementById('modalCategory');
+    const modalCounter = document.getElementById('modalCounter');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const openNewBtn = document.getElementById('openNewBtn');
+    const closeBtn = document.getElementById('modalClose');
+
+    function openModal(index) {
+      currentIndex = index;
+      updateModal();
+      backdrop.classList.add('active');
+      container.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      backdrop.classList.remove('active');
+      container.classList.remove('active');
+      document.body.style.overflow = '';
+      iframe.src = '';
+    }
+
+    function updateModal() {
+      const template = templates[currentIndex];
+      iframe.src = template.file;
+      modalTitle.textContent = template.name;
+      modalCategory.textContent = template.category;
+      modalCounter.textContent = `${currentIndex + 1} / ${templates.length}`;
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex === templates.length - 1;
+    }
+
+    function nextTemplate() {
+      if (currentIndex < templates.length - 1) {
+        currentIndex++;
+        updateModal();
+      }
+    }
+
+    function prevTemplate() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateModal();
+      }
+    }
+
+    function openInNewWindow() {
+      window.open(templates[currentIndex].file, '_blank');
+    }
+
+    // Event Listeners
+    backdrop.onclick = closeModal;
+    closeBtn.onclick = closeModal;
+    prevBtn.onclick = prevTemplate;
+    nextBtn.onclick = nextTemplate;
+    openNewBtn.onclick = openInNewWindow;
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      if (!container.classList.contains('active')) return;
+
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowLeft') prevTemplate();
+      if (e.key === 'ArrowRight') nextTemplate();
+    });
+
+    // Disable Right Click
+    document.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      return false;
+    });
+
+    // Disable keyboard shortcuts for inspect/devtools
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'F12' ||
+          (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+          (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+          (e.ctrlKey && e.key === 'u')) {
         e.preventDefault();
-        const target = document.querySelector(link.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
+        return false;
+      }
     });
   </script>
 
