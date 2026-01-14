@@ -4,15 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>10-Minute Mobility Series | Project Plan</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
   <style>
     :root {
       --gold: #ffcc00;
+      --yellow: #fdea01;
       --gold-light: #ffe566;
-      --black: #1A1A1A;
+      --black: #000000;
+      --dark-gray: #111111;
       --gray: #4A4A4A;
       --light: #F5F5F5;
       --white: #FFFFFF;
+      --font-display: 'Futura PT', 'Futura', 'Century Gothic', 'Avant Garde', sans-serif;
+      --font-body: 'Futura PT', 'Futura', 'Century Gothic', sans-serif;
+      --font-accent: 'Cormorant Garamond', 'Garamond', serif;
     }
 
     * {
@@ -27,11 +34,12 @@
     }
 
     body {
-      font-family: 'Open Sans', sans-serif;
+      font-family: var(--font-body);
       background: var(--white);
       color: var(--black);
       font-size: 11px;
-      line-height: 1.5;
+      line-height: 1.6;
+      font-weight: 400;
       max-width: 8.5in;
       margin: 0 auto;
       padding: 0.5in;
@@ -58,10 +66,12 @@
     }
 
     .tagline {
+      font-family: var(--font-display);
       font-size: 9px;
       color: var(--gray);
-      letter-spacing: 1px;
+      letter-spacing: 2px;
       text-transform: uppercase;
+      font-weight: 500;
     }
 
     .project-title {
@@ -69,19 +79,22 @@
     }
 
     .project-title h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
+      font-family: var(--font-display);
+      font-size: 26px;
       color: var(--black);
-      letter-spacing: 2px;
+      letter-spacing: 4px;
       line-height: 1;
+      font-weight: 700;
+      text-transform: uppercase;
     }
 
     .project-title .subtitle {
+      font-family: var(--font-display);
       font-size: 10px;
       color: var(--gold);
-      font-weight: 600;
+      font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
     }
 
     /* Overview */
@@ -95,22 +108,26 @@
     .overview p {
       color: var(--gray);
       font-size: 11px;
+      font-weight: 400;
     }
 
     .overview strong {
       color: var(--black);
+      font-weight: 600;
     }
 
     /* Deliverables Grid */
     .section-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 16px;
+      font-family: var(--font-display);
+      font-size: 14px;
       color: var(--black);
-      letter-spacing: 1px;
+      letter-spacing: 3px;
       margin-bottom: 12px;
       display: flex;
       align-items: center;
       gap: 8px;
+      font-weight: 700;
+      text-transform: uppercase;
     }
 
     .section-title::after {
@@ -145,11 +162,13 @@
     }
 
     .deliverable h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 14px;
+      font-family: var(--font-display);
+      font-size: 13px;
       color: var(--black);
-      letter-spacing: 1px;
+      letter-spacing: 2px;
       margin-bottom: 6px;
+      font-weight: 700;
+      text-transform: uppercase;
     }
 
     .deliverable p {
@@ -178,11 +197,13 @@
     }
 
     .deal-box h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1px;
+      font-family: var(--font-display);
+      font-size: 14px;
+      letter-spacing: 3px;
       color: var(--gold);
       margin-bottom: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
     }
 
     .deal-row {
@@ -198,17 +219,21 @@
     }
 
     .deal-item .label {
+      font-family: var(--font-display);
       font-size: 9px;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
       color: var(--gold-light);
       margin-bottom: 4px;
+      font-weight: 500;
     }
 
     .deal-item .value {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 24px;
-      letter-spacing: 1px;
+      font-family: var(--font-display);
+      font-size: 22px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      text-transform: uppercase;
     }
 
     .deal-arrow {
@@ -239,18 +264,21 @@
     }
 
     .metric .number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 26px;
+      font-family: var(--font-display);
+      font-size: 24px;
       color: var(--gold);
       line-height: 1;
+      font-weight: 700;
     }
 
     .metric .label {
+      font-family: var(--font-display);
       font-size: 8px;
       color: var(--gray);
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
       margin-top: 4px;
+      font-weight: 500;
     }
 
     /* Footer */

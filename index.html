@@ -4,27 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brand House | Zeb's Platinum Fitness</title>
-  <meta name="description" content="The strategic brand hub for Zeb's Platinum Fitness — Personal training for adults 50+ in Redding, CA.">
+  <meta name="description" content="The strategic brand hub for Zeb's Platinum Fitness - Personal training for adults 50+ in Redding, CA.">
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" rel="stylesheet">
-  <style>
-    /* Fallback for Futura PT */
-    body {
-      font-family: 'Libre Franklin', 'Century Gothic', 'Futura', sans-serif;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-marquee">
+      <div class="loading-marquee-content">
+        <span>STRUCTURE</span>
+        <span class="loading-dot"></span>
+        <span>MOTIVATION</span>
+        <span class="loading-dot"></span>
+        <span>ACCOUNTABILITY</span>
+        <span class="loading-dot"></span>
+        <span>STRUCTURE</span>
+        <span class="loading-dot"></span>
+        <span>MOTIVATION</span>
+        <span class="loading-dot"></span>
+        <span>ACCOUNTABILITY</span>
+        <span class="loading-dot"></span>
+        <span>STRUCTURE</span>
+        <span class="loading-dot"></span>
+        <span>MOTIVATION</span>
+        <span class="loading-dot"></span>
+        <span>ACCOUNTABILITY</span>
+        <span class="loading-dot"></span>
+      </div>
+    </div>
+  </div>
 
   <!-- Section 1: Marquee Bar -->
   <div class="marquee-bar">
     <div class="marquee-content">
-      <span class="marquee-text">"There is nothing impossible to him who will try." — Alexander The Great</span>
-      <span class="marquee-text">"There is nothing impossible to him who will try." — Alexander The Great</span>
-      <span class="marquee-text">"There is nothing impossible to him who will try." — Alexander The Great</span>
-      <span class="marquee-text">"There is nothing impossible to him who will try." — Alexander The Great</span>
+      <span class="marquee-text">"There is nothing impossible to him who will try." - Alexander The Great</span>
+      <span class="marquee-text">"There is nothing impossible to him who will try." - Alexander The Great</span>
+      <span class="marquee-text">"There is nothing impossible to him who will try." - Alexander The Great</span>
+      <span class="marquee-text">"There is nothing impossible to him who will try." - Alexander The Great</span>
     </div>
   </div>
 
@@ -55,14 +75,14 @@
       <p class="hero-overline">Brand House</p>
       <h1 class="hero-title">ZEB'S PLATINUM FITNESS</h1>
       <p class="hero-tagline">Structure &bull; Motivation &bull; Accountability</p>
-      <p class="hero-quote">"I'm in my 60s. If you think it's too late — watch me."</p>
+      <p class="hero-quote">"I'm in my 60s. If you think it's too late - watch me."</p>
     </div>
   </section>
 
   <!-- Section 4: Brand Foundation -->
   <section id="brand" class="section">
     <div class="container">
-      <p class="section-label fade-up">01 — Foundation</p>
+      <p class="section-label fade-up">01 / Foundation</p>
       <h2 class="section-title fade-up">THE BRAND</h2>
 
       <!-- Vision & Mission -->
@@ -109,7 +129,7 @@
   <!-- Section 5: Products -->
   <section id="products" class="section section--light">
     <div class="container">
-      <p class="section-label fade-up">02 — Products</p>
+      <p class="section-label fade-up">02 / Products</p>
       <h2 class="section-title fade-up">THE 10-MINUTE SERIES</h2>
       <p class="fade-up mb-lg" style="max-width: 700px;">Quick, focused workouts designed to fit into any schedule. Each series targets a specific need and builds from free content to premium programs.</p>
 
@@ -189,7 +209,7 @@
   <!-- Section 6: Social Strategy -->
   <section id="social" class="section">
     <div class="container">
-      <p class="section-label fade-up">03 — Social</p>
+      <p class="section-label fade-up">03 / Social</p>
       <h2 class="section-title fade-up">GOING ONLINE</h2>
       <p class="fade-up mb-lg" style="max-width: 700px;">Building a digital presence from the ground up. The strategy: lead with value, build trust through consistency, and convert attention into community.</p>
 
@@ -237,7 +257,7 @@
   <!-- Section 7: Roadmap -->
   <section id="roadmap" class="section section--light">
     <div class="container">
-      <p class="section-label fade-up">04 — Timeline</p>
+      <p class="section-label fade-up">04 / Timeline</p>
       <h2 class="section-title fade-up">THE ROADMAP</h2>
 
       <div class="timeline fade-up">
@@ -288,7 +308,7 @@
   <!-- Section 8: Asset Library -->
   <section id="assets" class="section">
     <div class="container">
-      <p class="section-label fade-up">05 — Assets</p>
+      <p class="section-label fade-up">05 / Assets</p>
       <h2 class="section-title fade-up">BRAND ASSETS</h2>
 
       <div class="grid grid--4">
@@ -361,11 +381,18 @@
       <p><a href="a-z-deal.html" style="color: var(--gold); font-size: 0.75rem;">A-Z Deal</a></p>
     </div>
     <p class="footer-quote">"There is nothing impossible to him who will try."</p>
-    <p class="footer-quote-author">— Alexander The Great</p>
+    <p class="footer-quote-author">- Alexander The Great</p>
   </footer>
 
   <!-- Scroll Animation Script -->
   <script>
+    // Loading screen
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.getElementById('loadingScreen').classList.add('hidden');
+      }, 1200);
+    });
+
     // Intersection Observer for fade-up animations
     const observerOptions = {
       root: null,
