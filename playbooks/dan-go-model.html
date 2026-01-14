@@ -4,633 +4,605 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Dan Go Model | Content Strategy</title>
-  <link rel="stylesheet" href="../styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
   <style>
-    .playbook-hero {
-      background: var(--black);
-      padding: var(--space-2xl) var(--space-lg);
-      text-align: center;
+    @import url('https://fonts.cdnfonts.com/css/futura-pt');
+
+    :root {
+      --black: #000000;
+      --near-black: #0a0a0a;
+      --dark: #111111;
+      --dark-gray: #1a1a1a;
+      --gray: #888888;
+      --light-gray: #cccccc;
+      --white: #ffffff;
+      --gold: #C9A227;
     }
 
-    .playbook-hero-label {
-      font-family: var(--font-display);
-      font-size: 0.75rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.3em;
-      color: var(--yellow);
-      margin-bottom: var(--space-sm);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    .playbook-hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.5rem, 7vw, 4rem);
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
+    body {
+      font-family: 'Futura PT', 'Futura', 'Century Gothic', sans-serif;
+      background: var(--near-black);
       color: var(--white);
-      line-height: 1;
-      margin-bottom: var(--space-md);
+      font-size: 15px;
+      line-height: 1.7;
     }
 
-    .playbook-hero-subtitle {
-      font-family: var(--font-body);
-      font-size: 1.125rem;
-      color: var(--gray);
+    /* LAYOUT */
+    section {
+      padding: 80px 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    section.full {
+      max-width: 100%;
+      background: var(--dark);
+    }
+
+    section.full .inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* TYPOGRAPHY */
+    .label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    h3 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-weight: 300;
+      color: var(--light-gray);
+      margin-bottom: 16px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    strong {
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      border-bottom: 1px solid #222;
+    }
+
+    .hero p {
+      font-size: 17px;
       max-width: 600px;
       margin: 0 auto;
     }
 
-    .playbook-section {
-      padding: var(--space-xl) var(--space-lg);
-      max-width: 900px;
-      margin: 0 auto;
+    /* GRID */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
     }
 
-    .playbook-section--dark {
-      background: var(--black);
-      max-width: 100%;
-    }
-
-    .playbook-section--dark .playbook-content {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .playbook-section--yellow {
-      background: var(--yellow);
-      max-width: 100%;
-    }
-
-    .playbook-section--yellow .playbook-content {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .playbook-label {
-      font-family: var(--font-display);
-      font-size: 0.75rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--yellow);
-      margin-bottom: var(--space-sm);
-    }
-
-    .playbook-section--dark .playbook-label {
-      color: var(--yellow);
-    }
-
-    .playbook-section--yellow .playbook-label {
-      color: rgba(0, 0, 0, 0.4);
-    }
-
-    .playbook-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.75rem, 5vw, 2.5rem);
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      color: var(--black);
-      margin-bottom: var(--space-md);
-    }
-
-    .playbook-section--dark .playbook-title {
-      color: var(--white);
-    }
-
-    .playbook-section--yellow .playbook-title {
-      color: var(--black);
-    }
-
-    .playbook-text {
-      font-family: var(--font-body);
-      font-size: 1.0625rem;
-      line-height: 1.8;
-      color: var(--dark-gray);
-    }
-
-    .playbook-text p {
-      margin-bottom: var(--space-md);
-    }
-
-    .playbook-section--dark .playbook-text {
-      color: rgba(255, 255, 255, 0.8);
-    }
-
-    .playbook-section--yellow .playbook-text {
-      color: rgba(0, 0, 0, 0.7);
-    }
-
-    /* Stats Grid */
-    .stats-grid {
+    .grid-4 {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: var(--space-md);
-      margin: var(--space-lg) 0;
+      gap: 16px;
     }
 
-    .stat-box {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: var(--space-md);
+    @media (max-width: 700px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* CARDS */
+    .card {
+      background: var(--dark);
+      border: 1px solid #222;
+      padding: 32px;
+    }
+
+    .card.highlight {
+      border: 2px solid var(--gold);
+    }
+
+    .card h3 {
+      padding-bottom: 12px;
+      border-bottom: 1px solid #333;
+      margin-bottom: 16px;
+    }
+
+    .card.highlight h3 {
+      border-bottom-color: var(--gold);
+    }
+
+    .card ul {
+      list-style: none;
+    }
+
+    .card li {
+      padding: 8px 0;
+      border-bottom: 1px solid #222;
+      color: var(--light-gray);
+      font-size: 14px;
+    }
+
+    .card li:last-child {
+      border-bottom: none;
+    }
+
+    .card-edge {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid #333;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold);
+    }
+
+    /* STATS */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid #222;
+      margin-top: 40px;
+    }
+
+    .stat {
+      padding: 32px 20px;
       text-align: center;
+      border-right: 1px solid #222;
+    }
+
+    .stat:last-child {
+      border-right: none;
     }
 
     .stat-number {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--yellow);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--gold);
       line-height: 1;
+      margin-bottom: 8px;
     }
 
     .stat-label {
-      font-family: var(--font-display);
-      font-size: 0.625rem;
-      font-weight: 500;
+      font-size: 10px;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
       color: var(--gray);
-      margin-top: 4px;
     }
 
-    /* Comparison */
-    .comparison-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-lg);
-      margin: var(--space-lg) 0;
+    @media (max-width: 700px) {
+      .stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .stat:nth-child(2) {
+        border-right: none;
+      }
+      .stat:nth-child(1), .stat:nth-child(2) {
+        border-bottom: 1px solid #222;
+      }
     }
 
-    .comparison-box {
-      background: var(--white);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      padding: var(--space-lg);
+    /* TWEET */
+    .tweet {
+      background: var(--dark-gray);
+      border: 1px solid #333;
+      padding: 24px;
     }
 
-    .comparison-box.highlight {
-      border: 2px solid var(--yellow);
-      background: #FFFDF5;
+    .tweet-handle {
+      font-size: 13px;
+      color: var(--gray);
+      margin-bottom: 12px;
     }
 
-    .comparison-box h3 {
-      font-family: var(--font-display);
-      font-size: 1rem;
+    .tweet-handle strong {
+      color: var(--white);
+    }
+
+    .tweet-hook {
+      font-size: 16px;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--gray);
-      margin-bottom: var(--space-md);
-      padding-bottom: var(--space-sm);
-      border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+      color: var(--white);
+      display: block;
+      margin-bottom: 12px;
     }
 
-    .comparison-box.highlight h3 {
-      color: var(--black);
-      border-bottom-color: var(--yellow);
+    .tweet-content {
+      font-size: 14px;
+      color: var(--light-gray);
+      line-height: 1.6;
     }
 
-    .comparison-box ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+    .tweet-thread {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px dashed #333;
+      font-size: 12px;
+      color: var(--gold);
     }
 
-    .comparison-box li {
-      font-family: var(--font-body);
-      font-size: 0.9375rem;
-      color: var(--dark-gray);
-      padding: 6px 0;
-      padding-left: 20px;
-      position: relative;
-    }
-
-    .comparison-box li::before {
-      content: '-';
-      position: absolute;
-      left: 0;
-      color: var(--gray);
-    }
-
-    .comparison-box.highlight li::before {
-      content: '✓';
-      color: var(--yellow);
-    }
-
-    .comparison-edge {
-      margin-top: var(--space-md);
-      padding-top: var(--space-sm);
-      border-top: 1px solid rgba(0, 0, 0, 0.08);
-      font-family: var(--font-display);
-      font-size: 0.8125rem;
-      font-weight: 700;
-      color: #2D8A4E;
-    }
-
-    /* Flywheel */
+    /* FLYWHEEL */
     .flywheel {
-      background: rgba(0, 0, 0, 0.03);
-      padding: var(--space-lg);
-      margin: var(--space-lg) 0;
+      background: var(--dark);
+      border: 1px solid #222;
+      padding: 40px;
+      margin: 40px 0;
     }
 
     .flywheel-title {
-      font-family: var(--font-display);
-      font-size: 1rem;
+      font-size: 12px;
       font-weight: 700;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--black);
+      color: var(--gold);
       text-align: center;
-      margin-bottom: var(--space-md);
+      margin-bottom: 32px;
     }
 
     .flywheel-steps {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: var(--space-sm);
+      gap: 12px;
     }
 
     .flywheel-step {
       text-align: center;
       flex: 1;
-      min-width: 100px;
     }
 
     .flywheel-icon {
-      font-size: 2rem;
-      margin-bottom: 4px;
+      font-size: 28px;
+      margin-bottom: 8px;
     }
 
     .flywheel-step-title {
-      font-family: var(--font-display);
-      font-size: 0.75rem;
+      font-size: 11px;
       font-weight: 700;
+      letter-spacing: 1px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--black);
+      color: var(--white);
+      margin-bottom: 4px;
     }
 
     .flywheel-step-desc {
-      font-family: var(--font-body);
-      font-size: 0.6875rem;
+      font-size: 10px;
       color: var(--gray);
     }
 
     .flywheel-arrow {
-      font-size: 1.5rem;
-      color: var(--yellow);
+      font-size: 20px;
+      color: var(--gold);
     }
 
-    /* Revenue Path */
-    .revenue-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--space-md);
-      margin: var(--space-lg) 0;
-    }
-
-    .revenue-item {
-      background: rgba(0, 0, 0, 0.03);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      padding: var(--space-md);
-      text-align: center;
-    }
-
-    .revenue-phase {
-      font-family: var(--font-display);
-      font-size: 0.625rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--yellow);
-      margin-bottom: 4px;
-    }
-
-    .revenue-product {
-      font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: var(--black);
-      margin-bottom: 4px;
-    }
-
-    .revenue-price {
-      font-family: var(--font-display);
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: #2D8A4E;
-    }
-
-    .revenue-note {
-      font-family: var(--font-body);
-      font-size: 0.6875rem;
-      color: var(--gray);
-      margin-top: 4px;
-    }
-
-    /* Tweet Examples */
-    .tweet-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-md);
-      margin: var(--space-lg) 0;
-    }
-
-    .tweet {
-      background: var(--white);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 12px;
-      padding: var(--space-md);
-      position: relative;
-    }
-
-    .tweet::before {
-      content: 'X';
-      position: absolute;
-      top: var(--space-sm);
-      right: var(--space-sm);
-      font-family: var(--font-display);
-      font-size: 0.875rem;
-      font-weight: 800;
-      color: var(--black);
-    }
-
-    .tweet-handle {
-      font-family: var(--font-body);
-      font-size: 0.8125rem;
-      color: var(--gray);
-      margin-bottom: var(--space-sm);
-    }
-
-    .tweet-handle strong {
-      color: var(--black);
-    }
-
-    .tweet-content {
-      font-family: var(--font-body);
-      font-size: 0.9375rem;
-      line-height: 1.5;
-      color: var(--dark-gray);
-    }
-
-    .tweet-hook {
-      font-weight: 700;
-      color: var(--black);
-      display: block;
-      margin-bottom: var(--space-sm);
-    }
-
-    .tweet-thread {
-      margin-top: var(--space-sm);
-      padding-top: var(--space-sm);
-      border-top: 1px dashed rgba(0, 0, 0, 0.1);
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      color: #1DA1F2;
-    }
-
-    /* Back Link */
-    .back-link {
-      text-align: center;
-      padding: var(--space-lg);
-      background: var(--black);
-    }
-
-    .back-link a {
-      font-family: var(--font-display);
-      font-size: 0.875rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--gray);
-      text-decoration: none;
-    }
-
-    .back-link a:hover {
-      color: var(--yellow);
-    }
-
-    @media (max-width: 768px) {
-      .stats-grid, .revenue-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .comparison-grid, .tweet-grid {
-        grid-template-columns: 1fr;
-      }
-
+    @media (max-width: 700px) {
       .flywheel-steps {
         flex-direction: column;
+        gap: 20px;
       }
-
       .flywheel-arrow {
         transform: rotate(90deg);
       }
     }
 
-    @media print {
-      .playbook-hero {
-        padding: 40px 20px;
-      }
+    /* REVENUE PATH */
+    .revenue-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 40px;
+    }
 
-      .stats-grid, .revenue-grid {
-        grid-template-columns: 1fr 1fr;
+    .revenue-item {
+      background: var(--dark-gray);
+      border: 1px solid #333;
+      padding: 24px 16px;
+      text-align: center;
+    }
+
+    .revenue-phase {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 8px;
+    }
+
+    .revenue-product {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .revenue-price {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .revenue-note {
+      font-size: 10px;
+      color: var(--gray);
+      margin-top: 8px;
+    }
+
+    @media (max-width: 700px) {
+      .revenue-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
+    }
+
+    /* DIVIDER */
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 40px 0;
+    }
+
+    /* CALLOUT */
+    .callout {
+      background: var(--gold);
+      color: var(--black);
+      padding: 40px;
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .callout h3 {
+      color: var(--black);
+      margin-bottom: 8px;
+    }
+
+    .callout p {
+      color: rgba(0,0,0,0.7);
+      font-size: 15px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 60px 40px;
+      border-top: 1px solid #222;
+    }
+
+    footer a {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--gold);
     }
   </style>
 </head>
 <body>
 
-  <!-- Hero -->
-  <section class="playbook-hero">
-    <p class="playbook-hero-label">Content Strategy Vision</p>
-    <h1 class="playbook-hero-title">The Dan Go Model</h1>
-    <p class="playbook-hero-subtitle">How a fitness coach built a 7-figure business with simple social media content - and why Zeb is positioned even better.</p>
+  <!-- HERO -->
+  <section class="hero">
+    <p class="label">Content Strategy</p>
+    <h1>The Dan Go Model</h1>
+    <p>How a fitness coach built a 7-figure business with simple social content — and why Zeb is positioned even better.</p>
   </section>
 
-  <!-- Who is Dan Go -->
-  <section class="playbook-section playbook-section--dark">
-    <div class="playbook-content">
-      <p class="playbook-label">The Blueprint</p>
-      <h2 class="playbook-title">Who is Dan Go?</h2>
-      <div class="playbook-text">
-        <p>Dan Go is a 44-year-old fitness coach who built an empire posting simple, no-BS fitness advice for busy professionals. He started with Twitter threads. Now he has a coaching business, courses, and a massive email list - all from content.</p>
-      </div>
-      <div class="stats-grid">
-        <div class="stat-box">
-          <p class="stat-number">756K</p>
-          <p class="stat-label">Twitter Followers</p>
+  <!-- WHO IS DAN GO -->
+  <section class="full">
+    <div class="inner">
+      <p class="label">The Blueprint</p>
+      <h2>Who is Dan Go?</h2>
+      <p>Dan Go is a 44-year-old fitness coach who built an empire posting simple, no-BS fitness advice for busy professionals. He started with Twitter threads. Now he has coaching, courses, and a massive email list — all from content.</p>
+
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-number">756K</div>
+          <div class="stat-label">Twitter Followers</div>
         </div>
-        <div class="stat-box">
-          <p class="stat-number">480K+</p>
-          <p class="stat-label">Email Subscribers</p>
+        <div class="stat">
+          <div class="stat-number">480K+</div>
+          <div class="stat-label">Email Subscribers</div>
         </div>
-        <div class="stat-box">
-          <p class="stat-number">$2-8K</p>
-          <p class="stat-label">Coaching Packages</p>
+        <div class="stat">
+          <div class="stat-number">$2-8K</div>
+          <div class="stat-label">Coaching Packages</div>
         </div>
-        <div class="stat-box">
-          <p class="stat-number">94%</p>
-          <p class="stat-label">Client Success Rate</p>
+        <div class="stat">
+          <div class="stat-number">94%</div>
+          <div class="stat-label">Client Success Rate</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Comparison -->
-  <section class="playbook-section">
-    <p class="playbook-label">The Opportunity</p>
-    <h2 class="playbook-title">Why Zeb is Positioned Better</h2>
-    <div class="comparison-grid">
-      <div class="comparison-box">
-        <h3>Dan Go's Positioning</h3>
+  <!-- COMPARISON -->
+  <section>
+    <p class="label">The Opportunity</p>
+    <h2>Why Zeb Wins</h2>
+    <p>Dan Go is impressive. But Zeb has something Dan doesn't: <strong>he IS the transformation.</strong></p>
+
+    <div class="grid-2" style="margin-top: 40px;">
+      <div class="card">
+        <h3>Dan Go</h3>
         <ul>
-          <li>44 years old - "still young" to many</li>
+          <li>44 years old — "still young" to his audience</li>
           <li>Targets busy entrepreneurs & executives</li>
           <li>Focus: fat loss, energy, optimization</li>
           <li>Proof: client transformations</li>
           <li>Tone: hustle culture meets health</li>
-          <li>Signature: "I'm 44. If you're in your 20s, read this..."</li>
+          <li>Hook: "I'm 44. If you're in your 20s..."</li>
         </ul>
       </div>
-      <div class="comparison-box highlight">
-        <h3>Zeb's Positioning</h3>
+      <div class="card highlight">
+        <h3>Zeb Young</h3>
         <ul>
-          <li><strong>60s - living proof it's never too late</strong></li>
+          <li><strong>60s — living proof it's never too late</strong></li>
           <li>Targets 50+ adults who feel "too old"</li>
           <li>Focus: mobility, independence, confidence</li>
           <li><strong>Proof: HIMSELF after back surgery</strong></li>
           <li>Tone: wisdom, discipline, no excuses</li>
-          <li>Signature: <strong>"I'm in my 60s. If you think it's too late..."</strong></li>
+          <li>Hook: <strong>"I'm in my 60s. If you think it's too late..."</strong></li>
         </ul>
-        <p class="comparison-edge">Zeb IS the transformation. That's rare and powerful.</p>
+        <p class="card-edge">Zeb IS the transformation. That's a category of one.</p>
       </div>
     </div>
   </section>
 
-  <!-- Content Examples -->
-  <section class="playbook-section" style="background: #f8f8f8;">
-    <p class="playbook-label">Content in Action</p>
-    <h2 class="playbook-title">Zeb's Voice, Dan Go Style</h2>
-    <div class="tweet-grid">
-      <div class="tweet">
-        <p class="tweet-handle"><strong>Zeb Young</strong> @ZebPlatinum</p>
-        <div class="tweet-content">
+  <!-- CONTENT EXAMPLES -->
+  <section class="full">
+    <div class="inner">
+      <p class="label">Content in Action</p>
+      <h2>Zeb's Voice, Dan Go Style</h2>
+      <p>Simple posts. Clear hooks. Real value. No fancy production — just truth.</p>
+
+      <div class="grid-2" style="margin-top: 40px;">
+        <div class="tweet">
+          <p class="tweet-handle"><strong>Zeb Young</strong> @ZebPlatinum</p>
           <span class="tweet-hook">I'm in my 60s. If you're in your 50s, read this:</span>
-          After back surgery, doctors weren't sure I'd train again.<br><br>
-          Today I'm stronger than most people half my age.<br><br>
-          Here's what I learned rebuilding my body from zero:
+          <p class="tweet-content">After back surgery, doctors weren't sure I'd train again.<br><br>Today I'm stronger than most people half my age.<br><br>Here's what I learned rebuilding my body from zero:</p>
+          <p class="tweet-thread">Thread (1/8) →</p>
         </div>
-        <p class="tweet-thread">Thread (1/8)</p>
-      </div>
-      <div class="tweet">
-        <p class="tweet-handle"><strong>Zeb Young</strong> @ZebPlatinum</p>
-        <div class="tweet-content">
+        <div class="tweet">
+          <p class="tweet-handle"><strong>Zeb Young</strong> @ZebPlatinum</p>
           <span class="tweet-hook">Unpopular opinion: You don't need motivation.</span>
-          You need simplicity.<br><br>
-          Most people over 50 fail at fitness because they overcomplicate it.<br><br>
-          Too many programs. Too many diets. Too many gadgets.<br><br>
-          Pick ONE thing. Do it consistently. That's it.
+          <p class="tweet-content">You need simplicity.<br><br>Most people over 50 fail at fitness because they overcomplicate it.<br><br>Too many programs. Too many diets. Too many gadgets.<br><br>Pick ONE thing. Do it consistently. That's it.</p>
         </div>
-      </div>
-      <div class="tweet">
-        <p class="tweet-handle"><strong>Zeb Young</strong> @ZebPlatinum</p>
-        <div class="tweet-content">
-          <span class="tweet-hook">The 6 movements that rebuilt my body after surgery:</span>
-          1. Squat (or sit-to-stand)<br>
-          2. Hip hinge<br>
-          3. Push<br>
-          4. Pull<br>
-          5. Carry<br>
-          6. Core<br><br>
-          30 minutes. 3x a week. Simple beats complex.
+        <div class="tweet">
+          <p class="tweet-handle"><strong>Zeb Young</strong> @ZebPlatinum</p>
+          <span class="tweet-hook">The 6 movements that rebuilt my body:</span>
+          <p class="tweet-content">1. Squat (or sit-to-stand)<br>2. Hip hinge<br>3. Push<br>4. Pull<br>5. Carry<br>6. Core<br><br>30 minutes. 3x a week. Simple beats complex.</p>
         </div>
-      </div>
-      <div class="tweet">
-        <p class="tweet-handle"><strong>Zeb Young</strong> @ZebPlatinum</p>
-        <div class="tweet-content">
-          <span class="tweet-hook">You can't fake having a fit body in your 60s.</span>
-          You can fake wealth.<br>
-          You can fake wisdom.<br>
-          You can fake being busy.<br><br>
-          But when you're 60+ and you can move without pain?<br><br>
-          That's earned. Every single day.
+        <div class="tweet">
+          <p class="tweet-handle"><strong>Zeb Young</strong> @ZebPlatinum</p>
+          <span class="tweet-hook">You can't fake a fit body in your 60s.</span>
+          <p class="tweet-content">You can fake wealth.<br>You can fake wisdom.<br>You can fake being busy.<br><br>But when you're 60+ and you can move without pain?<br><br>That's earned. Every single day.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Flywheel -->
-  <section class="playbook-section">
-    <p class="playbook-label">The System</p>
-    <h2 class="playbook-title">Content to Revenue Flywheel</h2>
+  <!-- FLYWHEEL -->
+  <section>
+    <p class="label">The System</p>
+    <h2>Content → Revenue</h2>
+    <p>Free content isn't charity. It's a machine that generates customers.</p>
+
     <div class="flywheel">
-      <p class="flywheel-title">How Free Content Becomes Paying Clients</p>
+      <p class="flywheel-title">The Flywheel</p>
       <div class="flywheel-steps">
         <div class="flywheel-step">
           <div class="flywheel-icon">📱</div>
           <p class="flywheel-step-title">Post Content</p>
-          <p class="flywheel-step-desc">FB, IG, YouTube</p>
+          <p class="flywheel-step-desc">FB, YouTube</p>
         </div>
         <span class="flywheel-arrow">→</span>
         <div class="flywheel-step">
           <div class="flywheel-icon">👀</div>
           <p class="flywheel-step-title">Get Attention</p>
-          <p class="flywheel-step-desc">People share, engage</p>
+          <p class="flywheel-step-desc">Shares, comments</p>
+        </div>
+        <span class="flywheel-arrow">→</span>
+        <div class="flywheel-step">
+          <div class="flywheel-icon">💵</div>
+          <p class="flywheel-step-title">Sell Product</p>
+          <p class="flywheel-step-desc">$19 course</p>
         </div>
         <span class="flywheel-arrow">→</span>
         <div class="flywheel-step">
           <div class="flywheel-icon">📧</div>
-          <p class="flywheel-step-title">Capture Emails</p>
-          <p class="flywheel-step-desc">Lead magnets</p>
-        </div>
-        <span class="flywheel-arrow">→</span>
-        <div class="flywheel-step">
-          <div class="flywheel-icon">💰</div>
-          <p class="flywheel-step-title">Sell Products</p>
-          <p class="flywheel-step-desc">Courses, coaching</p>
+          <p class="flywheel-step-title">Build List</p>
+          <p class="flywheel-step-desc">Buyers, not freebies</p>
         </div>
         <span class="flywheel-arrow">→</span>
         <div class="flywheel-step">
           <div class="flywheel-icon">🔄</div>
           <p class="flywheel-step-title">Repeat</p>
-          <p class="flywheel-step-desc">Compounds forever</p>
+          <p class="flywheel-step-desc">Compounds</p>
         </div>
       </div>
     </div>
-    <div class="playbook-text">
-      <p><strong>Key insight:</strong> The 10-Minute Series is a lead magnet, not a product. Users give their email to access it. This builds the list. The list is where the real business happens.</p>
-    </div>
+
+    <p style="text-align: center; color: var(--gray); font-size: 14px;"><strong style="color: var(--white);">Key insight:</strong> The content attracts. The product qualifies. Buyers buy again — freebie hunters don't.</p>
   </section>
 
-  <!-- Revenue Path -->
-  <section class="playbook-section playbook-section--yellow">
-    <div class="playbook-content">
-      <p class="playbook-label">The Path</p>
-      <h2 class="playbook-title">Your Revenue Ladder</h2>
+  <!-- REVENUE PATH -->
+  <section class="full">
+    <div class="inner">
+      <p class="label">The Path</p>
+      <h2>Revenue Ladder</h2>
+      <p>Start small. Prove demand. Scale what works.</p>
+
       <div class="revenue-grid">
         <div class="revenue-item">
           <p class="revenue-phase">Now</p>
           <p class="revenue-product">10-Min Mobility</p>
-          <p class="revenue-price">FREE</p>
-          <p class="revenue-note">Builds email list</p>
+          <p class="revenue-price">$19</p>
+          <p class="revenue-note">Validates demand</p>
         </div>
         <div class="revenue-item">
-          <p class="revenue-phase">Month 2-3</p>
-          <p class="revenue-product">Premium Course</p>
+          <p class="revenue-phase">Month 3</p>
+          <p class="revenue-product">Full Programs</p>
           <p class="revenue-price">$47-97</p>
-          <p class="revenue-note">Sell to email list</p>
+          <p class="revenue-note">Bundle all 3 series</p>
         </div>
         <div class="revenue-item">
-          <p class="revenue-phase">Month 4-6</p>
+          <p class="revenue-phase">Month 6</p>
           <p class="revenue-product">The Book</p>
           <p class="revenue-price">$15-20</p>
           <p class="revenue-note">Credibility + royalties</p>
@@ -639,28 +611,30 @@
           <p class="revenue-phase">Ongoing</p>
           <p class="revenue-product">Online Coaching</p>
           <p class="revenue-price">$500-2K</p>
-          <p class="revenue-note">Group or 1:1 remote</p>
+          <p class="revenue-note">Group or 1:1</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Bottom Line -->
-  <section class="playbook-section playbook-section--dark">
-    <div class="playbook-content" style="text-align: center;">
-      <p class="playbook-label">The Bottom Line</p>
-      <h2 class="playbook-title">A Category of One</h2>
-      <div class="playbook-text" style="max-width: 600px; margin: 0 auto;">
-        <p>Dan Go is 44 talking to 30-year-olds about optimization. Zeb is <strong>in his 60s talking to 50-year-olds about what's actually possible</strong>. He's not teaching theory - he's living proof. That's a category of one.</p>
-        <p style="font-family: var(--font-accent); font-style: italic; font-size: 1.5rem; color: var(--yellow); margin-top: var(--space-lg);">"I'm in my 60s. If you think it's too late - watch me."</p>
-      </div>
+  <!-- BOTTOM LINE -->
+  <section style="text-align: center;">
+    <p class="label">The Bottom Line</p>
+    <h2>A Category of One</h2>
+
+    <div class="divider" style="margin: 40px auto;"></div>
+
+    <p style="font-size: 18px; max-width: 600px; margin: 0 auto 40px;">Dan Go is 44 talking to 30-year-olds about optimization.<br><br><strong>Zeb is in his 60s talking to 50-year-olds about what's actually possible.</strong><br><br>He's not teaching theory. He's living proof.</p>
+
+    <div class="callout" style="max-width: 600px; margin: 0 auto;">
+      <p style="font-size: 20px; font-style: italic; font-weight: 300; color: var(--black);">"I'm in my 60s. If you think it's too late — watch me."</p>
     </div>
   </section>
 
-  <!-- Back Link -->
-  <div class="back-link">
+  <!-- FOOTER -->
+  <footer>
     <a href="../index.html">← Back to Brand House</a>
-  </div>
+  </footer>
 
 </body>
 </html>
