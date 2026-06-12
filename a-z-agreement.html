@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aaron / Zeb Partnership Agreement — Plan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #ffcc00;
+      --yellow: #fdea01;
+      --gold-light: #ffe566;
+      --black: #000000;
+      --gray: #4A4A4A;
+      --light: #F5F5F5;
+      --white: #FFFFFF;
+      --font-display: 'Futura PT', 'Futura', 'Century Gothic', 'Avant Garde', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    @page { size: letter; margin: 0.5in; }
+
+    body {
+      font-family: var(--font-display);
+      background: var(--white);
+      color: var(--black);
+      font-size: 11px;
+      line-height: 1.6;
+      max-width: 8.5in;
+      margin: 0 auto;
+      padding: 0.5in;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+      border-bottom: 3px solid var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .header .subtitle {
+      font-size: 10px;
+      color: var(--gold);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .header .meta {
+      text-align: right;
+      font-size: 9px;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .overview {
+      background: var(--light);
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--gold);
+      font-size: 11px;
+      color: var(--gray);
+    }
+
+    .overview strong { color: var(--black); }
+
+    .section-title {
+      font-size: 13px;
+      letter-spacing: 3px;
+      margin: 20px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .section-title::after { content: ''; flex: 1; height: 2px; background: var(--gold-light); }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+
+    .box {
+      border: 1px solid #E0E0E0;
+      padding: 14px;
+      position: relative;
+    }
+
+    .box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--gold);
+    }
+
+    .box h3 {
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .box ul { font-size: 10px; color: var(--gray); padding-left: 14px; }
+    .box li { margin-bottom: 4px; }
+    .box li strong { color: var(--black); }
+
+    .deal-box {
+      background: var(--black);
+      color: var(--white);
+      padding: 20px 24px;
+      text-align: center;
+      margin: 16px 0;
+    }
+
+    .deal-box h3 {
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: var(--gold);
+      margin-bottom: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .deal-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      margin-bottom: 12px;
+    }
+
+    .deal-item .label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold-light);
+      margin-bottom: 4px;
+    }
+
+    .deal-item .value {
+      font-size: 18px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .deal-arrow { font-size: 20px; color: var(--gold); }
+
+    .deal-note { font-size: 9px; color: #999; border-top: 1px solid #333; padding-top: 10px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10px;
+      margin-bottom: 8px;
+    }
+
+    th {
+      text-align: left;
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--gray);
+      border-bottom: 2px solid var(--gold);
+      padding: 6px 8px;
+    }
+
+    td {
+      padding: 7px 8px;
+      border-bottom: 1px solid #EEE;
+      color: var(--gray);
+      vertical-align: top;
+    }
+
+    td strong { color: var(--black); }
+
+    .footer {
+      border-top: 2px solid var(--gold);
+      padding-top: 12px;
+      margin-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 9px;
+      color: var(--gray);
+    }
+
+    .footer a { color: var(--gold); text-decoration: none; }
+
+    .sig-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 28px;
+    }
+
+    .sig {
+      border-top: 1px solid var(--black);
+      padding-top: 6px;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray);
+    }
+
+    @media print { body { padding: 0; } }
+    @media (max-width: 640px) {
+      body { padding: 20px; }
+      .two-col, .sig-row { grid-template-columns: 1fr; }
+      .deal-row { flex-direction: column; gap: 12px; }
+      .deal-arrow { transform: rotate(90deg); }
+      .header { flex-direction: column; gap: 10px; text-align: center; }
+      .header .meta { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div>
+      <div class="subtitle">Partnership Plan — Draft for Discussion</div>
+      <h1>The Aaron / Zeb Agreement</h1>
+    </div>
+    <div class="meta">
+      Prepared June 2026<br>
+      Supersedes nothing — companion<br>to the 10-Min Mobility deal
+    </div>
+  </header>
+
+  <div class="overview">
+    <p><strong>The idea, in one line:</strong> Zeb trains Aaron. Aaron builds Zeb's online business — marketing, web, and video. An even trade between two professionals, each giving the thing they're best at, with clear deliverables on both sides so the handshake stays friendly.</p>
+  </div>
+
+  <!-- The trade -->
+  <div class="deal-box">
+    <h3>The Trade</h3>
+    <div class="deal-row">
+      <div class="deal-item">
+        <div class="label">Zeb Provides</div>
+        <div class="value">Personal Training</div>
+      </div>
+      <div class="deal-arrow">⇄</div>
+      <div class="deal-item">
+        <div class="label">Aaron Provides</div>
+        <div class="value">Marketing · Web · Video</div>
+      </div>
+    </div>
+    <div class="deal-note">
+      Tracked hour-for-hour at agreed rates (suggested: training sessions valued at Zeb's standard rate; Aaron's work valued at an agreed project rate).
+      Both sides log their hours in a shared sheet. Square up the ledger quarterly.
+    </div>
+  </div>
+
+  <!-- What each side delivers -->
+  <div class="section-title">What Each Side Delivers</div>
+  <div class="two-col">
+    <div class="box">
+      <h3>Zeb → Aaron: Training</h3>
+      <ul>
+        <li><strong>2 sessions / week</strong> — 30-minute personal training at the studio (schedule flexes around both calendars)</li>
+        <li><strong>Program design</strong> — a written plan Aaron follows on non-session days</li>
+        <li><strong>Quarterly assessment</strong> — measurements, mobility check, goals reset</li>
+        <li><strong>Nutrition guidance</strong> — the same coaching paying clients get</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Aaron → Zeb: Marketing / Web / Video</h3>
+      <ul>
+        <li><strong>Web</strong> — build &amp; maintain the ZFIT ecommerce site and landing pages; Stripe checkout setup; updates as products launch</li>
+        <li><strong>Video</strong> — film &amp; edit the 10-Minute Series (Abs, Booty, video #3) plus promo cuts for social</li>
+        <li><strong>Marketing</strong> — email sequences, social templates, launch campaigns, and the funnel (see below)</li>
+        <li><strong>Reporting</strong> — a simple monthly snapshot: list growth, sales, traffic</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Cadence -->
+  <div class="section-title">Working Rhythm</div>
+  <table>
+    <tr><th>Cadence</th><th>What Happens</th></tr>
+    <tr><td><strong>Weekly</strong></td><td>Aaron trains 2× with Zeb. Quick word after a session covers any business items — no extra meetings needed.</td></tr>
+    <tr><td><strong>Monthly</strong></td><td>30-minute sit-down: review numbers (email list, sales, views), pick next month's one priority.</td></tr>
+    <tr><td><strong>Quarterly</strong></td><td>Square the hours ledger. Fitness assessment for Aaron. Decide: continue, adjust, or wind down.</td></tr>
+  </table>
+
+  <!-- Ground rules -->
+  <div class="section-title">Ground Rules (The Part That Keeps It Friendly)</div>
+  <div class="two-col">
+    <div class="box">
+      <h3>Ownership &amp; Money</h3>
+      <ul>
+        <li><strong>Zeb owns the brand</strong> — ZFIT, Zeb's Platinum Fitness, all video content featuring Zeb, and 100% of product revenue</li>
+        <li><strong>Aaron owns his craft</strong> — may show the work in his portfolio; reusable templates/code remain Aaron's to reuse elsewhere</li>
+        <li><strong>Hard costs are Zeb's</strong> — domain, hosting, Stripe fees, email platform, ad spend (est. $30–60/mo before ads)</li>
+        <li><strong>Optional upside</strong> — if ZFIT digital revenue passes $1,000/mo for 3 straight months, discuss a small rev-share (e.g. 10%) to replace traded hours</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Boundaries &amp; Exit</h3>
+      <ul>
+        <li><strong>Scope is written</strong> — new asks (e.g. "can you also run my Facebook ads daily") get added to the ledger, not assumed</li>
+        <li><strong>Either side can pause</strong> — 2 weeks notice, no hard feelings; ledger balance settles in sessions or work</li>
+        <li><strong>Wind-down</strong> — if it ends, Zeb keeps the site &amp; content; Aaron does a 1-hour handoff so anyone can maintain it</li>
+        <li><strong>Not a partnership entity</strong> — this is a barter of services between two sole proprietors; each handles their own taxes (barter is reportable income — both should note fair-market value)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 90 day plan -->
+  <div class="section-title">First 90 Days</div>
+  <table>
+    <tr><th>Phase</th><th>Aaron Ships</th><th>Zeb Ships</th></tr>
+    <tr>
+      <td><strong>Days 1–30</strong></td>
+      <td>ZFIT site live · landing page &amp; funnel up · Stripe connected · welcome email sequence</td>
+      <td>Films 10 Min Abs + free lead-magnet workout · Aaron's training program starts</td>
+    </tr>
+    <tr>
+      <td><strong>Days 31–60</strong></td>
+      <td>Launch campaign for 10 Min Abs · 3 social posts/week from templates · promo video cut</td>
+      <td>Films 10 Min Booty · shares launch posts to local network &amp; client list</td>
+    </tr>
+    <tr>
+      <td><strong>Days 61–90</strong></td>
+      <td>Bundle launch (all-access $39) · supplement pages live · first monthly report</td>
+      <td>Names &amp; films video #3 · finalizes supplement line/fulfillment choice</td>
+    </tr>
+  </table>
+
+  <!-- Success metrics -->
+  <div class="section-title">What Success Looks Like (Day 90)</div>
+  <table>
+    <tr><th>Metric</th><th>Target</th></tr>
+    <tr><td>Email list</td><td><strong>250+</strong> subscribers</td></tr>
+    <tr><td>Video sales (singles + bundles)</td><td><strong>25+</strong> orders</td></tr>
+    <tr><td>Training inquiries from the site</td><td><strong>5+</strong></td></tr>
+    <tr><td>Aaron's training</td><td><strong>24 sessions</strong> completed, measurable progress at quarterly assessment</td></tr>
+  </table>
+
+  <!-- Signatures -->
+  <div class="sig-row">
+    <div class="sig">Zeb Young — Zeb's Platinum Fitness &nbsp;·&nbsp; Date</div>
+    <div class="sig">Aaron Phelps &nbsp;·&nbsp; Date</div>
+  </div>
+
+  <footer class="footer">
+    <span><strong>Zeb's Platinum Fitness</strong> · 1320 Yuba Street Suite 101, Redding, CA 96001 · 530-736-0831</span>
+    <span><a href="index.html">← Brand House</a> · <a href="a-z-deal.html">Original A-Z Deal</a> · Draft, not legal advice</span>
+  </footer>
+
+</body>
+</html>
