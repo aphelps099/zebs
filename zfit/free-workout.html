@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Free Workout Is In | ZFIT</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="zfit.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-container" style="justify-content: center;">
+      <a href="index.html" class="nav-brand">Z<span>FIT</span></a>
+    </div>
+  </nav>
+
+  <!-- Confirmation + the workout itself -->
+  <header class="hero" style="min-height: auto; padding-bottom: var(--space-lg);">
+    <div class="container" style="max-width: 880px;">
+      <p class="eyebrow">You're In ✓</p>
+      <h1 style="font-size: clamp(2.25rem, 6vw, 4rem);">Don't wait for the email.<br><em>Press play now.</em></h1>
+      <p class="hero-sub">Your free workout is below (it's also on its way to your inbox). Ten minutes. Right now. Today-you versus yesterday-you — go.</p>
+
+      <!-- VIDEO EMBED: replace the src with the unlisted YouTube/Vimeo embed URL -->
+      <div style="aspect-ratio: 16/9; background: var(--dark-gray); border: 1px solid rgba(253,234,1,0.3); display: flex; align-items: center; justify-content: center; margin: var(--space-lg) 0;">
+        <!--
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID" width="100%" height="100%"
+                  style="border:0;" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        -->
+        <div style="text-align: center; padding: var(--space-lg);">
+          <p style="font-weight: 900; font-size: 2rem; color: var(--yellow); text-transform: uppercase;">▶ Free 10-Min Workout</p>
+          <p style="font-size: 0.8125rem; margin-top: 8px;">(Video embed goes here — paste the unlisted YouTube/Vimeo iframe in this file)</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tripwire: one-time bundle offer while motivation is hot -->
+  <section class="section--yellow">
+    <div class="container grid-2" style="max-width: 1000px;">
+      <div class="fade-up">
+        <p class="eyebrow">New Member Offer</p>
+        <h2>Liked that?<br>There are two more.</h2>
+        <p style="margin-top: var(--space-md); font-size: 1.125rem;">Get the complete ZFIT series — <strong>10 Min Abs, 10 Min Booty, and 10 Min Total</strong> — plus Zeb's weekly rotation plan. Yours forever, for less than one personal training session costs per minute.</p>
+        <ul class="zlist" style="margin-top: var(--space-md);">
+          <li>All 3 follow-along workout videos</li>
+          <li>Zeb's 7-day rotation plan (which workout, which day)</li>
+          <li>Lifetime access — stream anywhere, any device</li>
+          <li>30-day money-back guarantee</li>
+        </ul>
+      </div>
+      <div class="zcard zcard--bundle fade-up" style="background: var(--black);">
+        <div class="zcard-body" style="text-align: center;">
+          <p class="zcard-audience">The Full ZFIT Series</p>
+          <h3 class="zcard-title" style="font-size: 1.75rem;">All-Access Bundle</h3>
+          <div class="zcard-price" style="justify-content: center;">
+            <span class="now" style="font-size: 3rem;">$39</span>
+            <span class="was" style="font-size: 1.25rem;">$57</span>
+          </div>
+          <a class="btn btn--block js-buy" data-product="bundle" href="#">Get All 3 Workouts</a>
+          <p style="font-size: 0.75rem; margin-top: var(--space-md); color: var(--gray);">Secure checkout by Stripe · Instant access</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Or single videos -->
+  <section>
+    <div class="container" style="text-align: center;">
+      <p class="fade-up" style="margin-bottom: var(--space-md);">Just want one to start?</p>
+      <div class="hero-actions fade-up" style="justify-content: center;">
+        <a href="abs.html" class="btn btn--ghost">10 Min Abs — $19</a>
+        <a href="booty.html" class="btn btn--ghost">10 Min Booty — $19</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-brand">Z<span>FIT</span></p>
+      <small>© 2026 Zeb's Platinum Fitness · Redding, California</small>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+</body>
+</html>
