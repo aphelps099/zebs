@@ -166,6 +166,55 @@ export const ALIGNMENTS = [
 
 export type AlignId = typeof ALIGNMENTS[number]['id'];
 
+// ── Timed text cues ──
+// Extra text layered over a scene on its own clock — e.g. a "TIP"
+// lower third that sweeps in mid-clip while the video keeps playing,
+// or an additional big text snippet with its own in/out times.
+export const CUE_STYLES = [
+  { id: 'tip',  label: 'Tip' },   // lower-third plate: accent bar + label + line
+  { id: 'text', label: 'Text' },  // plain display text, rises in and fades away
+] as const;
+
+export type CueStyleId = typeof CUE_STYLES[number]['id'];
+
+export const CUE_POSITIONS = [
+  { id: 'lower-left',   label: 'Lower Left' },
+  { id: 'lower-center', label: 'Lower Center' },
+  { id: 'lower-right',  label: 'Lower Right' },
+  { id: 'center',       label: 'Center' },
+] as const;
+
+export type CuePosId = typeof CUE_POSITIONS[number]['id'];
+
+export interface TextCue {
+  id: string;
+  style: CueStyleId;
+  /** Small accent label on tip plates (e.g. "TIP"). */
+  label: string;
+  text: string;
+  /** Scene-local time the cue enters (ms). */
+  start: number;
+  /** Time on screen — enter + hold + exit (ms). */
+  duration: number;
+  position: CuePosId;
+}
+
+let cueCounter = 0;
+
+export function makeCue(overrides: Partial<TextCue> = {}): TextCue {
+  cueCounter += 1;
+  return {
+    id: `cue-${Date.now().toString(36)}-${cueCounter}`,
+    style: 'tip',
+    label: 'TIP',
+    text: 'Keep your core tight',
+    start: 2000,
+    duration: 4000,
+    position: 'lower-left',
+    ...overrides,
+  };
+}
+
 // ── Scene ──
 export interface Scene {
   id: string;
@@ -187,6 +236,12 @@ export interface Scene {
   textScale: number;
   /** Show the numbered markers on list/agenda scenes. */
   listMarkers: boolean;
+  /** Delay before the scene's text layer starts animating in (ms). */
+  textStart: number;
+  /** Scene-local time the text layer exits (ms). 0 = holds until the scene ends. */
+  textEnd: number;
+  /** Timed text cues layered over the scene on their own clocks. */
+  cues: TextCue[];
 
   // Text content (used per-template)
   kicker: string;
@@ -318,6 +373,9 @@ export function makeScene(template: TemplateId, overrides: Partial<Scene> = {}):
     serifTitle: false,
     textScale: 1,
     listMarkers: true,
+    textStart: 0,
+    textEnd: 0,
+    cues: [],
     kicker: '',
     title: '',
     subtitle: '',

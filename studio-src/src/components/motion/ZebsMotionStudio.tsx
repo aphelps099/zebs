@@ -3,10 +3,10 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import {
   MotionDoc, Scene, TemplateId, AssetMap, ImageAsset, VideoAsset, VideoMap, AudioAsset, AudioMap,
-  CustomScheme, TransitionId,
+  CustomScheme, TransitionId, TextCue,
   ASPECTS, TEMPLATES, TEXT_ANIMS, TRANSITIONS, KEN_BURNS, OVERLAYS, ALIGNMENTS,
-  PIP_POSITIONS, TEXT_SCALES,
-  defaultDoc, makeScene, getAspect, resolveScheme, docDuration, sceneAt,
+  PIP_POSITIONS, TEXT_SCALES, CUE_STYLES, CUE_POSITIONS,
+  defaultDoc, makeScene, makeCue, getAspect, resolveScheme, docDuration, sceneAt,
 } from '@/lib/motion/types';
 import { renderFrame } from '@/lib/motion/render';
 import {
@@ -96,6 +96,8 @@ const ZEBS_SCENE_DEFAULTS: Partial<Record<TemplateId, Partial<Scene>>> = {
     kicker: "TODAY'S CIRCUIT",
     body: 'Warm-up — 60 seconds\nRound one — 4 minutes\nRound two — 4 minutes\nCool-down — 60 seconds',
     align: 'lower-left',
+    // Plain lines by default — flip Numbers on per scene for the 01/02/03 markers
+    listMarkers: false,
   },
   quote: {
     title: 'The best workout is the one you actually do.',
@@ -510,6 +512,39 @@ export default function ZebsMotionStudio() {
 
   const patchScene = useCallback((id: string, p: Partial<Scene>) => {
     setDoc((d) => ({ ...d, scenes: d.scenes.map((s) => (s.id === id ? { ...s, ...p } : s)) }));
+  }, []);
+
+  // ── Timed text cues (tips / extra snippets on a scene) ──
+  const addCue = useCallback((sceneId: string) => {
+    setDoc((d) => ({
+      ...d,
+      scenes: d.scenes.map((s) => {
+        if (s.id !== sceneId) return s;
+        const cue = makeCue({
+          start: Math.min(2000, Math.max(0, s.duration - 4000)),
+          duration: Math.min(4000, Math.max(1000, s.duration - 1000)),
+        });
+        return { ...s, cues: [...(s.cues ?? []), cue] };
+      }),
+    }));
+  }, []);
+
+  const patchCue = useCallback((sceneId: string, cueId: string, p: Partial<TextCue>) => {
+    setDoc((d) => ({
+      ...d,
+      scenes: d.scenes.map((s) => (s.id === sceneId
+        ? { ...s, cues: (s.cues ?? []).map((c) => (c.id === cueId ? { ...c, ...p } : c)) }
+        : s)),
+    }));
+  }, []);
+
+  const removeCue = useCallback((sceneId: string, cueId: string) => {
+    setDoc((d) => ({
+      ...d,
+      scenes: d.scenes.map((s) => (s.id === sceneId
+        ? { ...s, cues: (s.cues ?? []).filter((c) => c.id !== cueId) }
+        : s)),
+    }));
   }, []);
 
   const sceneStart = useCallback((index: number) => {
@@ -1168,6 +1203,90 @@ export default function ZebsMotionStudio() {
                     />
                   </Field>
                 )}
+              </>
+            )}
+
+            {/* Text overlay timing — video scenes */}
+            {selected.template === 'video' && (
+              <>
+                <Field label="Text in at">
+                  <Slider
+                    value={selected.textStart}
+                    onChange={(v) => patchScene(selected.id, { textStart: v })}
+                    min={0} max={Math.max(0, selected.duration - 1000)} step={100}
+                    format={(v) => (v <= 0 ? 'scene start' : fmtTime(v))}
+                  />
+                </Field>
+                <Field label="Text out at">
+                  <Slider
+                    value={selected.textEnd}
+                    onChange={(v) => patchScene(selected.id, { textEnd: v })}
+                    min={0} max={selected.duration} step={100}
+                    format={(v) => (v <= 0 ? 'with scene' : fmtTime(v))}
+                  />
+                </Field>
+
+                <Field label="Tips & timed text">
+                  {(selected.cues ?? []).map((cue) => (
+                    <div key={cue.id} className="ms-cue-card">
+                      <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: 8 }}>
+                        <Seg
+                          options={CUE_STYLES}
+                          value={cue.style}
+                          onChange={(v) => patchCue(selected.id, cue.id, { style: v })}
+                          small
+                        />
+                        <button
+                          className="ms-icon-btn is-danger"
+                          style={{ marginLeft: 'auto', flex: 'none' }}
+                          title="Remove"
+                          onClick={() => removeCue(selected.id, cue.id)}
+                        >
+                          ✕
+                        </button>
+                      </div>
+                      {cue.style === 'tip' && (
+                        <Field label="Label">
+                          <TextInput value={cue.label} onChange={(v) => patchCue(selected.id, cue.id, { label: v })} placeholder="TIP" />
+                        </Field>
+                      )}
+                      <Field label={cue.style === 'tip' ? 'Tip text' : 'Text'}>
+                        <TextArea value={cue.text} onChange={(v) => patchCue(selected.id, cue.id, { text: v })} rows={2} />
+                      </Field>
+                      <Field label="Appears at">
+                        <Slider
+                          value={cue.start}
+                          onChange={(v) => patchCue(selected.id, cue.id, { start: v })}
+                          min={0} max={Math.max(0, selected.duration - 800)} step={100}
+                          format={(v) => fmtTime(v)}
+                        />
+                      </Field>
+                      <Field label="On screen for">
+                        <Slider
+                          value={cue.duration}
+                          onChange={(v) => patchCue(selected.id, cue.id, { duration: v })}
+                          min={1000} max={Math.max(1000, selected.duration)} step={250}
+                          format={(v) => fmtTime(v)}
+                        />
+                      </Field>
+                      <Field label="Position">
+                        <Seg
+                          options={CUE_POSITIONS}
+                          value={cue.position}
+                          onChange={(v) => patchCue(selected.id, cue.id, { position: v })}
+                          small
+                        />
+                      </Field>
+                    </div>
+                  ))}
+                  <button className="ms-btn" style={{ width: '100%' }} onClick={() => addCue(selected.id)}>
+                    + Add tip / text
+                  </button>
+                  <p className="ms-hint">
+                    Tips sweep in over the footage on their own clock and sweep away — the clip
+                    keeps playing behind them. Add as many as the scene needs.
+                  </p>
+                </Field>
               </>
             )}
 
