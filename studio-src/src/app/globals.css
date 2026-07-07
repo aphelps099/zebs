@@ -1,0 +1,49 @@
+/* ZFIT Motion — global styles
+   Fonts come from Zeb's brand kit (../fonts in the zebs repo).
+   Paths are absolute to the GitHub Pages base (/zebs/studio). */
+
+@font-face {
+  font-family: 'Futura';
+  src: url('/zebs/studio/fonts/Futura-Book.ttf') format('truetype');
+  font-weight: 100 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura';
+  src: url('/zebs/studio/fonts/Futura-XBlk.ttf') format('truetype');
+  font-weight: 600 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura XBlk';
+  src: url('/zebs/studio/fonts/Futura-XBlk.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TROS';
+  src: url('/zebs/studio/fonts/TROS-Thin.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #000;
+  font-family: 'Futura', 'Futura PT', 'Century Gothic', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
