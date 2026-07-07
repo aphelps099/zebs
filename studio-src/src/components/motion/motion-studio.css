@@ -577,3 +577,13 @@
   margin-bottom: 8px;
   flex-wrap: wrap;
 }
+
+/* ── Timed text cue cards (inspector) ── */
+
+.ms-cue-card {
+  border: 1px solid var(--ms-line);
+  border-radius: 8px;
+  padding: 10px 10px 4px;
+  margin-bottom: 8px;
+  background: var(--ms-cream);
+}

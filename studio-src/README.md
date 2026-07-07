@@ -13,7 +13,15 @@ MP4 — everything runs in the browser, no video backend.
 - **Video scenes** — upload MP4/MOV/WebM, trim the start, match scene length
   to the clip, clip audio on/mute + volume. Text overlays (kicker/title/
   subtitle) sit lower-left/center/right with gradient fades, at 30/50/70/100%
-  size so the footage can lead.
+  size so the footage can lead. The overlay has its own clock — "Text in at"
+  / "Text out at" sliders time it independently of the clip.
+- **Tips & timed text** — layer any number of extra text cues on a video
+  scene, each with its own start time and on-screen duration: a **Tip**
+  lower third (accent bar + label + line) that sweeps in mid-clip and sweeps
+  away while the footage keeps playing, or a plain **Text** snippet that
+  rises in and fades out.
+- **Agenda scenes** — one line per row; the 01/02/03 index markers are off
+  by default, flip **Numbers** on per scene for the numbered-list look.
 - **Zeb cam** — layer a small talking-head clip in the lower third of any
   scene (position, size, start point, audio controls).
 - **Music** — loops under the whole video with fade-in/fade-out and volume.
@@ -56,3 +64,11 @@ The engine originated in the `aphelps099/mysbdc-tools` Motion Studio
 (`docs/motion-studio-porting-guide.md` there describes the architecture);
 when it gains features there, the `src/lib/motion` diff cherry-picks
 cleanly — it contains no brand.
+
+## Next phase
+
+The plan for the brand-generic editor driven by uploadable **style cards**
+(CSS-first brand packages — "skills for style") is in
+[`docs/style-skills.md`](docs/style-skills.md), along with the editor
+roadmap (undo/redo, project save/load, timeline upgrades, split-at-playhead,
+audio ducking, captions).

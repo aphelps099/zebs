@@ -541,6 +541,146 @@ function drawPipOverlay(
   ctx.restore();
 }
 
+// ── Timed text cues ───────────────────────────────────
+
+/** Letter-spaced width of a label, matching drawSpacedText's layout. */
+function spacedWidth(ctx: CanvasRenderingContext2D, text: string, font: string, spacing: number): number {
+  ctx.font = font;
+  const chars = [...text.toUpperCase()];
+  let total = 0;
+  chars.forEach((c) => { total += ctx.measureText(c).width + spacing; });
+  return Math.max(0, total - spacing);
+}
+
+/**
+ * Extra text layered over the scene on its own clock. 'tip' is a
+ * lower-third plate (accent bar + label + line) that sweeps in from
+ * its side, holds, and sweeps away while the footage keeps playing;
+ * 'text' is a plain display line that rises in and fades out.
+ */
+function drawTextCues(
+  ctx: CanvasRenderingContext2D,
+  sc: SceneCtx,
+  scene: Scene,
+  t: number,
+  p: Palette,
+) {
+  const cues = scene.cues;
+  if (!cues || cues.length === 0) return;
+  const { W, H, u, doc } = sc;
+  const scheme = resolveScheme(scene);
+
+  for (const cue of cues) {
+    const label = (cue.label || '').trim();
+    const text = (cue.text || '').trim();
+    if (!label && !text) continue;
+    const dur = Math.max(800, cue.duration || 0);
+    const ct = t - Math.max(0, cue.start || 0);
+    if (ct < 0 || ct >= dur) continue;
+
+    const enter = seg(ct, 0, 480, easeOutQuint);
+    const exit = seg(ct, dur - 420, 420, easeInCubic);
+    const alpha = enter * (1 - exit);
+    if (alpha <= 0) continue;
+
+    const pos = cue.position || 'lower-left';
+    const frame = p.frame;
+
+    if (cue.style === 'tip') {
+      const textPx = 30 * u;
+      const labelPx = 16 * u;
+      const textFont = fontStr(600, textPx, doc.fontBody);
+      const labelFont = fontStr(700, labelPx, doc.fontBody);
+      const maxW = W * 0.52;
+      const { lines, height: textH } = text
+        ? measureBlock(ctx, { text, font: textFont, px: textPx, lineHeight: 1.3, maxWidth: maxW })
+        : { lines: [], height: 0 };
+      const labelW = label ? spacedWidth(ctx, label, labelFont, labelPx * 0.2) : 0;
+      const contentW = Math.max(labelW, ...lines.map((l) => l.width), 1);
+      const labelH = label ? labelPx + (text ? 14 * u : 0) : 0;
+      const padX = 30 * u;
+      const padY = 24 * u;
+      const barW = 6 * u;
+      const plateW = barW + padX * 2 + contentW;
+      const plateH = padY * 2 + labelH + textH;
+
+      const x0 = pos === 'lower-right' ? frame.x + frame.w - plateW
+        : pos === 'lower-left' ? frame.x
+        : (W - plateW) / 2;
+      const y0 = pos === 'center' ? (H - plateH) / 2 : frame.y + frame.h - plateH;
+
+      // Sweep in from the plate's side; centered cues rise instead
+      const dir = pos === 'lower-right' ? 1 : pos === 'lower-left' ? -1 : 0;
+      const xOff = dir * ((1 - enter) + exit) * 90 * u;
+      const yOff = dir === 0 ? ((1 - enter) + exit) * 26 * u : 0;
+
+      ctx.save();
+      ctx.globalAlpha *= alpha;
+      ctx.translate(xOff, yOff);
+
+      ctx.save();
+      ctx.shadowColor = 'rgba(0,0,0,0.35)';
+      ctx.shadowBlur = 22 * u;
+      ctx.shadowOffsetY = 8 * u;
+      roundRectPath(ctx, x0, y0, plateW, plateH, 12 * u);
+      ctx.fillStyle = withAlpha(scheme.bg, 0.85);
+      ctx.fill();
+      ctx.restore();
+
+      ctx.save();
+      roundRectPath(ctx, x0, y0, plateW, plateH, 12 * u);
+      ctx.clip();
+      ctx.fillStyle = p.accent;
+      ctx.fillRect(x0, y0, barW, plateH);
+      ctx.restore();
+
+      const contentX = x0 + barW + padX;
+      let cy = y0 + padY;
+      if (label) {
+        drawSpacedText(ctx, label, labelFont, p.accent, contentX, cy + labelPx * 0.82, labelPx * 0.2, 'left', 1);
+        cy += labelH;
+      }
+      if (text) {
+        ctx.font = textFont;
+        ctx.fillStyle = p.fg;
+        ctx.textBaseline = 'alphabetic';
+        const spaceW = ctx.measureText(' ').width;
+        lines.forEach((line, li) => {
+          let lx = contentX;
+          const baseY = cy + li * textPx * 1.3 + textPx * 0.82;
+          for (const w of line.words) {
+            ctx.fillText(w.text, lx, baseY);
+            lx += w.width + spaceW;
+          }
+        });
+      }
+      ctx.restore();
+    } else {
+      // 'text' — plain display line on its own clock
+      const px = 54 * u;
+      const font = fontStr(scene.serifTitle ? 400 : 300, px, headingFamily(sc, scene));
+      const maxW = frame.w * 0.8;
+      const { height } = measureBlock(ctx, { text, font, px, lineHeight: 1.16, maxWidth: maxW });
+      const x = pos === 'lower-left' ? frame.x
+        : pos === 'lower-right' ? frame.x + frame.w
+        : W / 2;
+      const align: 'left' | 'center' | 'right' = pos === 'lower-left' ? 'left'
+        : pos === 'lower-right' ? 'right' : 'center';
+      const y = pos === 'center' ? (H - height) / 2 : frame.y + frame.h - height;
+
+      ctx.save();
+      ctx.globalAlpha *= 1 - exit;
+      ctx.translate(0, -exit * 20 * u);
+      drawTextBlock(ctx, {
+        text, font, px, lineHeight: 1.16, color: p.fg,
+        maxWidth: maxW, x, y, align,
+        anim: 'rise', t: ct, tStart: 0, accent: p.accent,
+      });
+      ctx.restore();
+    }
+  }
+}
+
 // ── Film grain ────────────────────────────────────────
 
 let grainTile: HTMLCanvasElement | OffscreenCanvas | null = null;
@@ -655,32 +795,51 @@ function drawScene(
   // with, while the palette frame stays at full scale so margins hold.
   const textScale = Math.max(0.2, Math.min(1.5, scene.textScale || 1));
   const tsc: SceneCtx = textScale === 1 ? sc : { ...sc, u: u * textScale };
+  const palette: Palette = { fg, muted, accent, anchorX, align, frame };
 
-  switch (scene.template) {
-    case 'title':
-    case 'image':
-    case 'video':
-      drawTitleScene(ctx, tsc, scene, t, { fg, muted, accent, anchorX, align, frame });
-      break;
-    case 'disclaimer':
-      drawDisclaimerScene(ctx, tsc, scene, t, { fg, muted, accent, anchorX, align, frame });
-      break;
-    case 'statement':
-      drawStatementScene(ctx, tsc, scene, t, { fg, muted, accent, anchorX, align, frame });
-      break;
-    case 'stat':
-      drawStatScene(ctx, tsc, scene, t, { fg, muted, accent, anchorX, align, frame });
-      break;
-    case 'list':
-      drawListScene(ctx, tsc, scene, t, { fg, muted, accent, anchorX, align, frame });
-      break;
-    case 'quote':
-      drawQuoteScene(ctx, tsc, scene, t, { fg, muted, accent, anchorX, align, frame });
-      break;
-    case 'endcard':
-      drawEndcardScene(ctx, tsc, scene, t, { fg, muted, accent, anchorX, align, frame });
-      break;
+  // Text layer timing — the main text can enter late (tText < 0 means
+  // every animation segment is still before its start, so nothing draws)
+  // and/or leave early with the standard exit move. Cues and the coach
+  // cam run on their own clocks below.
+  const textEndMs = scene.textEnd || 0;
+  const textExit = textEndMs > 0 ? seg(t, textEndMs, EXIT_MS, easeInCubic) : 0;
+  if (textExit < 1) {
+    const tText = t - Math.max(0, scene.textStart || 0);
+    ctx.save();
+    ctx.globalAlpha *= 1 - textExit;
+    ctx.translate(0, -textExit * 22 * u);
+
+    switch (scene.template) {
+      case 'title':
+      case 'image':
+      case 'video':
+        drawTitleScene(ctx, tsc, scene, tText, palette);
+        break;
+      case 'disclaimer':
+        drawDisclaimerScene(ctx, tsc, scene, tText, palette);
+        break;
+      case 'statement':
+        drawStatementScene(ctx, tsc, scene, tText, palette);
+        break;
+      case 'stat':
+        drawStatScene(ctx, tsc, scene, tText, palette);
+        break;
+      case 'list':
+        drawListScene(ctx, tsc, scene, tText, palette);
+        break;
+      case 'quote':
+        drawQuoteScene(ctx, tsc, scene, tText, palette);
+        break;
+      case 'endcard':
+        drawEndcardScene(ctx, tsc, scene, tText, palette);
+        break;
+    }
+
+    ctx.restore();
   }
+
+  // Timed text cues (tips / extra snippets) — independent of the main text
+  drawTextCues(ctx, sc, scene, t, palette);
 
   // Coach-cam thumbnail over any template (full-scale units)
   drawPipOverlay(ctx, sc, scene, t);
