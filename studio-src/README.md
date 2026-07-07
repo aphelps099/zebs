@@ -79,5 +79,10 @@ cleanly — it contains no brand.
 The plan for the brand-generic editor driven by uploadable **style cards**
 (CSS-first brand packages — "skills for style") is in
 [`docs/style-skills.md`](docs/style-skills.md), along with the editor
-roadmap (undo/redo, project save/load, timeline upgrades, split-at-playhead,
-audio ducking, captions).
+roadmap.
+
+[`docs/handoff-next-version.md`](docs/handoff-next-version.md) is the
+team handoff: how to rebuild this system for another company (worked
+example: a tractor dealership), add carousel-ad output, and wire up agentic
+automation — including the working method for building it with Opus/Sonnet
+class AI assistants.
