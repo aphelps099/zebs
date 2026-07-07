@@ -171,8 +171,9 @@ export type AlignId = typeof ALIGNMENTS[number]['id'];
 // lower third that sweeps in mid-clip while the video keeps playing,
 // or an additional big text snippet with its own in/out times.
 export const CUE_STYLES = [
-  { id: 'tip',  label: 'Tip' },   // lower-third plate: accent bar + label + line
-  { id: 'text', label: 'Text' },  // plain display text, rises in and fades away
+  { id: 'tip',     label: 'Tip' },     // lower-third plate: accent bar + label + line
+  { id: 'text',    label: 'Text' },    // plain display text, rises in and fades away
+  { id: 'caption', label: 'Caption' }, // subtitle pill, quick fade — SRT import lands here
 ] as const;
 
 export type CueStyleId = typeof CUE_STYLES[number]['id'];
@@ -314,6 +315,10 @@ export interface MotionDoc {
   voVolume: number;
   /** Timeline position where the voiceover begins (ms). */
   voStart: number;
+  /** Auto-duck the music while the voiceover plays. */
+  audioDuckOn: boolean;
+  /** Music gain multiplier while ducked (0–1). */
+  audioDuckLevel: number;
 }
 
 // ── Loaded image assets, keyed by imageId ──
@@ -488,6 +493,8 @@ export function defaultDoc(): MotionDoc {
     voId: null,
     voVolume: 1,
     voStart: 0,
+    audioDuckOn: true,
+    audioDuckLevel: 0.3,
   };
 }
 

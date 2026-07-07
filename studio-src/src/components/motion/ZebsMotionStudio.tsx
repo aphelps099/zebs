@@ -206,6 +206,54 @@ function fmtTime(ms: number): string {
 
 const HEX_RE = /^#[0-9a-fA-F]{6}$/;
 
+const AUTOSAVE_KEY = 'zfit-motion-autosave-v1';
+
+/** Parse an SRT file into ms-timed entries. Tolerant of missing index lines. */
+function parseSrt(srt: string): { start: number; end: number; text: string }[] {
+  const out: { start: number; end: number; text: string }[] = [];
+  for (const block of srt.replace(/\r/g, '').split(/\n{2,}/)) {
+    const lines = block.split('\n').filter((l) => l.trim().length > 0);
+    const ti = lines.findIndex((l) => l.includes('-->'));
+    if (ti < 0) continue;
+    const m = lines[ti].match(/(\d+):(\d{2}):(\d{2})[,.](\d{1,3})\s*-->\s*(\d+):(\d{2}):(\d{2})[,.](\d{1,3})/);
+    if (!m) continue;
+    const ms = (h: string, mn: string, s: string, f: string) =>
+      Number(h) * 3600000 + Number(mn) * 60000 + Number(s) * 1000 + Number(f.padEnd(3, '0'));
+    const start = ms(m[1], m[2], m[3], m[4]);
+    const end = ms(m[5], m[6], m[7], m[8]);
+    const text = lines.slice(ti + 1).join(' ').replace(/<[^>]+>/g, '').replace(/\{[^}]+\}/g, '').trim();
+    if (text && end > start) out.push({ start, end, text });
+  }
+  return out;
+}
+
+/** Mini render of a scene for the strip — same renderer, scaled down. */
+function SceneThumb({ scene, doc, assets, videos }: {
+  scene: Scene; doc: MotionDoc; assets: AssetMap; videos: VideoMap;
+}) {
+  const ref = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const c = ref.current;
+      if (!c) return;
+      const { w: W, h: H } = getAspect(doc.aspect);
+      const scale = 156 / W;
+      c.width = 156;
+      c.height = Math.max(24, Math.round(H * scale));
+      const ctx = c.getContext('2d');
+      if (!ctx) return;
+      ctx.setTransform(scale, 0, 0, scale, 0, 0);
+      try {
+        // Late in the scene: text fully entered, exit not yet started
+        renderFrame(ctx, { ...doc, scenes: [scene], showGrain: false },
+          Math.max(0, scene.duration - 600), assets, videos);
+      } catch { /* thumbnail is best-effort */ }
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [scene, doc, assets, videos]);
+  return <canvas ref={ref} className="ms-scene-thumb" />;
+}
+
 function sameScheme(a: CustomScheme | null | undefined, b: { bg: string; fg: string; accent: string }): boolean {
   return !!a && a.bg.toLowerCase() === b.bg.toLowerCase()
     && a.fg.toLowerCase() === b.fg.toLowerCase()
@@ -352,6 +400,11 @@ export default function ZebsMotionStudio() {
   loopRef.current = loopMode;
   const playheadRef = useRef(0);
   const exportingRef = useRef(false);
+  /** J/K/L shuttle rate: 1 = normal, 2/4 = fast, negative = reverse. */
+  const rateRef = useRef(1);
+  const [showGuides, setShowGuides] = useState(false);
+  const guidesRef = useRef(false);
+  guidesRef.current = showGuides;
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -392,6 +445,11 @@ export default function ZebsMotionStudio() {
     const total = docDuration(d);
     const { index, local } = sceneAt(d, playheadRef.current);
     const active = d.scenes[index];
+    const voDurMs = d.voId && audioRef.current[d.voId]
+      ? audioRef.current[d.voId].buffer.duration * 1000 : 0;
+    // Media elements only free-run at normal forward speed; while
+    // shuttling (J/L fast or reverse) they pause and chase by seeking.
+    const smooth = playingRef.current && rateRef.current === 1;
 
     for (const id in videosRef.current) {
       const v = videosRef.current[id].video;
@@ -404,7 +462,7 @@ export default function ZebsMotionStudio() {
         const targetS = (trim + local) / 1000;
         v.muted = muted;
         v.volume = Math.max(0, Math.min(1, vol));
-        if (playingRef.current) {
+        if (smooth) {
           if (v.paused) v.play().catch(() => {});
           if (Math.abs(v.currentTime - targetS) > 0.3) v.currentTime = targetS;
         } else {
@@ -422,8 +480,8 @@ export default function ZebsMotionStudio() {
       const isVo = !isBed && d.voId === id && total > 0;
       if (isBed) {
         a.element.loop = true;
-        a.element.volume = Math.max(0, Math.min(1, musicGainAt(d, playheadRef.current, total)));
-        if (playingRef.current) {
+        a.element.volume = Math.max(0, Math.min(1, musicGainAt(d, playheadRef.current, total, voDurMs)));
+        if (smooth) {
           if (a.element.paused) a.element.play().catch(() => {});
           const targetS = (playheadRef.current / 1000) % Math.max(0.01, a.buffer.duration);
           if (Math.abs(a.element.currentTime - targetS) > 0.4) a.element.currentTime = targetS;
@@ -435,7 +493,7 @@ export default function ZebsMotionStudio() {
         a.element.volume = Math.max(0, Math.min(1, d.voVolume));
         const relS = (playheadRef.current - d.voStart) / 1000;
         const within = relS >= 0 && relS < a.buffer.duration;
-        if (playingRef.current && within) {
+        if (smooth && within) {
           if (a.element.paused) a.element.play().catch(() => {});
           if (Math.abs(a.element.currentTime - relS) > 0.4) a.element.currentTime = relS;
         } else if (!a.element.paused) {
@@ -459,10 +517,14 @@ export default function ZebsMotionStudio() {
       const total = docDuration(d);
 
       if (playingRef.current && total > 0 && !exportingRef.current) {
-        playheadRef.current += dt;
-        if (playheadRef.current >= total) {
-          if (loopRef.current) playheadRef.current %= total;
-          else { playheadRef.current = total - 1; setPlaying(false); }
+        playheadRef.current += dt * rateRef.current;
+        if (playheadRef.current <= 0 && rateRef.current < 0) {
+          playheadRef.current = 0;
+          rateRef.current = 1;
+          setPlaying(false);
+        } else if (playheadRef.current >= total) {
+          if (loopRef.current && rateRef.current === 1) playheadRef.current %= total;
+          else { playheadRef.current = total - 1; rateRef.current = 1; setPlaying(false); }
         }
       }
 
@@ -480,6 +542,25 @@ export default function ZebsMotionStudio() {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       renderFrame(ctx, d, playheadRef.current, assetsRef.current, videosRef.current);
 
+      // Safe-area guides — preview only, never in exports (the exporters
+      // render offline through renderFrame directly)
+      if (guidesRef.current) {
+        ctx.save();
+        ctx.lineWidth = 2;
+        ctx.setLineDash([10, 10]);
+        ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+        ctx.strokeRect(W * 0.05, H * 0.05, W * 0.9, H * 0.9);   // action safe
+        ctx.strokeStyle = 'rgba(255,255,255,0.22)';
+        ctx.strokeRect(W * 0.1, H * 0.1, W * 0.8, H * 0.8);     // title safe
+        ctx.setLineDash([]);
+        ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+        ctx.beginPath();
+        ctx.moveTo(W / 2 - 24, H / 2); ctx.lineTo(W / 2 + 24, H / 2);
+        ctx.moveTo(W / 2, H / 2 - 24); ctx.lineTo(W / 2, H / 2 + 24);
+        ctx.stroke();
+        ctx.restore();
+      }
+
       // Imperative UI updates (no React re-render at 60fps)
       if (playheadElRef.current && total > 0) {
         playheadElRef.current.style.left = `${(playheadRef.current / total) * 100}%`;
@@ -492,13 +573,75 @@ export default function ZebsMotionStudio() {
     return () => cancelAnimationFrame(raf);
   }, [syncMedia]);
 
-  // Space = play/pause
+  // ── Keyboard: space play/pause, J/K/L shuttle, arrows nudge,
+  //    S split, Del remove scene, ⌘Z/⇧⌘Z undo/redo ──
+  // Latest handlers reach the mount-once listener through this ref.
+  const keysRef = useRef({
+    undo: () => {}, redo: () => {}, split: () => {}, del: () => {},
+  });
+
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       const tag = (e.target as HTMLElement).tagName;
-      if (e.key === ' ' && tag !== 'INPUT' && tag !== 'TEXTAREA' && tag !== 'SELECT') {
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+      const mod = e.metaKey || e.ctrlKey;
+      if (mod && e.key.toLowerCase() === 'z') {
         e.preventDefault();
-        setPlaying((p) => !p);
+        if (e.shiftKey) keysRef.current.redo(); else keysRef.current.undo();
+        return;
+      }
+      if (mod && e.key.toLowerCase() === 'y') { e.preventDefault(); keysRef.current.redo(); return; }
+      if (mod) return;
+      switch (e.key) {
+        case ' ':
+          e.preventDefault();
+          rateRef.current = 1;
+          setPlaying((p) => !p);
+          break;
+        case 'k': case 'K':
+          rateRef.current = 1;
+          setPlaying(false);
+          break;
+        case 'l': case 'L':
+          // repeat presses double the forward speed (1× → 2× → 4×)
+          rateRef.current = playingRef.current && rateRef.current >= 1
+            ? Math.min(4, rateRef.current * 2) : 1;
+          setPlaying(true);
+          break;
+        case 'j': case 'J':
+          // reverse shuttle, doubling the same way
+          rateRef.current = playingRef.current && rateRef.current <= -1
+            ? Math.max(-4, rateRef.current * 2) : -1;
+          setPlaying(true);
+          break;
+        case 'ArrowRight': {
+          e.preventDefault();
+          setPlaying(false);
+          const d = docRef.current;
+          playheadRef.current = Math.min(Math.max(0, docDuration(d) - 1),
+            playheadRef.current + (e.shiftKey ? 1000 : 1000 / d.fps));
+          break;
+        }
+        case 'ArrowLeft': {
+          e.preventDefault();
+          setPlaying(false);
+          playheadRef.current = Math.max(0,
+            playheadRef.current - (e.shiftKey ? 1000 : 1000 / docRef.current.fps));
+          break;
+        }
+        case 'Home':
+          playheadRef.current = 0;
+          break;
+        case 'End':
+          playheadRef.current = Math.max(0, docDuration(docRef.current) - 1);
+          break;
+        case 's': case 'S':
+          keysRef.current.split();
+          break;
+        case 'Delete': case 'Backspace':
+          e.preventDefault();
+          keysRef.current.del();
+          break;
       }
     };
     window.addEventListener('keydown', handler);
@@ -546,6 +689,279 @@ export default function ZebsMotionStudio() {
         : s)),
     }));
   }, []);
+
+  // ── Undo / redo ──
+  // Doc snapshots are cheap (immutable updates share scene objects).
+  // Rapid edits — slider drags, typing — coalesce via the 350ms debounce.
+  // Undo/redo set the doc to stack[index] by reference, so the effect's
+  // identity check skips re-pushing those without any extra flag.
+  const histRef = useRef<{ stack: MotionDoc[]; index: number }>({
+    stack: [doc], index: 0,
+  });
+  const [histTick, setHistTick] = useState(0);
+
+  /** Commit the current doc as a snapshot if it isn't one already. */
+  const flushHistory = useCallback(() => {
+    const h = histRef.current;
+    const cur = docRef.current;
+    if (h.stack[h.index] === cur) return;
+    h.stack = h.stack.slice(0, h.index + 1);
+    h.stack.push(cur);
+    if (h.stack.length > 120) h.stack.shift();
+    h.index = h.stack.length - 1;
+  }, []);
+
+  useEffect(() => {
+    const h = histRef.current;
+    if (h.stack[h.index] === doc) return;
+    const timer = setTimeout(() => {
+      // An undo/redo/flush may have already committed this state
+      if (h.stack[h.index] === doc) return;
+      h.stack = h.stack.slice(0, h.index + 1);
+      h.stack.push(doc);
+      if (h.stack.length > 120) h.stack.shift();
+      h.index = h.stack.length - 1;
+      setHistTick((n) => n + 1);
+    }, 350);
+    return () => clearTimeout(timer);
+  }, [doc]);
+
+  const undo = useCallback(() => {
+    // Commit any still-debouncing edit first so undo steps back exactly
+    // one state — not past the edit the user just made.
+    flushHistory();
+    const h = histRef.current;
+    if (h.index <= 0) return;
+    h.index -= 1;
+    setDoc(h.stack[h.index]);
+    setHistTick((n) => n + 1);
+  }, [flushHistory]);
+
+  const redo = useCallback(() => {
+    const h = histRef.current;
+    if (h.index >= h.stack.length - 1) return;
+    h.index += 1;
+    setDoc(h.stack[h.index]);
+    setHistTick((n) => n + 1);
+  }, []);
+
+  const canUndo = histTick >= 0
+    && (histRef.current.index > 0 || histRef.current.stack[histRef.current.index] !== doc);
+  const canRedo = histTick >= 0 && histRef.current.index < histRef.current.stack.length - 1;
+
+  // ── Split at playhead ──
+  const splitAtPlayhead = useCallback(() => {
+    const d = docRef.current;
+    const { index, local } = sceneAt(d, playheadRef.current);
+    const scene = d.scenes[index];
+    if (!scene || local < 500 || scene.duration - local < 500) return;
+    const cut = Math.round(local);
+    const textTail = scene.textEnd > 0 ? scene.textEnd - cut : 0;
+    const first: Scene = {
+      ...scene,
+      duration: cut,
+      textEnd: scene.textEnd > 0 && scene.textEnd <= cut ? scene.textEnd : 0,
+      cues: (scene.cues ?? []).filter((c) => c.start < cut),
+    };
+    const second: Scene = {
+      ...scene,
+      id: `${scene.id}-b-${Math.floor(Math.random() * 1e6)}`,
+      duration: scene.duration - cut,
+      transition: 'cut',
+      videoTrimStart: scene.template === 'video' ? scene.videoTrimStart + cut : scene.videoTrimStart,
+      pipTrimStart: scene.pipVideoId ? scene.pipTrimStart + cut : scene.pipTrimStart,
+      // Text that already finished in the first half stays hidden here
+      textStart: scene.textEnd > 0 && textTail <= 0
+        ? scene.duration - cut
+        : Math.max(0, (scene.textStart || 0) - cut),
+      textEnd: textTail > 0 ? textTail : 0,
+      cues: (scene.cues ?? [])
+        .filter((c) => c.start >= cut)
+        .map((c) => ({ ...c, start: c.start - cut })),
+    };
+    setDoc((dd) => {
+      const scenes = [...dd.scenes];
+      scenes.splice(index, 1, first, second);
+      return { ...dd, scenes };
+    });
+    setSelectedId(second.id);
+  }, []);
+
+  // ── Project save / load / autosave ──
+  // The JSON carries the doc plus a filename→id manifest for media;
+  // binaries stay on disk. Re-uploading a file by the same name relinks
+  // it to its old asset id, so scenes rejoin automatically.
+  const savedMediaRef = useRef<{
+    videos: Record<string, string>;
+    images: Record<string, string>;
+    audio: Record<string, string>;
+  }>({ videos: {}, images: {}, audio: {} });
+  const [missingMedia, setMissingMedia] = useState<string[]>([]);
+  const [projectStatus, setProjectStatus] = useState<{ ok: boolean; msg: string } | null>(null);
+  const projectInputRef = useRef<HTMLInputElement>(null);
+
+  const projectPayload = useCallback(() => {
+    const nameMap = (m: Record<string, { name: string }>) => {
+      const out: Record<string, string> = {};
+      for (const id in m) if (!id.startsWith('__')) out[m[id].name] = id;
+      return out;
+    };
+    return JSON.stringify({
+      app: 'zfit-motion',
+      version: 1,
+      doc: docRef.current,
+      media: {
+        videos: { ...savedMediaRef.current.videos, ...nameMap(videosRef.current) },
+        images: { ...savedMediaRef.current.images, ...nameMap(assetsRef.current) },
+        audio: { ...savedMediaRef.current.audio, ...nameMap(audioRef.current) },
+      },
+    });
+  }, []);
+
+  /** Returns the number of media files awaiting re-upload, or -1 on a bad file. */
+  const applyLoadedProject = useCallback((raw: string): number => {
+    try {
+      const parsed = JSON.parse(raw);
+      if (!parsed || parsed.app !== 'zfit-motion' || !parsed.doc?.scenes?.length) return -1;
+      // Merge over fresh defaults so docs saved before a field existed load clean
+      const scenes: Scene[] = parsed.doc.scenes.map((s: Partial<Scene>) => ({
+        ...makeScene((s.template as TemplateId) ?? 'title'),
+        ...s,
+      }));
+      const doc2: MotionDoc = { ...zebsDefaultDoc(), ...parsed.doc, scenes };
+      savedMediaRef.current = {
+        videos: { ...(parsed.media?.videos ?? {}) },
+        images: { ...(parsed.media?.images ?? {}) },
+        audio: { ...(parsed.media?.audio ?? {}) },
+      };
+      const missing: string[] = [];
+      for (const kind of ['videos', 'images', 'audio'] as const) {
+        const loaded: Record<string, unknown> = kind === 'videos' ? videosRef.current
+          : kind === 'images' ? assetsRef.current : audioRef.current;
+        for (const name in savedMediaRef.current[kind]) {
+          if (loaded[savedMediaRef.current[kind][name]]) delete savedMediaRef.current[kind][name];
+          else missing.push(name);
+        }
+      }
+      setMissingMedia(missing);
+      setDoc(doc2);
+      setSelectedId(doc2.scenes[0]?.id ?? null);
+      playheadRef.current = 0;
+      setPlaying(false);
+      return missing.length;
+    } catch {
+      return -1;
+    }
+  }, []);
+
+  const saveProject = () => {
+    const stamp = new Date().toISOString().slice(0, 10);
+    downloadBlob(new Blob([projectPayload()], { type: 'application/json' }), `zfit-project-${stamp}.json`);
+    setProjectStatus({ ok: true, msg: 'Project saved. Media files travel by name — keep them alongside the JSON.' });
+  };
+
+  const handleProjectFile = async (file: File) => {
+    const missing = applyLoadedProject(await file.text());
+    setProjectStatus(missing < 0
+      ? { ok: false, msg: 'Could not read that project file.' }
+      : {
+        ok: true,
+        msg: missing > 0
+          ? `Project loaded — re-upload ${missing} media file(s) by the same name to relink.`
+          : 'Project loaded.',
+      });
+  };
+
+  const newProject = () => {
+    try { localStorage.removeItem(AUTOSAVE_KEY); } catch { /* private mode */ }
+    savedMediaRef.current = { videos: {}, images: {}, audio: {} };
+    setMissingMedia([]);
+    const d = zebsDefaultDoc();
+    setDoc(d);
+    setSelectedId(d.scenes[0].id);
+    playheadRef.current = 0;
+    setProjectStatus({ ok: true, msg: 'New project.' });
+  };
+
+  // Autosave the doc (not the media binaries) to this browser as you edit
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      try { localStorage.setItem(AUTOSAVE_KEY, projectPayload()); } catch { /* quota/private mode */ }
+    }, 800);
+    return () => clearTimeout(timer);
+  }, [doc, projectPayload]);
+
+  // Restore the autosaved session once on mount
+  const restoredRef = useRef(false);
+  useEffect(() => {
+    if (restoredRef.current) return;
+    restoredRef.current = true;
+    try {
+      const raw = localStorage.getItem(AUTOSAVE_KEY);
+      if (!raw) return;
+      const missing = applyLoadedProject(raw);
+      if (missing >= 0) {
+        setProjectStatus({
+          ok: true,
+          msg: missing > 0
+            ? `Session restored — re-upload ${missing} media file(s) by the same name to relink.`
+            : 'Session restored from autosave.',
+        });
+      }
+    } catch { /* ignore */ }
+  }, [applyLoadedProject]);
+
+  // ── Captions (SRT import) ──
+  const srtInputRef = useRef<HTMLInputElement>(null);
+  const [captionStatus, setCaptionStatus] = useState<{ ok: boolean; msg: string } | null>(null);
+
+  const handleSrtFile = async (file: File) => {
+    const entries = parseSrt(await file.text());
+    if (!entries.length) {
+      setCaptionStatus({ ok: false, msg: 'No captions found — is that an SRT file?' });
+      return;
+    }
+    // Slice the global SRT times into scene-local caption cues
+    const d = docRef.current;
+    const perScene = new Map<string, TextCue[]>();
+    let placed = 0;
+    let acc = 0;
+    for (const s of d.scenes) {
+      const cues = entries
+        .filter((en) => en.start >= acc && en.start < acc + s.duration)
+        .map((en) => makeCue({
+          style: 'caption',
+          label: '',
+          text: en.text,
+          start: en.start - acc,
+          duration: Math.max(300, Math.min(en.end, acc + s.duration) - en.start),
+          position: 'lower-center',
+        }));
+      if (cues.length) { perScene.set(s.id, cues); placed += cues.length; }
+      acc += s.duration;
+    }
+    setDoc((dd) => ({
+      ...dd,
+      scenes: dd.scenes.map((s) => ({
+        ...s,
+        cues: [...(s.cues ?? []).filter((c) => c.style !== 'caption'), ...(perScene.get(s.id) ?? [])],
+      })),
+    }));
+    const skipped = entries.length - placed;
+    setCaptionStatus({
+      ok: true,
+      msg: `${placed} caption${placed === 1 ? '' : 's'} placed${skipped > 0 ? ` — ${skipped} fell past the end of the timeline` : ''}.`,
+    });
+  };
+
+  const clearCaptions = () => {
+    setDoc((dd) => ({
+      ...dd,
+      scenes: dd.scenes.map((s) => ({ ...s, cues: (s.cues ?? []).filter((c) => c.style !== 'caption') })),
+    }));
+    setCaptionStatus({ ok: true, msg: 'Captions cleared.' });
+  };
+
 
   const sceneStart = useCallback((index: number) => {
     return docRef.current.scenes.slice(0, index).reduce((a, s) => a + s.duration, 0);
@@ -625,6 +1041,44 @@ export default function ZebsMotionStudio() {
     window.addEventListener('pointerup', up);
   };
 
+  // ── Timeline trim-drag (right edge of a block sets its duration) ──
+  const onTrimStart = (e: React.PointerEvent, id: string) => {
+    e.stopPropagation();
+    const el = timelineRef.current;
+    if (!el) return;
+    const d0 = docRef.current;
+    const scene = d0.scenes.find((s) => s.id === id);
+    if (!scene) return;
+    const msPerPx = docDuration(d0) / el.getBoundingClientRect().width;
+    const x0 = e.clientX;
+    const dur0 = scene.duration;
+    (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
+    const move = (ev: PointerEvent) => {
+      const nd = Math.round(Math.max(1000, dur0 + (ev.clientX - x0) * msPerPx) / 100) * 100;
+      patchScene(id, { duration: nd });
+    };
+    const up = () => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+
+  // ── Scene-card drag & drop reorder ──
+  const dragIndexRef = useRef(-1);
+
+  const moveSceneTo = (from: number, to: number) => {
+    if (from < 0 || to < 0 || from === to) return;
+    setDoc((d) => {
+      if (from >= d.scenes.length || to >= d.scenes.length) return d;
+      const scenes = [...d.scenes];
+      const [moved] = scenes.splice(from, 1);
+      scenes.splice(to, 0, moved);
+      return { ...d, scenes };
+    });
+  };
+
   // ── Image upload ──
   const imageInputRef = useRef<HTMLInputElement>(null);
 
@@ -632,10 +1086,18 @@ export default function ZebsMotionStudio() {
     const url = URL.createObjectURL(file);
     try {
       const img = await loadImage(url);
-      const asset: ImageAsset = { id: `img-${Date.now().toString(36)}`, name: file.name, url, img };
+      // A saved project references this filename — reuse its old id so
+      // the scenes that pointed at it rejoin automatically.
+      const savedId = savedMediaRef.current.images[file.name];
+      const asset: ImageAsset = { id: savedId ?? `img-${Date.now().toString(36)}`, name: file.name, url, img };
       assetsRef.current[asset.id] = asset;
       setImages((list) => [...list, asset]);
-      if (selected) patchScene(selected.id, { imageId: asset.id });
+      if (savedId) {
+        delete savedMediaRef.current.images[file.name];
+        setMissingMedia((m) => m.filter((n) => n !== file.name));
+      } else if (selected) {
+        patchScene(selected.id, { imageId: asset.id });
+      }
     } catch {
       URL.revokeObjectURL(url);
     }
@@ -651,8 +1113,10 @@ export default function ZebsMotionStudio() {
     setVideoStatus(null);
     try {
       const video = await loadVideoElement(url);
+      // Relink: a saved project references this filename — reuse the old id
+      const savedId = savedMediaRef.current.videos[file.name];
       const asset: VideoAsset = {
-        id: `vid-${Date.now().toString(36)}`,
+        id: savedId ?? `vid-${Date.now().toString(36)}`,
         name: file.name,
         url,
         video,
@@ -663,7 +1127,10 @@ export default function ZebsMotionStudio() {
       };
       videosRef.current[asset.id] = asset;
       setVideos((list) => [...list, asset]);
-      if (selected) {
+      if (savedId) {
+        delete savedMediaRef.current.videos[file.name];
+        setMissingMedia((m) => m.filter((n) => n !== file.name));
+      } else if (selected) {
         if (target === 'main' && selected.template === 'video') {
           patchScene(selected.id, {
             videoId: asset.id,
@@ -706,7 +1173,14 @@ export default function ZebsMotionStudio() {
     const setStatus = target === 'music' ? setAudioStatus : setVoStatus;
     setStatus(null);
     try {
-      const asset = await loadAudioAsset(file);
+      let asset = await loadAudioAsset(file);
+      // Relink: a saved project references this filename — reuse the old id
+      const savedId = savedMediaRef.current.audio[file.name];
+      if (savedId) {
+        asset = { ...asset, id: savedId };
+        delete savedMediaRef.current.audio[file.name];
+        setMissingMedia((m) => m.filter((n) => n !== file.name));
+      }
       audioRef.current[asset.id] = asset;
       setAudioTracks((list) => [...list, asset]);
       if (target === 'music') {
@@ -885,6 +1359,16 @@ export default function ZebsMotionStudio() {
     ? Math.max(10000, selectedVideo.duration)
     : 10000;
 
+  // Route keyboard shortcuts to the latest handlers (listener mounts once)
+  keysRef.current = {
+    undo,
+    redo,
+    split: splitAtPlayhead,
+    del: () => {
+      if (selected && docRef.current.scenes.length > 1) removeScene(selected.id);
+    },
+  };
+
   return (
     <div className="ms-root ms-zebs">
 
@@ -901,6 +1385,17 @@ export default function ZebsMotionStudio() {
               role="button"
               tabIndex={0}
               className={`ms-scene-card ${active ? 'is-active' : ''}`}
+              draggable
+              onDragStart={(e) => {
+                dragIndexRef.current = i;
+                e.dataTransfer.effectAllowed = 'move';
+              }}
+              onDragOver={(e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; }}
+              onDrop={(e) => {
+                e.preventDefault();
+                moveSceneTo(dragIndexRef.current, i);
+                dragIndexRef.current = -1;
+              }}
               onClick={() => { setSelectedId(s.id); seekToScene(i); }}
               onKeyDown={(e) => { if (e.key === 'Enter') { setSelectedId(s.id); seekToScene(i); } }}
             >
@@ -909,6 +1404,7 @@ export default function ZebsMotionStudio() {
                 <span className="ms-scene-kind">{TEMPLATES.find((t) => t.id === s.template)?.label}</span>
                 <span className="ms-scene-dot" style={{ background: scheme.bg }} />
               </div>
+              <SceneThumb scene={s} doc={doc} assets={assetsRef.current} videos={videosRef.current} />
               <div className="ms-scene-preview">{sceneLabel(s) || '—'}</div>
               <div className="ms-scene-meta">{(s.duration / 1000).toFixed(1)}s · {TEXT_ANIMS.find((a) => a.id === s.anim)?.label}</div>
 
@@ -960,6 +1456,16 @@ export default function ZebsMotionStudio() {
           >
             ↻ Loop
           </button>
+          <button className="ms-btn" onClick={undo} disabled={!canUndo} title="Undo (⌘Z)">↶</button>
+          <button className="ms-btn" onClick={redo} disabled={!canRedo} title="Redo (⇧⌘Z)">↷</button>
+          <button className="ms-btn" onClick={splitAtPlayhead} title="Split scene at playhead (S)">✂ Split</button>
+          <button
+            className={`ms-btn ${showGuides ? 'is-toggled' : ''}`}
+            onClick={() => setShowGuides((g) => !g)}
+            title="Safe-area guides (preview only)"
+          >
+            ⊞ Safe
+          </button>
           <button
             className="ms-btn"
             onClick={() => stageRef.current?.requestFullscreen?.()}
@@ -979,6 +1485,21 @@ export default function ZebsMotionStudio() {
               style={{ width: `${(s.duration / Math.max(1, totalMs)) * 100}%`, minWidth: 18 }}
             >
               <span className="ms-tl-label">{sceneLabel(s)}</span>
+              {(s.cues ?? [])
+                .filter((c) => c.text.trim() || c.label.trim())
+                .map((c) => (
+                  <span
+                    key={c.id}
+                    className="ms-tl-cue"
+                    title={c.text || c.label}
+                    style={{ left: `${Math.min(98, (c.start / Math.max(1, s.duration)) * 100)}%` }}
+                  />
+                ))}
+              <div
+                className="ms-tl-trim"
+                title="Drag to set scene duration"
+                onPointerDown={(e) => onTrimStart(e, s.id)}
+              />
             </div>
           ))}
           <div className="ms-playhead" ref={playheadElRef} style={{ left: 0 }} />
@@ -1555,11 +2076,29 @@ export default function ZebsMotionStudio() {
                   format={(v) => `${(v / 1000).toFixed(2)}s`}
                 />
               </Field>
+              <Field label="Duck under voiceover">
+                <Seg
+                  options={[{ id: 'on', label: 'Auto-duck' }, { id: 'off', label: 'Off' }] as const}
+                  value={doc.audioDuckOn ? 'on' : 'off'}
+                  onChange={(v) => patchDoc({ audioDuckOn: v === 'on' })}
+                  small
+                />
+              </Field>
+              {doc.audioDuckOn && (
+                <Field label="Duck music to">
+                  <Slider
+                    value={doc.audioDuckLevel}
+                    onChange={(v) => patchDoc({ audioDuckLevel: v })}
+                    min={0} max={1} step={0.05}
+                    format={(v) => `${Math.round(v * 100)}%`}
+                  />
+                </Field>
+              )}
             </>
           )}
           <p className="ms-hint">
-            Loops under the whole video and ducks nothing — set clip volume per video scene.
-            The same fade curve plays in the preview and in the MP4.
+            Loops under the whole video; with auto-duck on it dips while the voiceover
+            plays and recovers after. The same curves play in the preview and in the MP4.
           </p>
         </Section>
 
@@ -1618,6 +2157,30 @@ export default function ZebsMotionStudio() {
           <p className="ms-hint">
             Recorded narration (or an ElevenLabs render) mixed over the music. For Zeb talking
             on camera, use the Zeb cam on a scene instead — its audio mixes in automatically.
+          </p>
+        </Section>
+
+        {/* — Captions — */}
+        <Section title="Captions" badge="SRT import">
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+            <button className="ms-file-btn" onClick={() => srtInputRef.current?.click()}>
+              ⬆ Import .srt
+            </button>
+            <button className="ms-btn" onClick={clearCaptions}>Clear captions</button>
+          </div>
+          <input
+            ref={srtInputRef}
+            type="file"
+            accept=".srt,text/plain"
+            hidden
+            onChange={(e) => { const f = e.target.files?.[0]; if (f) handleSrtFile(f); e.target.value = ''; }}
+          />
+          {captionStatus && (
+            <p className={`ms-status ${captionStatus.ok ? 'is-ok' : 'is-err'}`}>{captionStatus.msg}</p>
+          )}
+          <p className="ms-hint">
+            Captions land on the scenes they fall over as quick-fade subtitle pills (lower
+            center) and burn into the export. Re-importing replaces the previous captions.
           </p>
         </Section>
 
@@ -1700,6 +2263,34 @@ export default function ZebsMotionStudio() {
           <Field label="Watermark">
             <TextInput value={doc.watermark} onChange={(v) => patchDoc({ watermark: v })} placeholder="ZFIT" />
           </Field>
+        </Section>
+
+        {/* — Project — */}
+        <Section title="Project" badge="Autosaves locally">
+          <div style={{ display: 'flex', gap: 6 }}>
+            <button className="ms-btn" style={{ flex: 1 }} onClick={saveProject}>⬇ Save JSON</button>
+            <button className="ms-btn" style={{ flex: 1 }} onClick={() => projectInputRef.current?.click()}>⬆ Load</button>
+            <button className="ms-btn" style={{ flex: 1 }} onClick={newProject}>✦ New</button>
+          </div>
+          <input
+            ref={projectInputRef}
+            type="file"
+            accept=".json,application/json"
+            hidden
+            onChange={(e) => { const f = e.target.files?.[0]; if (f) handleProjectFile(f); e.target.value = ''; }}
+          />
+          {missingMedia.length > 0 && (
+            <p className="ms-status is-err">
+              Missing media — re-upload by the same name to relink: {missingMedia.join(', ')}
+            </p>
+          )}
+          {projectStatus && (
+            <p className={`ms-status ${projectStatus.ok ? 'is-ok' : 'is-err'}`}>{projectStatus.msg}</p>
+          )}
+          <p className="ms-hint">
+            The document autosaves to this browser as you edit and restores on reload.
+            Media binaries aren&apos;t embedded — projects reference them by filename.
+          </p>
         </Section>
 
         {/* — Fonts — */}

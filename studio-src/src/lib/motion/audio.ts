@@ -58,7 +58,7 @@ export async function loadAudioAsset(file: File): Promise<AudioAsset> {
  * doc.audioVolume, linear fade-out to 0 at the end. Fades are clamped
  * so they never overlap on very short documents.
  */
-export function musicGainAt(doc: MotionDoc, tMs: number, totalMs: number): number {
+export function musicGainAt(doc: MotionDoc, tMs: number, totalMs: number, voDurMs = 0): number {
   const vol = Math.max(0, Math.min(1, doc.audioVolume));
   if (totalMs <= 0) return 0;
   const fadeIn = Math.max(0, Math.min(doc.audioFadeIn, totalMs / 2));
@@ -66,7 +66,26 @@ export function musicGainAt(doc: MotionDoc, tMs: number, totalMs: number): numbe
   let g = 1;
   if (fadeIn > 0 && tMs < fadeIn) g = Math.min(g, tMs / fadeIn);
   if (fadeOut > 0 && tMs > totalMs - fadeOut) g = Math.min(g, (totalMs - tMs) / fadeOut);
-  return Math.max(0, Math.min(1, g)) * vol;
+  return Math.max(0, Math.min(1, g)) * vol * duckGainAt(doc, tMs, voDurMs);
+}
+
+const DUCK_RAMP_MS = 300;
+
+/**
+ * Duck multiplier at global time t — 1 outside the voiceover window,
+ * doc.audioDuckLevel while the VO plays, linear ramps either side.
+ * voDurMs comes from the decoded VO buffer (0 = no VO loaded).
+ */
+export function duckGainAt(doc: MotionDoc, tMs: number, voDurMs: number): number {
+  if (!doc.audioDuckOn || !doc.voId || voDurMs <= 0 || doc.voVolume <= 0) return 1;
+  const lvl = Math.max(0, Math.min(1, doc.audioDuckLevel ?? 0.3));
+  const s = doc.voStart;
+  const e = doc.voStart + voDurMs;
+  let duck = 0;
+  if (tMs >= s && tMs <= e) duck = 1;
+  else if (tMs > s - DUCK_RAMP_MS && tMs < s) duck = (tMs - (s - DUCK_RAMP_MS)) / DUCK_RAMP_MS;
+  else if (tMs > e && tMs < e + DUCK_RAMP_MS) duck = 1 - (tMs - e) / DUCK_RAMP_MS;
+  return 1 - duck * (1 - lvl);
 }
 
 /**
@@ -138,7 +157,24 @@ export async function renderMixdown(
       gain.gain.setValueAtTime(vol, Math.max(fadeIn, totalS - fadeOut));
       gain.gain.linearRampToValueAtTime(0, totalS);
     }
-    src.connect(gain).connect(octx.destination);
+
+    // Duck envelope multiplies the fade envelope via a second gain node
+    // in series — same ramps duckGainAt() gives the preview.
+    const voBuf = doc.voId ? audio[doc.voId]?.buffer : null;
+    const duck = octx.createGain();
+    duck.gain.value = 1;
+    if (doc.audioDuckOn && voBuf && doc.voVolume > 0) {
+      const lvl = Math.max(0, Math.min(1, doc.audioDuckLevel ?? 0.3));
+      const ramp = DUCK_RAMP_MS / 1000;
+      const s = Math.max(0, Math.min(doc.voStart, totalMs)) / 1000;
+      const e = Math.min(s + voBuf.duration, totalS);
+      duck.gain.setValueAtTime(1, Math.max(0, s - ramp));
+      duck.gain.linearRampToValueAtTime(lvl, s);
+      duck.gain.setValueAtTime(lvl, e);
+      duck.gain.linearRampToValueAtTime(1, Math.min(totalS, e + ramp));
+    }
+
+    src.connect(gain).connect(duck).connect(octx.destination);
     src.start(0);
     src.stop(totalS);
   }

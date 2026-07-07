@@ -587,3 +587,39 @@
   margin-bottom: 8px;
   background: var(--ms-cream);
 }
+
+/* ── Timeline trim handles & cue ticks ── */
+
+.ms-tl-trim {
+  position: absolute;
+  right: -4px;
+  top: 0;
+  bottom: 0;
+  width: 9px;
+  cursor: ew-resize;
+  z-index: 3;
+  border-radius: 2px;
+}
+
+.ms-tl-trim:hover { background: var(--ms-royal); opacity: 0.55; }
+
+.ms-tl-cue {
+  position: absolute;
+  top: 3px;
+  width: 2px;
+  height: 8px;
+  background: var(--ms-royal);
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+/* ── Scene-strip thumbnails ── */
+
+.ms-scene-thumb {
+  width: 100%;
+  display: block;
+  border-radius: 6px;
+  border: 1px solid var(--ms-line);
+  background: #000;
+  margin: 6px 0 4px;
+}
