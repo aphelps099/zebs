@@ -1,0 +1,81 @@
+/* ═══════════════════════════════════════════════════════
+   ZFIT Motion — dark editor chrome for /motion/zebs
+   Scoped overrides on top of motion-studio.css: pure-black
+   stage, near-black panels, white text, ZEBS yellow
+   accents (Zeb's Platinum Fitness brand). Rules the base
+   sheet hard-codes for a light theme are re-declared here
+   under .ms-zebs.
+   ═══════════════════════════════════════════════════════ */
+
+.ms-root.ms-zebs {
+  --ms-sand: #000000;
+  --ms-cream: #111111;
+  --ms-white: #1a1a1a;
+  --ms-ink: #fafafa;
+  --ms-mid: #9a9a94;
+  --ms-muted: #777770;
+  --ms-line: rgba(255, 255, 255, 0.09);
+  --ms-royal: #fdea01;
+  --ms-pool: #fdea01;
+  --ms-sans: 'Futura', 'Futura PT', 'Century Gothic', sans-serif;
+}
+
+.ms-zebs .ms-scene-card:hover { border-color: rgba(253, 234, 1, 0.4); }
+
+.ms-zebs .ms-scene-card.is-active {
+  box-shadow: 0 0 0 1px var(--ms-royal), 0 3px 10px rgba(253, 234, 1, 0.14);
+}
+
+.ms-zebs .ms-scene-dot { border-color: rgba(255, 255, 255, 0.18); }
+
+/* Yellow accent on dark chrome: flip button text to black */
+.ms-zebs .ms-icon-btn:hover:not(:disabled) { color: #000; }
+.ms-zebs .ms-icon-btn.is-danger:hover:not(:disabled) { background: #a82039; color: #fff; }
+
+.ms-zebs .ms-add-btn { border-color: rgba(253, 234, 1, 0.4); }
+.ms-zebs .ms-add-btn:hover { color: #000; }
+
+.ms-zebs .ms-btn.is-primary {
+  color: #000;
+  box-shadow: 0 2px 8px rgba(253, 234, 1, 0.25);
+}
+
+.ms-zebs .ms-btn.is-primary:hover:not(:disabled) {
+  color: #000;
+  box-shadow: 0 4px 14px rgba(253, 234, 1, 0.35);
+}
+
+.ms-zebs .ms-btn.is-toggled { color: #000; }
+
+.ms-zebs .ms-tl-scene:hover { background: rgba(253, 234, 1, 0.06); }
+.ms-zebs .ms-tl-scene.is-active { background: rgba(253, 234, 1, 0.1); }
+
+.ms-zebs .ms-seg-btn:hover { border-color: rgba(253, 234, 1, 0.45); }
+.ms-zebs .ms-seg-btn.is-active { color: #000; }
+
+.ms-zebs .ms-status.is-ok { color: #fdea01; }
+.ms-zebs .ms-status.is-err { color: #ff6b81; }
+
+.ms-zebs .ms-file-btn { border-color: rgba(253, 234, 1, 0.5); }
+.ms-zebs .ms-file-btn:hover { color: #000; }
+
+.ms-zebs .ms-swatch-custom {
+  background:
+    linear-gradient(var(--ms-white), var(--ms-white)) padding-box,
+    conic-gradient(#fdea01, #ffffff, #ffcc00, #111111, #fdea01) border-box;
+}
+
+.ms-zebs .ms-logo-thumb.is-dark-bg { background: #000; }
+
+.ms-zebs .ms-stage { box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65); }
+
+/* Slanted "zag" bolt mark for the page header (ZEBS brand angle) */
+.zebs-bolt {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background: #fdea01;
+  transform: skewX(-12deg) rotate(-2deg);
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(253, 234, 1, 0.45);
+}
