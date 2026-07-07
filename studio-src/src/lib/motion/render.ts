@@ -574,9 +574,45 @@ function drawTextCues(
     const label = (cue.label || '').trim();
     const text = (cue.text || '').trim();
     if (!label && !text) continue;
-    const dur = Math.max(800, cue.duration || 0);
+    const dur = Math.max(cue.style === 'caption' ? 200 : 800, cue.duration || 0);
     const ct = t - Math.max(0, cue.start || 0);
     if (ct < 0 || ct >= dur) continue;
+
+    // Captions: subtitle pill, quick fade — no sweep, reads at SRT pace
+    if (cue.style === 'caption') {
+      if (!text) continue;
+      const a = seg(ct, 0, 150) * (1 - seg(ct, dur - 150, 150, easeInCubic));
+      if (a <= 0) continue;
+      const px = 26 * u;
+      const font = fontStr(500, px, doc.fontBody);
+      const { lines, height } = measureBlock(ctx, { text, font, px, lineHeight: 1.4, maxWidth: W * 0.68 });
+      const widest = Math.max(...lines.map((l) => l.width), 1);
+      const padX = 22 * u;
+      const padY = 14 * u;
+      const boxW = widest + padX * 2;
+      const boxH = height + padY * 2;
+      const bx = (W - boxW) / 2;
+      const by = H - 64 * u - boxH;
+      ctx.save();
+      ctx.globalAlpha *= a;
+      roundRectPath(ctx, bx, by, boxW, boxH, 10 * u);
+      ctx.fillStyle = 'rgba(0,0,0,0.6)';
+      ctx.fill();
+      ctx.font = font;
+      ctx.fillStyle = '#ffffff';
+      ctx.textBaseline = 'alphabetic';
+      const spaceW = ctx.measureText(' ').width;
+      lines.forEach((line, li) => {
+        let lx = W / 2 - line.width / 2;
+        const baseY = by + padY + li * px * 1.4 + px * 0.82;
+        for (const w of line.words) {
+          ctx.fillText(w.text, lx, baseY);
+          lx += w.width + spaceW;
+        }
+      });
+      ctx.restore();
+      continue;
+    }
 
     const enter = seg(ct, 0, 480, easeOutQuint);
     const exit = seg(ct, dur - 420, 420, easeInCubic);

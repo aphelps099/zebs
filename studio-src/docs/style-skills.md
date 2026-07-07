@@ -200,30 +200,43 @@ That makes every brand experiment shareable, which is the "skill" payoff.
 
 ## Appendix — editor roadmap ("basic Premiere, iMovie simple")
 
-Shipped this round: per-scene **text in/out timing** on video scenes,
-**multiple timed text cues per clip** including the sweep-in/sweep-away
-**TIP lower third**, and numbered list markers **off by default** (per-scene
-"Numbers" toggle to opt back in).
+**Shipped — text & cues round:** per-scene text in/out timing on video
+scenes, multiple timed text cues per clip including the sweep-in/sweep-away
+TIP lower third, numbered list markers off by default (per-scene "Numbers"
+toggle).
 
-Next, roughly in value order:
+**Shipped — editing round:**
 
-1. **Undo / redo** — single doc-state history stack; biggest trust win.
-2. **Project save / load** — doc JSON download + autosave to IndexedDB
-   (media re-linked by filename prompt, like every NLE). Refresh currently
-   loses the session; this unlocks real workflows and pairs with M4.
-3. **Timeline upgrades** — drag scene edges to set duration, drag to
-   reorder, cue markers on scene blocks, clip thumbnails, audio waveform
-   under the strip.
-4. **Split at playhead** — cut a video scene into two scenes with
-   trim-start/duration computed; with trim this covers most real editing.
-5. **Audio ducking** — auto-lower music under VO / clip audio (one gain
-   curve in `audio.ts`, same for preview + export).
-6. **Per-clip look controls** — exposure / contrast / saturation +
+- **Undo / redo** — debounced doc-history stack (slider drags coalesce),
+  ⌘Z / ⇧⌘Z / ⌘Y + transport buttons. Undo flushes any still-debouncing
+  edit first so it always steps back exactly one state.
+- **Project save / load + autosave** — doc JSON download/upload; autosaves
+  to localStorage and restores on reload. Media binaries aren't embedded:
+  projects reference files by name, and re-uploading a file with the same
+  name relinks it to its old asset id so scenes rejoin automatically.
+- **Timeline upgrades** — drag a block's right edge to set duration, drag
+  scene cards to reorder, cue tick-marks on blocks, live render thumbnails
+  on the scene cards.
+- **Split at playhead** — S key or ✂ button; video trim-start, PIP trim,
+  text timing, and cues are recomputed for both halves.
+- **Audio ducking** — music auto-dips under the voiceover (level + on/off
+  in the Music panel), one curve for preview and export (`duckGainAt`).
+- **Captions** — SRT import distributes entries onto scenes as quick-fade
+  subtitle pills (a third cue style, `caption`); burned into the export.
+- **J/K/L shuttle** — L play (repeat = 2×/4×), J reverse (−1×/−2×/−4×),
+  K pause; space resets to 1×. Arrows nudge a frame (⇧ = 1s), Home/End
+  jump, Delete removes the selected scene.
+- **Safe-area guides** — action-safe/title-safe overlay + center cross,
+  preview-only (never exported).
+
+Still open, roughly in value order:
+
+1. **Draggable text** — drag the overlay block on the canvas to a custom
+   anchor (stored as fractional x/y, snapping to thirds). Deferred: it
+   changes the anchor model in every scene template.
+2. **Per-clip look controls** — exposure / contrast / saturation +
    a one-click "brand grade" (canvas filters, deterministic in t).
-7. **Captions** — SRT import → timed lower-third text track (rides on the
-   cue system shipped this round); burned-in for socials.
-8. **Keyboard editing** — J/K/L shuttle, arrows to nudge playhead,
-   `[`/`]` trim, Del removes scene.
-9. **Safe-area & grid toggles** — title-safe overlay per aspect preset.
-10. **Draggable text** — drag the overlay block on the canvas to a custom
-    anchor (stored as fractional x/y, snapping to thirds).
+3. **Audio waveform** under the timeline strip; caption editing UI beyond
+   the video-scene cue list.
+4. **IndexedDB media persistence** — store uploaded binaries so autosave
+   restores media too, not just the doc.

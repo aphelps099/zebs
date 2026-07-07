@@ -22,6 +22,15 @@ MP4 — everything runs in the browser, no video backend.
   rises in and fades out.
 - **Agenda scenes** — one line per row; the 01/02/03 index markers are off
   by default, flip **Numbers** on per scene for the numbered-list look.
+- **Editing** — undo/redo (⌘Z/⇧⌘Z), split at playhead (S), J/K/L shuttle
+  with reverse and 2×/4× speeds, arrow-key nudge, drag timeline edges to
+  set duration, drag scene cards to reorder, live thumbnails, safe-area
+  guides (preview only).
+- **Project** — save/load as JSON and autosave to the browser; media is
+  referenced by filename and relinks on re-upload.
+- **Captions** — import an .srt and the lines land on the right scenes as
+  subtitle pills, burned into the export.
+- **Ducking** — music auto-dips under the voiceover and recovers after.
 - **Zeb cam** — layer a small talking-head clip in the lower third of any
   scene (position, size, start point, audio controls).
 - **Music** — loops under the whole video with fade-in/fade-out and volume.
